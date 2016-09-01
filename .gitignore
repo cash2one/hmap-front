@@ -1,0 +1,12 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+node_modules/
+bower_components/
+src/app/constant/baseconfig.constants.js
+e2e/
+dist/
+.tmp
+.idea/
+*.log
+config

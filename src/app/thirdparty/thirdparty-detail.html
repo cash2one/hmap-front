@@ -1,0 +1,29 @@
+<div>
+  <alert-error></alert-error>
+  <h2><span>{{vm.thirdparty.appName}}</span></h2>
+  <dl class="dl-horizontal">
+    <dt><span>appCode</span></dt>
+    <dd>{{vm.thirdparty.appCode}}</dd>
+    <dt><span>appDesc</span></dt>
+    <dd>{{vm.thirdparty.appDesc}}</dd>
+    <dt><span>appIcon</span></dt>
+    <dd>{{vm.thirdparty.appIcon}}</dd>
+    <dt><span>appKey</span></dt>
+    <dd>{{vm.thirdparty.appKey}}</dd>
+    <dt><span>appSecret</span></dt>
+    <dd>{{vm.thirdparty.appSecret}}</dd>
+    <dt><span>expiredDate</span></dt>
+    <dd>{{vm.thirdparty.expiredDate | date:'dd/MM/yy HH:mm' }}</dd>
+    <dt><span>appHomepage</span></dt>
+    <dd>{{vm.thirdparty.appHomepage}}</dd>
+    <dt><span>freeFlag</span></dt>
+    <dd>{{vm.thirdparty.freeFlag}}</dd>
+    <dt><span>enableFlag</span></dt>
+    <dd>{{vm.thirdparty.enableFlag}}</dd>
+  </dl>
+  <button type="submit"
+          ui-sref="thirdparty"
+          class="btn btn-info">
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> 后退</span>
+  </button>
+</div>

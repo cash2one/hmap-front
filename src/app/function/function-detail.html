@@ -1,0 +1,137 @@
+<div>
+  <alert-error></alert-error>
+  <h2><span>功能名称:{{vm.function.functionName}}</span></h2>
+
+  <div class="ibox-content">
+    <div class="form-inline">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能名称</label>
+
+            <div class="col-md-8"><input type="text" ng-model="vm.function.functionName" class="form-control"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能代码</label>
+
+            <div class="col-md-8"><input type="text" ng-model="vm.function.functionCode" class="form-control"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能图标</label>
+
+            <div class="col-md-8"><input type="text" ng-model="vm.function.functionIcon" class="form-control"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能序号</label>
+
+            <div class="col-md-8"><input type="text" ng-model="vm.function.functionSequence" class="form-control"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-md-4 control-label">功能描述</label>
+
+            <div class="col-md-6"><input type="text" ng-model="vm.function.functionDescription" class="form-control"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-md-4 control-label">父级功能</label>
+
+            <div class="col-md-6"><input type="text" ng-model="vm.function.parentFunctionName" class="form-control"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-md-4 control-label">入口页面</label>
+            <div class="col-md-6">
+              <input type="text" ng-model="vm.function.resourceName" class="form-control"/>
+            </div>
+            <div class="col-md-2">
+
+              <button type="button" class="btn btn-primary glyphicon glyphicon-search"></button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p></p>
+
+  <p></p>
+  <button type="button"
+          ui-sref="function"
+          class="btn btn-info">
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> 后退</span>
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">
+    <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
+  </button>
+</div>
+<br/><br/>
+
+<div class="ibox-content">
+  <div class="row"><h2><span>功能资源</span></h2></div>
+  <div class="row">
+    <button type="button" class="btn btn-primary" ui-sref="function.addResource({id:vm.function.functionId})">
+      <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>添加</span>
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="vm.saveFunctionResource()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
+    </button>
+    <button type="button" class="btn btn-danger" ng-click="vm.deleteFunctionResource()">
+      <span class="glyphicon glyphicon-trash"></span>&nbsp;<span> 删除</span>
+    </button>
+    <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+  </div>
+
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th><input type="checkbox" ng-click="vm.toggleAll()" ng-model="vm.isAllSelected"></th>
+          <th>ID</th>
+          <th>名称</th>
+          <th>URL</th>
+          <th>类型</th>
+          <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="resource in vm.function.resources|filter:vm.isNotDelete">
+          <td><input type="checkbox" ng-model="resource.deleteFlag" ng-true-value="'Y'" ng-false-value="'N'"/></td>
+          <td>{{resource.resourceId}}</a></td>
+          <td>{{resource.name}}</a></td>
+          <td>{{resource.type}}</td>
+          <td>{{resource.url}}</td>
+          <td>{{resource.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

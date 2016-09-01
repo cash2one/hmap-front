@@ -1,0 +1,130 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">创建或者编辑第三方应用</h4>
+  </div>
+  <div class="modal-body">
+    <!--<jhi-alert-error></jhi-alert-error>-->
+    <div class="form-group" ng-show="vm.thirdparty.id">
+      <label for="id">ID</label>
+      <input type="text" class="form-control" id="id" name="id"
+             ng-model="vm.thirdparty.id" readonly/>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appName">App Name</label>
+          <input type="text" class="form-control" name="appName" id="field_appName"
+                 ng-model="vm.thirdparty.appName"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appCode">App Code</label>
+          <input type="text" class="form-control" name="appCode" id="field_appCode"
+                 ng-model="vm.thirdparty.appCode"
+            />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appDesc">App Desc</label>
+          <input type="text" class="form-control" name="appDesc" id="field_appDesc"
+                 ng-model="vm.thirdparty.appDesc"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appIcon">App Icon</label>
+          <input type="text" class="form-control" name="appIcon" id="field_appIcon"
+                 ng-model="vm.thirdparty.appIcon"
+            />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appKey">App Key</label>
+          <input type="text" class="form-control" name="appKey" id="field_appKey"
+                 ng-model="vm.thirdparty.appKey"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appSecret">App Secret</label>
+          <input type="text" class="form-control" name="appSecret" id="field_appSecret"
+                 ng-model="vm.thirdparty.appSecret"/>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_expiredDate">Expired Date</label>
+
+          <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup name="expiredDate" id="field_expiredDate"
+                   ng-model="vm.thirdparty.expiredDate" datepicker-options="vm.dateOptions" is-open="vm.isOpen"/>
+
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="vm.popupOpen()">
+              <i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_appHomepage">App HomePage</label>
+          <input type="text" class="form-control" name="appName" id="field_appHomepage"
+                 ng-model="vm.thirdparty.appHomepage"/>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_freeFlag">Free Flag</label>
+          <input type="checkbox"  name="freeFlag" id="field_freeFlag"
+                 ng-model="vm.thirdparty.freeFlag"  ng-true-value="'Y'" ng-false-value="'N'"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_enableFlag">Enable Flag</label>
+          <input type="checkbox"  name="enableFlag" id="field_enableFlag"
+                 ng-model="vm.thirdparty.enableFlag" ng-true-value="'Y'" ng-false-value="'N'"
+            />
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

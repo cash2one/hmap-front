@@ -1,0 +1,132 @@
+<div class="row">
+  <alert-error></alert-error>
+</div>
+<div class="ibox-content">
+  <div class="row">
+    文件上传需要对应一个接口
+    <div class="row">
+      <div class="col-md-5"><label>
+        <input type="radio" checked="" value="local" id="local" name="storageRadios">本地存储</label>
+      </div>
+      <div class="col-md-5"><label><input type="radio" value="yun" id="yun"
+                                          name="storageRadios">云存储</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <form class="form-horizontal">
+          <div class="form-group"><label class="col-lg-4 control-label">服务器ip</label>
+
+            <div class="col-lg-8"><input type="email" placeholder="Email" class="form-control"> <span
+              class="help-block m-b-none"></span>
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">用户名</label>
+
+            <div class="col-lg-8"><input type="text" placeholder="username" class="form-control">
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">密码</label>
+
+            <div class="col-lg-8"><input type="password" placeholder="Password" class="form-control">
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">接入前缀</label>
+
+            <div class="col-lg-8"><input type="text" placeholder="endpoint" class="form-control">
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">存储目录</label>
+
+            <div class="col-lg-8"><input type="text" placeholder="uploadDir" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5"><select class="form-control m-b" name="account">
+        <option>阿里云</option>
+        <option>腾讯云</option>
+      </select></div>
+    </div>
+  </div>
+</div>
+
+<div class="ibox-content">
+  <div class="row">
+    消息推送
+    <div class="row">
+      <div class="col-md-5"><label>
+        <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">极光</label>
+      </div>
+      <div class="col-md-5"><label><input type="radio" value="option2" id="optionsRadios2"
+                                          name="optionsRadios">百度</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <form class="form-horizontal">
+          <div class="form-group"><label class="col-lg-4 control-label">服务器ip</label>
+
+            <div class="col-lg-8"><input type="email" placeholder="Email" class="form-control"> <span
+              class="help-block m-b-none"></span>
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">用户名</label>
+
+            <div class="col-lg-8"><input type="text" placeholder="username" class="form-control">
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">密码</label>
+
+            <div class="col-lg-8"><input type="password" placeholder="Password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5"><select class="form-control m-b" name="account">
+        <option>阿里云</option>
+        <option>腾讯云</option>
+      </select></div>
+    </div>
+  </div>
+</div>
+
+<div class="ibox-content">
+  <div class="row">
+    地图
+    <div class="row">
+      <div class="col-md-5"><label>
+        <input type="radio" checked="" value="baidu" id="baidu" name="mapRadios">百度</label>
+      </div>
+      <div class="col-md-5"><label><input type="radio" value="gaode" id="gaode"
+                                          name="mapRadios">高德</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <form class="form-horizontal">
+          <div class="form-group"><label class="col-lg-4 control-label">服务器ip</label>
+
+            <div class="col-lg-8"><input type="email" placeholder="Email" class="form-control"> <span
+              class="help-block m-b-none"></span>
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">用户名</label>
+
+            <div class="col-lg-8"><input type="text" placeholder="username" class="form-control">
+            </div>
+          </div>
+          <div class="form-group"><label class="col-lg-4 control-label">密码</label>
+
+            <div class="col-lg-8"><input type="password" placeholder="Password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5">
+        <hms-select code="SYS.RESOURCE_TYPE" ng-model="vm.value"></hms-select>
+        选择的值{{vm.value}}
+      </div>
+    </div>
+  </div>
+</div>

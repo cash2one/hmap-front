@@ -1,0 +1,71 @@
+<div>
+  <h2>执行记录</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="col-lg-3 control-label">任务名称</label>
+            <div class="col-lg-6">
+              <input type="text" id="jobName" class="form-control" ng-model="vm.job.jobName">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label class="col-lg-3 control-label">任务组</label>
+            <div class="col-lg-6">
+              <input type="text" id="jobGroup" class="form-control" ng-model="vm.job.jobGroup">
+            </div>
+          </div>
+        </div>
+      <br/>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="col-lg-3 control-label">任务状态</label>
+            <div class="col-lg-6">
+              <input type="text" id="jobStatus" class="form-control" ng-model="vm.job.jobStatus">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <button class="col-lg-offset-5 col-lg-3 btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadJobs()">搜索</button>
+          </div>
+        </div>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>序号</th>
+        <th>任务名称</th>
+        <th>任务组</th>
+        <th>任务状态</th>
+        <th>执行概要</th>
+        <th>上次执行时间</th>
+        <th>计划执行时间</th>
+        <th>下次执行时间</th>
+        <th>实际执行时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="job in vm.jobs track by job.jobRunningInfoId">
+        <td ng-bind="job.jobRunningInfoId"></td>
+        <td ng-bind="job.jobName"></td>
+        <td ng-bind="job.jobGroup"></td>
+        <td ng-bind="job.jobStatus"></td>
+        <td ng-bind="job.executionSummary"></td>
+        <td ng-bind="job.previousFireTime"></td>
+        <td ng-bind="job.scheduledFireTime"></td>
+        <td ng-bind="job.nextFireTime"></td>
+        <td ng-bind="job.fireTime"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div>
+  <alert-error></alert-error>
+  <h2><span>功能名称:{{vm.resource.name}}</span></h2>
+  <div class="ibox-content">
+    <form class="form-horizontal">
+      <div class="row">
+        <div class="form-group"><label class="col-lg-2 control-label">名称</label>
+
+          <div class="col-lg-6"><input type="text" ng-model="vm.resource.name" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group"><label class="col-lg-2 control-label">URL</label>
+
+          <div class="col-lg-6"><input type="text" ng-model="vm.resource.url" class="form-control"/>
+          </div>
+        </div>
+
+        <div class="form-group"><label class="col-lg-2 control-label">类型</label>
+
+          <div class="col-lg-6"><input type="text" ng-model="vm.resource.type" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group"><label class="col-lg-2 control-label">描述</label>
+
+          <div class="col-lg-6"><input type="text" ng-model="vm.resource.description" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">需要登录</label> <div class="col-lg-6">
+          <input type="checkbox"  name="loginRequire" id="field_loginRequire"
+                 ng-model="vm.resource.loginRequire"  ng-true-value="'Y'" ng-false-value="'N'"/></div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">访问控制</label> <div class="col-lg-6">
+            <input type="checkbox"  name="accessCheck" id="field_accessCheck"
+                   ng-model="vm.resource.accessCheck"  ng-true-value="'Y'" ng-false-value="'N'"/></div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <button type="button"
+          ui-sref="resource"
+          class="btn btn-info">
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> 后退</span>
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">
+    <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
+  </button>
+</div>

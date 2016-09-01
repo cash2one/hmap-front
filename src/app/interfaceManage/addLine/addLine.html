@@ -1,0 +1,93 @@
+
+
+<alert-error></alert-error>
+<!--<div>-->
+<!--<h3>快速编码管理</h3>-->
+<!--</div>-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>新增接口</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form name="addForm" role="form" ng-submit="vm.add()">
+
+          <div >
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="id"
+                     ng-model="vm.line.headerId"/>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">接口代码</label>
+                  <input type="text" class="form-control"  ng-model="vm.line.lineCode" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label" for="lineName">接口名称</label>
+                  <input type="text" class="form-control"  id="lineName"
+                         ng-model="vm.line.lineName" required
+                    />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label" for="lineIftUrl">接口地址</label>
+                  <input type="text" class="form-control" name="appDesc" id="lineIftUrl"
+                         ng-model="vm.line.iftUrl" required
+                    />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label" for="LineEnableFlag">是否有效</label>
+                  <select class="form-control" ng-model="vm.line.enableFlag" id="LineEnableFlag" ng-init="vm.line.enableFlag='Y'">
+                    <option ng-repeat="x in vm.flag" value="{{x.code}}">{{x.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+            </button>
+            <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div>
+  <h2>APP版本管理</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4 no-padding-left">
+        <button class="btn btn-primary" ui-sref="appedition.new">
+          <span class="glyphicon glyphicon-plus"></span>
+          创建一个APP
+        </button>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>操作</th>
+        <th>序号</th>
+        <th>应用代码</th>
+        <th>应用名称</th>
+        <th>适用设备</th>
+        <th>最新版本</th>
+        <th>是否有效</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="appedition in vm.appeditions track by appedition.id">
+        <td>
+          <a ui-sref="appedition.edit({id:appedition.id})"><i class="fa fa-edit text-navy"> 编辑</i></a>
+        </td>
+        <td ng-bind="$index+1">1</td>
+        <td ng-bind="appedition.appCode"></td>
+        <td ng-bind="appedition.appName"></td>
+        <td ng-bind="appedition.appEquipment"></td>
+        <td ng-bind="appedition.newEdition"></td>
+        <td ng-bind="appedition.enableFlag"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+
+<div class="row"><alert-error></alert-error></div>
+<div class="ibox-content">
+<div>
+  <h2>第三方应用</h2>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4 no-padding-left">
+        <button class="btn btn-primary" ui-sref="thirdparty.new">
+          <span class="glyphicon glyphicon-plus"></span>
+          创建一个新的应用
+        </button>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>应用名称</th>
+        <th>应用描述</th>
+        <th>应用代码</th>
+        <th>应用图标</th>
+        <th>Key</th>
+        <th>Secret</th>
+        <th>是否付费</th>
+        <th>过期时间</th>
+        <th>是否有效</th>
+        <th>主页</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="thirdparty in vm.thirdpartys track by thirdparty.id">
+        <td><a ui-sref="thirdparty-detail({id:thirdparty.id})">{{thirdparty.appName}}</a></td>
+        <td>{{thirdparty.appDesc}}</td>
+        <td>{{thirdparty.appCode}}</td>
+        <td>{{thirdparty.appIcon}}</td>
+        <td>{{thirdparty.appKey}}</td>
+        <td>{{thirdparty.appSecret}}</td>
+        <td>{{thirdparty.freeFlag}}</td>
+        <td>{{thirdparty.expiredDate}}</td>
+        <td>{{thirdparty.enableFlag}}</td>
+        <td>{{thirdparty.appHomePage}}</td>
+        <td class="text-right">
+          <div class="btn-group flex-btn-group-container">
+            <button type="submit"
+                    ui-sref="thirdparty-detail({id:thirdparty.id})"
+                    class="btn btn-info btn-sm">
+              <span class="glyphicon glyphicon-eye-open"></span>
+              <span class="hidden-xs hidden-sm">查看</span>
+            </button>
+            <button type="submit"
+                    ui-sref="thirdparty.edit({id:thirdparty.id})"
+                    class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="hidden-xs hidden-sm">编辑</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+  </div>
+</div>
+

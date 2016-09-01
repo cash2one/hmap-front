@@ -1,0 +1,30 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">创建授权</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="authId">应用名称</label>
+          <select class="form-control" ng-model="vm.interfaceAuth.authId" name="authId" id="authId">
+            <option ng-repeat="x in vm.appNames" value="{{x.id}}">{{x.appName}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

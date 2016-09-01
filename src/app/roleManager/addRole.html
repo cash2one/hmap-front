@@ -1,0 +1,46 @@
+<form name="addForm" role="form" novalidate ng-submit="vm.add()">
+
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">新增角色</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_roldCode">角色代码</label>
+          <input type="text" class="form-control" name="roldCode" id="field_roldCode"
+                 ng-model="vm.role.roleCode"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_roleName">角色名称</label>
+          <input type="text" class="form-control" name="roleName" id="field_roleName"
+                 ng-model="vm.role.roleName"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_roleDescription">角色描述</label>
+          <input type="text" class="form-control" name="roleDescription" id="field_roleDescription"
+                 ng-model="vm.role.roleDescription"
+            />
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

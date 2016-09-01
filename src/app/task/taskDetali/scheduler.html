@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>用户管理</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1 style="font-size: 100px;margin-left: auto;margin-right: auto">Standby</h1>
+              <a ng-click="vm.start">Start</a><br/>
+              <a ng-click="vm.standby">Standby</a>
+            </div>
+            <div class="col-lg-6">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <td>Name</td>
+                    <td ng-bind="vm.scheduler.schedulerName"></td>
+                  </tr>
+                  <tr>
+                    <td>Instance Id</td>
+                    <td ng-bind="vm.scheduler.schedulerInstanceId"></td>
+                  </tr>
+                  <tr>
+                    <td>Version</td>
+                    <td ng-bind="vm.scheduler.version"></td>
+                  </tr>
+                  <tr>
+                    <td>Standby</td>
+                    <td ng-bind="vm.scheduler.inStandbyMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Started</td>
+                    <td ng-bind="vm.scheduler.started"></td>
+                  </tr>
+                  <tr>
+                    <td>Running Since</td>
+                    <td ng-bind="vm.scheduler.runningSince"></td>
+                  </tr>
+                  <tr>
+                    <td>Jobs Executed</td>
+                    <td ng-bind="vm.scheduler.numberOfJobsExecuted"></td>
+                  </tr>
+                  <tr>
+                    <td>Job Store Clustered</td>
+                    <td ng-bind="vm.scheduler.jobStoreClustered"></td>
+                  </tr>
+                  <tr>
+                    <td>Suupports Persistence</td>
+                    <td ng-bind="vm.scheduler.jobStoreSupportsPersistence"></td>
+                  </tr>
+                  <tr>
+                    <td>Scheduler Remote</td>
+                    <td ng-bind="vm.scheduler.schedulerRemote"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th><input type="checkbox" ng-click="updateSelectionAll($event)"></th>
+                    <th>schedname</th>
+                    <th>instancename</th>
+                    <th>lastcheckintime</th>
+                    <th>checkininterval</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="scheduler in vm.jobs track by $index">
+                    <td><input type="checkbox" id={{job.jobName}} name="{{job.jobGroup}}" ng-checked="isSelected(job.jobName)" ng-click="updateSelection($event,job.jobName)"></td>
+                    <td ng-bind="scheduler.schedulerName"></td>
+                    <td ng-bind="scheduler.schedulerInstanceId"></td>
+                    <td ng-bind="scheduler.lastCheckinTime"></td>
+                    <td ng-bind="scheduler.checkinInterval"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

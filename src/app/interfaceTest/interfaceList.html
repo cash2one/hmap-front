@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>接口列表</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">请求方法</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.header.requestMethod" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">接口类型</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.header.interfaceType" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-8"></div>
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+                  <button class="btn btn-w-m btn-primary" type="button">搜索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th style="width: 5%;">序号</th>
+              <th style="width: 10%;">系统代码</th>
+              <th style="width: 10%;">接口代码</th>
+              <th style="width:10%;">接口类型</th>
+              <th style="width:10%;">请求方式</th>
+              <th style="width:10%;">请求方法</th>
+              <th style="width:20%;">系统地址</th>
+              <th style="width:15%;">接口地址</th>
+              <th style="width:5%;">测试</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="result in vm.result">
+              <td>{{$index+1}}</td>
+              <td>{{result.interfaceCode}}</td>
+              <td>{{result.lineCode}}</td>
+              <td>{{result.interfaceType}}</td>
+              <td>{{result.requestFormat}}</td>
+              <td>{{result.requestMethod}}</td>
+              <td>{{result.domainUrl}}</td>
+              <td>{{result.iftUrl}}</td>
+              <td>
+                <a ui-sref="test({lineId:result.lineId})">测试</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+          <uib-pagination class="pagination-sm"
+                          total-items="vm.totalItems"
+                          ng-model="vm.page"
+                          ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

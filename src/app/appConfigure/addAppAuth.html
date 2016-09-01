@@ -1,0 +1,60 @@
+<form name="addForm" role="form"  ng-submit="vm.add()">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">新建app配置</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="hidden" class="form-control" ng-model="vm.hmsAppAuth.Id"/>
+          <label class="control-label" for="field_appName">应用名称</label>
+          <input type="text" class="form-control" style="width:300px;border: 1px solid grey;" name="appName"
+                 id="field_appName"
+                 ng-model="vm.hmsAppAuth.appName" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">应用类型</label>
+          <select class="form-control" ng-model="vm.hmsAppAuth.appType"
+                  style="width:300px;border: 1px solid grey;" ng-init="vm.hmsAppAuth.appType = '客户端应用'">
+            <option ng-repeat="x in vm.appType" value="{{x.name}}">{{x.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-10"><label class="control-label">App图标</label>
+              <input type="hidden" class="form-control" style="width: 300px;border: 1px solid grey;" name="appIcon"
+                     id="field_appIcon"
+                     ng-model="vm.hmsAppAuth.appIcon" required>
+              <input type="file" ng-model="vm.file" ngf-select name="file" accept="image/*" required></div>
+            <div class="col-lg-10">
+              <div style="font-size: 40px;" ng-show="vm.imgShow">
+                <img  height="50" width="50" ngf-src="vm.file">
+              </div>
+            </div>
+          </div>
+          <div
+            style="background-color:#1c92c7;width: 60px;height: 20px;border-radius: 5px;color: white;margin-top: 10px;"
+            ng-click="vm.submitFile()">
+            <div ng-show="vm.varMay">开始上传</div>
+            <div ng-show="vm.varMays">上传成功</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

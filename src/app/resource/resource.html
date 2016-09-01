@@ -1,0 +1,52 @@
+
+<div class="row"><alert-error></alert-error></div>
+<div class="ibox-content">
+  <div>
+    <h2>资源管理</h2>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-4 no-padding-left">
+          <button class="btn btn-primary" ui-sref="resource.new">
+            <span class="glyphicon glyphicon-plus"></span>
+            新建资源
+          </button>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>名称</th>
+          <th>URL</th>
+          <th>类型</th>
+          <th>需要登录</th>
+          <th>接入检查</th>
+          <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="resource in vm.resources track by resource.resourceId">
+          <td><a ui-sref="resource.detail({id:resource.resourceId})">{{resource.name}}</a></td>
+          <td>{{resource.type}}</td>
+          <td>{{resource.url}}</td>
+          <td>{{resource.loginRequire}}</td>
+          <td>{{resource.accessCheck}}</td>
+          <td>{{resource.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>
+

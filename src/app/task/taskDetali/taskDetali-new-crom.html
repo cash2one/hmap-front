@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>新建CROM任务</h5>
+      </div>
+      <div class="ibox-content">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+          <input name="appId" id="appId" type="hidden" value="">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">任务名称</label>
+                <div class="col-lg-8">
+                  <input name="jobName" class="form-control" id="jobName" type="text"  ng-model="vm.taskDetali.jobName">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">任务组</label>
+                <div class="col-lg-8">
+                  <input name="jobGroup" class="form-control" id="jobGroup" disabled type="text" ng-model="vm.taskDetali.jobGroup">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">任务描述</label>
+                <div class="col-lg-8">
+                  <input name="description" class="form-control" id="description" type="text" ng-model="vm.taskDetali.description">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">任务类名</label>
+                <div class="col-lg-8">
+                  <input name="jobClassName" class="form-control" id="jobClassName" type="text" ng-model="vm.taskDetali.jobClassName">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">开始日期</label>
+                <div class="col-lg-8">
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd HH:mm:ss" name="start" id="start"
+                           ng-model="vm.taskDetali.startTime" datepicker-options="vm.dateOptions" is-open="vm.isStartOpen"/>
+
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.startOpen()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">结束日期</label>
+                <div class="col-lg-8">
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd HH:mm:ss" name="end" id="end"
+                           ng-model="vm.taskDetali.endTime" datepicker-options="vm.dateOptions" is-open="vm.isEndOpen"/>
+
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.endOpen()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">表达式</label>
+                <div class="col-lg-8">
+                  <input name="cronExpression" class="form-control" id="cronExpression" type="text" ng-model="vm.taskDetali.cronExpression">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <div class="form-group">
+              <div class="row col-lg-5">
+                <div class="col-lg-6">
+                  <button class=" col-lg-1 btn btn-w-m btn-info" type="button"  ng-click="vm.addRow()">新建</button>
+                </div>
+                <div class="col-lg-6">
+                  <button class=" col-lg-1 btn btn-w-m btn-info" type="button"  ng-click="vm.delRow()">删除</button>
+                </div>
+              </div>
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style="width:15px"><input type="checkbox" ng-click="updateSelectionAll($event)"></th>
+                  <th>属性名</th>
+                  <th>属性值</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="data in vm.taskDetali.jobData track by $index">
+                  <td style="width:15px"><input type="checkbox" ng-checked="isSelected($index)" ng-click="updateSelection($event,$index)"/></td>
+                  <td><input type="text" class="form-control" ng-model="data.name"/></td>
+                  <td><input type="text" class="form-control" ng-model="data.value"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

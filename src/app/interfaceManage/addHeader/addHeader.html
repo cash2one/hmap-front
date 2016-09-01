@@ -1,0 +1,225 @@
+<alert-error></alert-error>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>系统信息新增</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form name="addHeader" role="form" ng-submit="vm.add()">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统代码</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" name="interfaceCode" type="text" ng-model="vm.header.interfaceCode" required>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统名称</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.name" required>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">接口类型</label>
+
+                <div class="col-lg-8">
+                  <select class="form-control" ng-model="vm.header.interfaceType"
+                          ng-options="a for a in vm.interfaceType" ng-init="vm.header.interfaceType='REST'">
+                    <!--<option value="">REST</option>-->
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统地址</label>
+
+                <div class="col-lg-8">
+                  <input type="url" ng-model="vm.header.domainUrl" class="form-control" required>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">请求方法</label>
+
+                <div class="col-lg-8">
+                  <select class="form-control" ng-model="vm.header.requestMethod"
+                          ng-options="a for a in vm.requestMethod" ng-init="vm.header.requestMethod='GET'">
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">请求形式</label>
+
+                <div class="col-lg-8">
+                  <select class="form-control" ng-model="vm.header.requestFormat"
+                          ng-options="a for a in vm.requestFormat" ng-init="vm.header.requestFormat='raw'">
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">请求报文格式</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.requestContenttype">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">请求接收类型</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.requestAccept">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">是否有效</label>
+
+                <div class="col-lg-8">
+
+                  <select class="form-control" ng-model="vm.header.enableFlag" ng-init="vm.header.enableFlag='Y'">
+                    <option ng-repeat="x in vm.flag" value="{{x.code}}">{{x.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">是否需要校验</label>
+
+                <div class="col-lg-8">
+                  <select class="form-control" ng-model="vm.header.authFlag" ng-init="vm.header.authFlag='N'">
+                    <option ng-repeat="x in vm.flag" value="{{x.code}}">{{x.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">校验用户名</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.authUsername">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">校验用密码</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.authPassword">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">SOAP报文前缀</label>
+
+                <div class="col-lg-8">
+                  <textarea class="form-control" type="text" ng-model="vm.header.bodyHeader"></textarea>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">SOAP报文后缀</label>
+
+                <div class="col-lg-8">
+                  <textarea class="form-control" type="text" ng-model="vm.header.bodyTail"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">命名空间</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.namespace">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">映射类</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.mapperClass">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="text-center">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">
+                  &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+                </button>
+                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                  &nbsp;&nbsp;Save&nbsp;&nbsp;
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+

@@ -1,0 +1,90 @@
+<div>
+  <h2>任务明细</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="col-lg-3 control-label">任务名称</label>
+          <div class="col-lg-6">
+            <input type="text" id="jobName" class="form-control" ng-model="vm.dto.jobName">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <label class="col-lg-3 control-label">任务组</label>
+          <div class="col-lg-6">
+            <input type="text" id="jobGroup" class="form-control" ng-model="vm.dto.jobGroup">
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="col-lg-offset-4 col-lg-3 btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadJobs()">搜索</button>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-6">
+          <a class="col-lg-offset-4 col-lg-3 btn btn-w-m btn-primary" ui-sref="taskDetali.scheduler">计划管理</a>
+        </div>
+      </div>
+      <br/>
+      <div class="row col-lg-10" style="margin-left: 20px">
+        <button class="btn btn-primary dim" type="button" ui-sref="taskDetali.newCrom">
+          <i class="fa fa-money">新建CRON任务</i>
+        </button>
+        <button class="btn btn-primary dim" type="button" ui-sref="taskDetali.new">
+          <i class="fa fa-money">新建简单任务</i>
+        </button>
+
+        <button class="btn btn-danger dim" type="button" ng-click="vm.delJobs()">
+          <i class="glyphicon glyphicon-remove">删除</i>
+        </button>
+        <button class="btn btn-warning dim" type="button" ng-click="vm.pauseJobs()">
+          <i class="glyphicon glyphicon-pause">暂停</i>
+        </button>
+        <button class="btn btn-info dim" type="button" ng-click="vm.resumeJobs()">
+          <i class="glyphicon glyphicon-play">恢复</i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th><input type="checkbox" ng-click="updateSelectionAll($event)"></th>
+        <th>任务名称</th>
+        <th>任务组</th>
+        <th>任务类名</th>
+        <th>任务描述</th>
+        <th>上次执行时间</th>
+        <th>计划执行时间</th>
+        <th>下次执行时间</th>
+        <th>实际执行时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="job in vm.jobs track by $index">
+        <td><input type="checkbox" id={{job.jobName}} name="{{job.jobGroup}}" ng-checked="isSelected(job.jobName)" ng-click="updateSelection($event,job.jobName)"></td>
+        <td ng-bind="job.jobName"></td>
+        <td ng-bind="job.jobGroup"></td>
+        <td ng-bind="job.jobClassName"></td>
+        <td ng-bind="job.description"></td>
+        <td ng-bind="job.previousFireTime"></td>
+        <td ng-bind="job.scheduledFireTime"></td>
+        <td ng-bind="job.nextFireTime"></td>
+        <td ng-bind="job.fireTime"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+</div>

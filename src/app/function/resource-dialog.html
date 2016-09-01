@@ -1,0 +1,41 @@
+<div class="ibox-content">
+  <div class="row">
+    <h2>选择资源</h2>
+    <br/>
+    <button type="button" class="btn btn-primary"  ng-click="vm.save()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>保存</span>
+    </button>
+    <button type="button" class="btn btn-primary"  ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+    </button>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th><input type="checkbox" ng-click="vm.toggleAll()" ng-model="vm.isAllSelected"></th>
+          <th>名称</th>
+          <th>URL</th>
+          <th>类型</th>
+          <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="resource in vm.resources track by resource.resourceId">
+          <td><input type="checkbox" ng-model="resource.addFlag" ng-true-value="'Y'" ng-false-value="'N'"/></td>
+          <td>{{resource.name}}</td>
+          <td>{{resource.type}}</td>
+          <td>{{resource.url}}</td>
+          <td>{{resource.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

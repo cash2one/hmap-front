@@ -1,0 +1,56 @@
+
+<div class="row"><alert-error></alert-error></div>
+<div class="ibox-content">
+  <div>
+    <h2>功能管理</h2>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-4 no-padding-left">
+          <button class="btn btn-primary" ui-sref="function.new">
+            <span class="glyphicon glyphicon-plus"></span>
+            新建功能
+          </button>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>功能名称</th>
+          <th>功能代码</th>
+          <th>功能图标</th>
+          <th>功能序号</th>
+          <th>功能描述</th>
+          <th>父级功能</th>
+          <th>入口页面</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="function in vm.functions track by function.functionId">
+          <td><a ui-sref="function.detail({id:function.functionId})">{{function.functionName}}</a></td>
+          <td>{{function.functionCode}}</td>
+          <td>{{function.functionIcon}}</td>
+          <td>{{function.functionSequence}}</td>
+          <td>{{function.functionDescription}}</td>
+          <td>{{function.parentFunctionName}}</td>
+          <td>{{function.resourceName}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>
+

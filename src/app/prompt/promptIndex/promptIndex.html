@@ -1,0 +1,64 @@
+<div class="row">
+  <alert-error></alert-error>
+</div>
+<div>
+  <h2>描述维护</h2>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4 no-padding-left">
+        <button class="btn btn-primary" ui-sref="promptIndex.add">
+          <span class="glyphicon glyphicon-plus"></span>
+          新增
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>序号</th>
+        <th>代码</th>
+        <th>语言</th>
+        <th>描述</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr ng-repeat="prompt in vm.prompts">
+        <td>{{$index+1}}</td>
+        <td>{{prompt.promptCode}}</td>
+        <td>
+          <select class="form-control" ng-model="prompt.lang" disabled>
+              <option ng-repeat="x in vm.langValue" value="{{x.langCode}}">{{x.description}}</option>
+          </select>
+        </td>
+        <td>{{prompt.description}}</td>
+        <td>
+          <div>
+            <button type="submit"
+                    ui-sref="promptIndex.edit({promptId:prompt.promptId})"
+                    class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="hidden-xs hidden-sm">编辑</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+</div>
