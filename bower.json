@@ -4,6 +4,9 @@
   "ignore": [
     "**/.*",
     "node_modules",
+    "karma.conf.js",
+    "gulpfile.js",
+    "protractor.conf.js",
     "bower_components",
     "config",
     "test",
