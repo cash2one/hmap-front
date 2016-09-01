@@ -9,4 +9,4 @@ dist/
 .tmp
 .idea/
 *.log
-config
+envConfig
