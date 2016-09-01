@@ -8,7 +8,7 @@
     "gulpfile.js",
     "protractor.conf.js",
     "bower_components",
-    "config",
+    "envConfig",
     "test",
     "tests",
     "dist",

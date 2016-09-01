@@ -1,0 +1,15 @@
+
+ {
+   "BaseConfig": {
+     "url": "http://10.211.110.174/wecorp",
+     "backUrls": [
+       "/api",
+       "/oauth/token",
+       "/metrics"
+     ],
+     "authenticatedUrls": [
+       "/api",
+       "/metrics"
+     ]
+   }
+ }
