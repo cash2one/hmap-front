@@ -8,38 +8,37 @@
   angular.module('hmapFront')
     .controller('EditRoleController', EditRoleController);
 
-  EditRoleController.$inject = ['RoleService', '$scope', '$state', '$uibModalInstance', 'entity'];
+  EditRoleController.$inject = ['RoleService', '$scope', '$state', '$uibModalInstance', 'entity','toastr','Hmapfe'];
 
-  function EditRoleController(RoleService, $scope, $state, $uibModalInstance, entity) {
+  function EditRoleController(RoleService, $scope, $state, $uibModalInstance, entity,toastr,Hmapfe) {
     var vm = this;
     vm.role = entity;
     vm.clear = clear;
-
     vm.update = update;
-    console.log("role:" + angular.toJson(vm.role));
+    vm.loadRole=loadRole;
+    vm.loadRole();
 
-    var role = vm.role;
-    getRoleByRoleId(role);
-    function getRoleByRoleId(role) {
-      return RoleService.findRoles(role)
-        .then(function (data) {
-          vm.role = data.rows[0];
-          console.log("result00000" + angular.toJson(vm.role));
-        })
+    function loadRole() {
+      Hmapfe.log('edit role');
+      Hmapfe.log(vm.role);
+      RoleService.findRoles().query(vm.role
+        , onRoleSuccess, onError);
     }
 
     function update() {
-      console.log("role:" + angular.toJson(vm.role));
-      return RoleService.updateRoles(vm.role)
-        .then(function (data) {
-          console.log("resultData:" + angular.toJson(data));
-          if (data.success) {
-            $uibModalInstance.close();
-            return $state.go('rolemanager', null, {reload: true});
-          }
+      RoleService.updateRoles().save(vm.role,onSuccess,onError);
+    };
 
-        })
+    function onRoleSuccess(data, headers) {
+      vm.role = data.rows[0];
+    }
 
+    function onSuccess(data, headers) {
+      toastr.success('保存成功！','信息提示');
+      $uibModalInstance.close(data);
+    }
+    function onError(error) {
+      //console.log('error');
     }
 
 
@@ -49,8 +48,6 @@
     function clear() {
       $uibModalInstance.dismiss('cancel');
     }
-
-
   }
 
 

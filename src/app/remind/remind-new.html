@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>用户管理</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">发送对象</label>
+                <div class="col-lg-8">
+                  <select class="form-control" id="target" name="target" ng-model="vm.remind.target" ng-options="e.id as e.name for e in vm.target" >
+                    <option value="">请选择</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">发送时间</label>
+                <div class="col-lg-8">
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup name="sendTime" id="sendTime"
+                           ng-model="vm.remind.sendTime" datepicker-options="vm.dateOptions" is-open="vm.isSendTime"/>
+
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.sendTime()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">megId</label>
+                <div class="col-lg-8">
+                  <input type="text" id="megId" name="megId" ng-model="vm.remind.megId" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">内容</label>
+                <div class="col-lg-8">
+                  <input type="text" id="info" name="info" ng-model="vm.remind.info" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                  <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+                </button>
+                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

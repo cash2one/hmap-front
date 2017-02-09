@@ -34,7 +34,50 @@
                     ]
                 }
 
-            });
+            })
+          .state('line.edit', {
+            parent: 'app',
+            url: "/line/edit/{lineId}",
+            views: {
+              'body': {
+                templateUrl: "app/interfaceManage/line/line-detail.html",
+                controller: 'LineDetailController',
+                controllerAs: 'vm'
+              }
+            },
+            resolve: {
+              entity: ['$stateParams',
+                function ($stateParams) {
+                  //console.log("0000="+$stateParams.lineId)
+                  return {
+                    lineId:$stateParams.lineId
+                    //headerId:$stateParams.headerId
+                  };
+                }
+              ]
+            }
+
+          }).state('line.new', {
+            parent: 'app',
+            url: "/line/new/{headerId}",
+            views: {
+              'body': {
+                templateUrl: "app/interfaceManage/line/line-detail.html",
+                controller: 'LineDetailController',
+                controllerAs: 'vm'
+              }
+            },
+            resolve: {
+              entity: ['$stateParams',
+                function ($stateParams) {
+                  return {
+                    headerId:$stateParams.headerId
+                  };
+                }
+              ]
+            }
+
+          });
     };
 
 })();

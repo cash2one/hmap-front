@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <alert-error></alert-error>
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+          ng-click="vm.clear()">&times;</button>
+  <h4 class="modal-title" id="myAfwkFunctionLabel">创建或者编辑系统配置</h4>
+</div>
+<div class="modal-body">
+  <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+    <!--<jhi-alert-error></jhi-alert-error>-->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_configKey">配置项</label>
+          <input type="text" class="form-control" name="configKey" id="field_configKey"
+                 ng-model="vm.sysConfig.configKey" ng-readonly="vm.isSystem"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_configValue">配置值</label>
+          <input type="text" class="form-control" name="configValue" id="field_configValue"
+                 ng-model="vm.sysConfig.configValue"
+            />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_configDesc">配置描述</label>
+          <input type="text" class="form-control" name="configDesc" id="field_configDesc"
+                 ng-model="vm.sysConfig.configDesc"
+            />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_configLevel">配置级别</label>
+          <select id="field_configLevel" class="form-control" ng-model="vm.sysConfig.configLevel"
+                  ng-options="level for level in vm.configLevelType" required ng-readonly="vm.isSystem">
+            <!--<option value="">REST</option>-->
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_enableFlag">启用</label>
+          <input type="checkbox" name="enableFlag" id="field_enableFlag"
+                 ng-model="vm.sysConfig.enable" ng-true-value="'Y'" ng-false-value="'N'"
+            />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+  取消
+</button>
+<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary" ng-click="vm.save()">
+  保存
+</button>
+</div>

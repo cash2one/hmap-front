@@ -1,0 +1,261 @@
+
+
+<alert-error></alert-error>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>工作流模板管理</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">来源系统</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.apiHeaderName" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">单据列表接口名称</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.getWfListApiName" class="form-control" readonly>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+        <div class="hr-line-dashed"></div>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">模板代码</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.templateCode" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">工作流名称</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.workflowName" class="form-control">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <a class="btn btn-w-m btn-info" ui-sref="wfTemp.edit({sourceId:vm.wfTemp.sourceId})">新增</a>
+                </div>
+              </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.search()">搜索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th >操作</th>
+              <th >序号</th>
+              <th >模板代码</th>
+              <th >工作流名称</th>
+              <!--<th>待办列表接口地址</th>-->
+              <th>单据详情接口名称</th>
+              <!--<th>待办详情接口地址</th>-->
+              <th>审批回执接口名称</th>
+              <!--<th>审批回执接口地址</th>-->
+              <th>转发人列表接口名称</th>
+              <!--<th>转发人列表接口地址</th>-->
+              <!--<th>是否有效</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr  ng-repeat="wfTemp in vm.wfTempAll ">
+              <td>
+                <a ui-sref="wfTemp.edit({id:wfTemp.id,sourceId:vm.wfTemp.sourceId})"><i class="fa fa-edit text-warning">编辑</i></a>
+                <a ng-click="vm.delete(wfTemp.id)"><i class="fa fa-times text-warning">删除</i></a>
+              </td>
+              <td>{{$index+1}}</td>
+              <td>{{wfTemp.templateCode}}</td>
+              <td>{{wfTemp.workflowName}}</td>
+              <!--<td>{{wfTemp.wfListItfAddr}}</td>-->
+              <td>{{wfTemp.getWfDetailApiName}}</td>
+              <!--<td>{{wfTemp.wfDetailItfAddr}}</td>-->
+              <td>{{wfTemp.setWfStatusApiName}}</td>
+              <!--<td>{{wfTemp.wfActionItfAddr}}</td>-->
+              <td>{{wfTemp.getUserListApiName}}</td>
+              <!--<td>{{wfTemp.wfForwardListItfAddr}}</td>-->
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+          <uib-pagination class="pagination-sm"
+                          total-items="vm.totalItems"
+                          ng-model="vm.page"
+                          ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>工作流筛选条件管理</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">来源系统</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.apiHeaderName" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">单据列表接口名称</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfTemp.getWfListApiName" class="form-control" readonly>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+
+
+
+        <div class="hr-line-dashed"></div>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">筛选条件代码</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfConditionType.conditionTypeCode" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">筛选条件名称</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfConditionType.conditionTypeName" class="form-control">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <a class="btn btn-w-m btn-info" ui-sref="wfTemp.wfConditionTypeEdit({sourceId:vm.wfTemp.sourceId})">新增</a>
+                </div>
+              </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <button class="btn btn-white" type="reset" id="">重置</button>
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.searchConditionType()">搜索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="hr-line-dashed"></div>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th >操作</th>
+              <th >序号</th>
+              <th >筛选条件代码</th>
+              <th >筛选条件名称</th>
+              <th>获取筛选条件内容接口名称</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  ng-repeat="wfConditionType in vm.wfConditionTypeAll ">
+              <td>
+                <a ui-sref="wfTemp.wfConditionTypeEdit({id:wfConditionType.id,sourceId:vm.wfTemp.sourceId})"><i class="fa fa-edit text-warning">编辑</i></a>
+                <!--<a ng-click="vm.editConditionType(wfConditionType.id)"><i class="fa fa-edit text-warning">编辑</i></a>-->
+                <a ng-click="vm.deleteConditionType(wfConditionType.id)"><i class="fa fa-times text-warning">删除</i></a>
+              </td>
+              <td>{{$index+1}}</td>
+              <td>{{wfConditionType.conditionTypeCode}}</td>
+              <td>{{wfConditionType.conditionTypeName}}</td>
+              <td>{{wfConditionType.getWfConditionApiName}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <item-count page="vm.conditionPage" total="vm.totalConditionItems" items-per-page="vm.itemsPerPage"></item-count>
+          <uib-pagination class="pagination-sm"
+                          total-items="vm.totalConditionItems"
+                          ng-model="vm.conditionPage"
+                          ng-change="vm.conditionPageChanged()"></uib-pagination>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

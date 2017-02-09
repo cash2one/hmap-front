@@ -7,20 +7,15 @@
   ExecutionLog.$inject = ['$resource'];
 
   function ExecutionLog ($resource) {
-    var resourceUrl = '/api/ExecutionLog/:id';
+    var service = {
+      loadAll: loadAll
+    };
+    return service;
 
-    return $resource(resourceUrl, {}, {
-      'query': { method: 'POST',isArray: false},
-      'get': {
-        method: 'GET',
-        transformResponse: function (data) {
-          if (data) {
-            data = angular.fromJson(data);
-          }
-          return data;
-        }
-      },
-      'update': { method:'PUT' }
-    });
+    function loadAll(page, pageSize) {
+      return $resource("/api/ExecutionLog?page=" + page + "&pageSize=" + pageSize, {}, {
+        'query': {method: 'POST', isArray: false}
+      });
+    }
   }
 })();

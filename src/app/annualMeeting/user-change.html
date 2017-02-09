@@ -1,0 +1,40 @@
+<form name="addForm" role="form" ng-submit="vm.save()">
+
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title">更换桌位</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">桌位</label>
+
+          <div class="input-group" style="width:90%">
+            <div>
+              <input readonly class="form-control" style="text-align:center;background-color: #f9f9f9;" type="text" ng-model="vm.tableNum">
+            </div>
+            <div class="input-group-btn">
+              <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">选择<span
+                class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li ng-repeat="x in vm.tables"><a ng-click="vm.tableId=x.id;vm.tableNum=x.tableNumber">{{x.tableNumber}}号桌</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>取消
+    </button>
+    <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>保存
+    </button>
+  </div>
+</form>

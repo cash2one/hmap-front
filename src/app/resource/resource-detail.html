@@ -1,6 +1,6 @@
 <div>
   <alert-error></alert-error>
-  <h2><span>功能名称:{{vm.resource.name}}</span></h2>
+  <h2><span>资源名称:{{vm.resource.name}}</span></h2>
   <div class="ibox-content">
     <form class="form-horizontal">
       <div class="row">
@@ -17,7 +17,9 @@
 
         <div class="form-group"><label class="col-lg-2 control-label">类型</label>
 
-          <div class="col-lg-6"><input type="text" ng-model="vm.resource.type" class="form-control"/>
+          <div class="col-lg-6">
+            <!--<input type="text" ng-model="vm.resource.type" class="form-control"/>-->
+            <lookup-select lookup-value="vm.resource.type" lookup-type="SYS.RESOURCE_TYPE"></lookup-select>
           </div>
         </div>
         <div class="form-group"><label class="col-lg-2 control-label">描述</label>
@@ -39,11 +41,8 @@
     </form>
   </div>
 
-  <button type="button"
-          ui-sref="resource"
-          class="btn btn-info">
-    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> 后退</span>
-  </button>
+  <p></p>
+  <p></p>
   <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">
     <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
   </button>

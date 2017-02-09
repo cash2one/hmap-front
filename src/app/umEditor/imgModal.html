@@ -1,0 +1,300 @@
+<style>
+  .modal_body{
+    height: 450px;padding: 0;
+  }
+
+  .tag_list{
+    float:left;
+    width: 15%;
+    height: 100%;
+    padding-top: 10px;
+  }
+  .modal_content{
+    float:right;width: 85%;height: 100%;border-left: 1px solid #e7e7eb;
+  }
+  .local_upload{
+    border-bottom: 1px solid #e7e7eb; height: 50px
+  }
+  .local_btn{
+    float: right;margin-top: 10px;margin-right: 30px;
+  }
+  .show_list{
+    height: 350px;
+    padding: 20px 20px 20px 0;/*上右下左*/
+    /*border-bottom: 1px solid #e7e7eb;*/
+  }
+
+  .modal_content ul{
+    list-style-type: none
+  }
+
+  .tag_list ul{
+  }
+
+  .li_item {
+    position: relative;
+    margin-right: 11px;
+    margin-bottom: 10px;
+    float: left;
+    border: 1px solid #E1E1EC;
+    width: 119px;
+    cursor: pointer;
+    /*text-align: center*/
+  }
+
+  .show_item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item_style{
+    width:117px;
+    height: 117px;
+    /*border-bottom:1px solid #e7e7eb;*/
+  }
+  .item_name_style{
+    height: 20px;
+    text-align: center;
+    /*   display: flex;
+       align-items: center;
+       justify-content: center;
+       word-break: break-all;*/
+    border-top: 1px solid #E1E1EC;
+    overflow: hidden;
+
+  }
+  .selected_item {
+    border: 1px solid #1094fa;
+    background-image: url(./assets/images/umEdit/selected.png);
+    background-repeat:no-repeat;
+    /*background-image: url(../images/success.gif)\9;*/
+    background-position: 100% 100%;
+  }
+  .selected_tag_query{
+    background-color: #f4f5f9;
+  }
+  .page_query{
+    display: inline-block;
+    float: right;
+    margin: 8px 10px;
+    border-radius: 4px;
+  }
+  .selectMedia{
+    margin-top: 10px;
+    height: 40px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e7e7eb;
+  }
+  .select_tag_List{
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    /*width: 80px;*/
+  }
+  .selected_group{
+    background-color: #f4f5f9;
+  }
+  .selected_image{
+    border: 1px solid #1094fa;
+    background-image: url(./assets/images/umEdit/success.png);
+    background-repeat:no-repeat;
+    /*background-image: url(../images/success.gif)\9;*/
+    background-position: 100% 100%;
+  }
+
+
+
+  .page_nav_area {
+    letter-spacing: 4px;
+    *letter-spacing: normal;
+  }
+  .page_nav_area, .goto_area {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+  }
+  .goto_area {
+    margin-left: 8px;
+  }
+
+  .btn.page_prev, .btn.page_next {
+    position: relative;
+    font-size: 0;
+    letter-spacing: -5px;
+    background-color: #fff;
+    background-image: -moz-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#fff));
+    background-image: -webkit-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: linear-gradient(to bottom,#fff 0,#fff 100%);
+    border-color: #e6e7ec;
+    color: #222;
+    height: 30px;
+    line-height: 30px;
+    *line-height: 28px;
+    width: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .btn.page_prev .arrow, .btn.page_next .arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -6px;
+    margin-left: -3px;
+  }
+  .page_prev .arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: dashed;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-color: #919191;
+    border-right-style: solid;
+  }
+  .page_next .arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: dashed;
+    border-color: transparent;
+    border-right-width: 0;
+    border-left-color: #919191;
+    border-left-style: solid;
+  }
+  .page_num {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    *margin-right: 4px;
+    letter-spacing: normal;
+  }
+  .goto_area {
+    margin-left: 8px;
+  }
+  .goto_area input[type="text"] {
+    vertical-align: middle;
+    width: 75px;
+    height: 30px;
+    line-height: 22px;
+    padding: 4px 0;
+    border: 1px solid #e7e7eb;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    margin-right: 4px;
+  }
+  /*.pagination*/ .btn {
+    min-width: 0;
+  }
+  .btn.page_first, .btn.page_last, .btn.page_go {
+    background-color: #fff;
+    background-image: -moz-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#fff));
+    background-image: -webkit-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#fff 100%);
+    background-image: linear-gradient(to bottom,#fff 0,#fff 100%);
+    border-color: #e6e7ec;
+    color: #222;
+    height: 30px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .modal-backdrop {
+    z-index: 2040 !important;
+  }
+
+  .modal {
+    z-index: 2050 !important;
+  }
+
+</style>
+<div class="modal-header">
+  <button type="button" class="close" ng-click="$ctrl.cancel()" data-dismiss="modal" aria-hidden="true">
+    &times;
+  </button>
+  <h4 class="modal-title" id="modalTitle">
+    选择图片
+  </h4>
+</div>
+<div class="modal-body modal_body">
+  <div id="groupList" class="tag_list">
+    <div ng-repeat="item in $ctrl.groupData">
+      <div ng-class="{true:'selected_group',false:''}[item.id==$ctrl.currentGroup]">
+        <a class="font1" id="{{item.id}}" style="margin: 0 20px;" ng-click="$ctrl.selectedGroup(item.id)">
+          {{item.groupName}}({{item.attachmentCount}})
+        </a>
+      </div>
+    </div>
+    <div style="padding: 5px 20px;">
+      <a uib-popover-template="$ctrl.dynamicPopover.templateUrl" popover-placement="bottom" popover-is-open="$ctrl.isOpen" class="font1"  type="button">+新建分组</a>
+    </div>
+
+    <script type="text/ng-template" id="popover.html">
+      <div>创建分组</div>
+      <div class="form-group">
+        <input type="text" ng-model="$ctrl.groupName" class="form-control" maxlength="30">
+      </div>
+      <div class="form-group" style="text-align: center;">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.addTag()">确定</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.closeAddTag()">取消</button>
+      </div>
+    </script>
+  </div>
+  <div id="modalContent" class="modal_content">
+    <div id="localUpLoad" class="local_upload">
+      <input type="file" name="picture" id="picture" ng-model="$ctrl.picture" accept="image/*" onchange="angular.element(this).scope().$ctrl.upLoadImage()"
+             style="display: none;">
+      <button type="button" ng-click="$ctrl.localUpLoad('picture')" class="btn btn-primary local_btn">本地上传</button>
+    </div>
+    <div class="show_list">
+      <ul id="showList">
+        <li ng-repeat="item in $ctrl.imageData" class="li_item" ng-class="{'selected_image':item.selectFlag}" ng-click="$ctrl.selectPicture($index)">
+          <div class="show_item" id="{{item.attachmentId}}">
+            <img class="item_style" ng-src="{{item.attachmentUrl}}" alt="还没有上传图片哦！">
+            <img ng-show="item.selectStatus" class="selected_style" ng-src="../assets/images/umEdit/selected.png">
+          </div>
+          <div class="item_name_style">
+            <span>{{item.attachmentName}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div style="height: 45px;text-align: right;padding-right: 20px;" ng-show="$ctrl.sumPage>1">
+      <span class="page_nav_area">
+            <!--<a href="javascript:void(0);" class="btn page_first" style="display: none;"></a>-->
+            <a href="javascript:void(0);" class="btn page_prev" ng-show="$ctrl.curPage>1" ng-click="$ctrl.prevPage()"><i class="arrow"></i></a>
+                <span class="page_num">
+                    <label>{{$ctrl.curPage}}</label>
+                    <span class="num_gap">/</span>
+                    <label>{{$ctrl.sumPage}}</label>
+                </span>
+            <a href="javascript:void(0);" class="btn page_next" ng-show="$ctrl.curPage<$ctrl.sumPage" ng-click="$ctrl.nextPage()"><i class="arrow"></i></a>
+            <!--<a href="javascript:void(0);" class="btn page_last" style="display: none;"></a>-->
+        </span>
+        <span class="goto_area">
+            <input type="text" ng-model="$ctrl.targetPage">
+            <a href="javascript:void(0);" class="btn page_go" ng-click="$ctrl.skipPage()">跳转</a>
+        </span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()" data-dismiss="modal" id="closeBtn">
+    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="$ctrl.ok()">
+    <span class="glyphicon glyphicon-save"></span>&nbsp;确定
+  </button>
+</div>

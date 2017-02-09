@@ -11,56 +11,53 @@
 
   AppAuthService.$inject = ['$resource', '$http'];
 
-  function AppAuthService($resource, $http) {
+  function AppAuthService($resource,$http) {
     var service = {
       findAppAuth: findAppAuth,
-      updateAppAuth: updateAppAuth,
-      addAppAuth: addAppAuth,
-      generateUUID:generateUUID
+      insertOrUpdateAppAuth: insertOrUpdateAppAuth,
+      getAppAuth:getAppAuth,
+      savePermissionData:savePermissionData,
+      generateUUID:generateUUID,
+      getPermissionData:getPermissionData
     };
     return service;
 
-    function findAppAuth(hmsAppAuth,page,pagesize) {
-      console.log("service  hmsAppAuth#########:" + angular.toJson(hmsAppAuth));
-      var resourceUrl = '/api/appauth/query?page='+page+'&pagesize='+pagesize;
-      var data = {};
-      for(var p in hmsAppAuth){
-         if(hmsAppAuth[p]){
-           data[p]=hmsAppAuth[p];
-         }
-      }
-      return $http.post(resourceUrl, data, {
-      }).then(function (response) {
-        console.log("000000" + angular.toJson(response.data));
-        return response.data;
-      })
-    }
-
-    function addAppAuth(hmsAppAuth) {
-      var resourceUrl = "/api/hmsappauth/insert";
-      console.log("insert hmsAppAuth:" + angular.toJson(hmsAppAuth));
-      return $http.post(resourceUrl, hmsAppAuth, {
-      }).then(function (response) {
-        return response.data;
-
+    function findAppAuth() {
+      var resourceUrl = '/api/appauth/query';
+      return $resource(resourceUrl, {}, {
+        'query': {method: 'POST'}
       });
     }
-
-    function updateAppAuth(hmsAppAuth) {
-      var resourceUrl = '/api/hmsappauth/update';
-      var data = hmsAppAuth;
-      console.log("service  hmsAppAuth:" + angular.toJson(hmsAppAuth));
-      return $http.post(resourceUrl, data, {
-      }).then(function (response) {
-        return response.data;
+    function savePermissionData(dataId) {
+      var resourceUrl = '/api/applicationPermission/save?dataId='+dataId;
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST'}
+      });
+    }
+    function getPermissionData() {
+      var resourceUrl = '/api/applicationPermission/query/:id';
+      return $resource(resourceUrl, {}, {
+        'query': {method: 'GET', isArray: false}
+      });
+    }
+    function getAppAuth() {
+      var resourceUrl = '/api/appauth/:id';
+      return $resource(resourceUrl, {}, {
+        'query': {method: 'GET'}
+      });
+    }
+    function insertOrUpdateAppAuth() {
+      var resourceUrl = '/api/appauth/insertOrUpdate';
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST'}
       });
     };
 
     function generateUUID() { //生成新的UUID
-      var d = new Date().getTime();
+      var date = new Date().getTime();
       var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
+        var r = (date + Math.random() * 16) % 16 | 0;
+        date = Math.floor(date / 16);
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
       });
       return uuid;

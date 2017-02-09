@@ -1,0 +1,135 @@
+<!--<div>-->
+<!--<h3>快速编码管理</h3>-->
+<!--</div>-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>快速编码值列表</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">应用名称</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.appEdition.appName" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">适用设备</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.appEdition.appEquipment" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="hr-line-dashed"></div>
+
+        <form class="form-horizontal">
+          <input type="hidden" ng-model="vm.code.codeId" class="form-control">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">APP主页</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.appEdition.appHomepage" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">是否有效</label>
+
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.appEdition.enableFlag" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <a class="btn btn-w-m btn-info" ui-sref="appEditionLine.new({appId:vm.appEdition.appId})">新增</a>
+                </div>
+              </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <button class="btn btn-white" type="reset" ng-click="vm.reset()">重置</button>
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.search()">搜索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="hr-line-dashed"></div>
+
+        <div style="margin-top:50px;">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th style="width: 20%;">操作</th>
+              <th style="width: 5%;">序号</th>
+              <th style="width: 10%;">更新类型</th>
+              <th style="width: 10%;">版本编号</th>
+              <th style="width: 15%;">下载地址</th>
+              <th style="width: 15%;">是否有效</th>
+              <th style="width: 15%;">版本信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="appEditionLine in vm.appEditionLines">
+              <td>
+                <a ui-sref="appEditionLine.edit({appEditionLineId:appEditionLine.id})"><i class="fa fa-edit text-navy">编辑</i></a>
+                |<a ng-click="vm.deleteAppEditionLine({id:appEditionLine.id})"><i class="fa fa-times text-navy">删除</i></a>
+                <a ng-show="appEditionLine.enableFlag=='N'" ng-click="vm.openAppEditionLine(appEditionLine)">|<i class="fa fa-check-circle text-navy">启用</i></a>
+                <a ng-show="appEditionLine.enableFlag=='Y'" ng-click="vm.closeAppEditionLine(appEditionLine)">|<i class="fa fa-times text-navy">禁用</i></a>
+                |<a ng-click="vm.showUpdateMessage(appEditionLine.updateMessage)"><i class="fa fa-info-circle text-navy">查看更新内容</i></a><br/>
+                <a ng-click="vm.setLatestEdition(appEditionLine)"><i class="fa fa-chevron-circle-up text-navy">设置为最新版本</i></a>
+                |<a ng-click="vm.setMinimumEdition(appEditionLine)"><i class="fa fa-chevron-circle-down text-navy">设置为最低版本</i></a>
+              </td>
+              <td>{{appEditionLine.orderNum}}</td>
+              <td>{{vm.updateTypes[appEditionLine.updateType]}}</td>
+              <td>{{appEditionLine.editionCode}}</td>
+              <td>{{appEditionLine.downloadUrl}}</td>
+              <td>{{vm.state[appEditionLine.enableFlag]}}</td>
+              <td>{{vm.editionInfo(appEditionLine.isMinimumEdition,appEditionLine.isLatestEdition)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

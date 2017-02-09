@@ -22,7 +22,7 @@
                 resolve: {
                     entity: ['$stateParams',
                         function ($stateParams) {
-                            console.log("0000="+$stateParams.lineId)
+                            //console.log("0000="+$stateParams.lineId)
                             return {
                                 lineId:$stateParams.lineId
                                 //headerId:$stateParams.headerId

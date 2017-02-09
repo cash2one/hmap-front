@@ -25,7 +25,7 @@
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(function (response) {
-        console.log("000000" + angular.toJson(response.data));
+        //console.log("000000" + angular.toJson(response.data));
         return response.data;
       })
     }

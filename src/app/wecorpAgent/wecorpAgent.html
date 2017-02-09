@@ -1,0 +1,226 @@
+<style>
+.agent-detail{
+  border-bottom: 1px solid #C8CACD;
+  padding: 17px 0 12px;
+  display: inline-block;
+  width: 950px;
+  text-align: left;
+}
+.agent-detailtitle{
+  padding-left: 20px;
+  color: #000;
+  vertical-align: top;
+  line-height: 34px;
+  display: inline-block!important;
+  font-size: 14px;
+}
+.agent-detail-logo{
+  width:80px;
+  height:80px;
+}
+.agent-detailcontent-onlyread{
+  padding-left: 20px;
+  color: #000;
+  vertical-align: top;
+  line-height: 34px;
+  display: inline-block!important;
+  font-size: 14px;
+}
+</style>
+
+<alert-error></alert-error>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>微信企业号应用管理</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <ul ng-repeat="agent in vm.agent" style="list-style: none;text-align: center;overflow: auto;">
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">应用logo</span>
+              </div>
+              <div class="col-lg-2" style="width: 110px">
+                <img  id="logo-url" alt="image" class="img-circle agent-detail-logo"  src="{{agent.square_logo_url}}" ng-show="!vm.isfile">
+                <img id="logo-file" class="img-circle agent-detail-logo" ngf-src="vm.file" ng-show="vm.isfile">
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <div class="col-lg-10">
+                    <input type="file" ng-model="vm.file" ngf-select name="file" accept="image/*" ng-change="vm.chooseImage()"/></div>
+                  <div class="col-lg-10">
+                    <button type="button" style="margin-top: 10px;padding:3px 5px 3px" class="btn btn-primary" ng-click="vm.cancelChooseImage()" ng-show="vm.isfile">撤消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+                <div class="col-lg-3">
+                  <span class="agent-detailtitle">应用名称</span>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="agent.name" class="form-control"/>
+                </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">应用类型</span>
+              </div>
+              <div class="col-lg-8">
+              <select class="form-control" ng-model="agent.type" ng-options="x.code as x.name for x in vm.agentType" class="form-control" ng-selected="x.code==agent.type" disabled>
+              </select>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">应用ID</span>
+              </div>
+              <div class="col-lg-8">
+                <span class="agent-detailcontent-onlyread">{{agent.agentid}}</span>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">应用描述</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.description" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">Token</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.token" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">EncodingAESKey</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.encodingAesKey" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">可信域名</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.redirect_domain" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail" ng-if=" agent.type == 2 ">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">主页URL</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.home_url" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">是否接受用户变更通知</span>
+              </div>
+              <div class="col-lg-8">
+                <select class="form-control" ng-model="agent.isreportuser" ng-options="x.code as x.name for x in vm.reportuserFlag" class="form-control" ng-selected="x.code==agent.isreportuser">
+                </select>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">是否上报用户进入应用事件</span>
+              </div>
+              <div class="col-lg-8">
+                <select class="form-control" ng-model="agent.isreportenter" ng-options="x.code as x.name for x in vm.reportenterFlag" class="form-control" ng-selected="x.code==agent.isreportenter">
+                </select>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">企业应用是否打开地理位置上报</span>
+              </div>
+              <div class="col-lg-8">
+                <select class="form-control" ng-model="agent.report_location_flag" ng-options="x.code as x.name for x in vm.reportLocationFlag" class="form-control" ng-selected="x.code==agent.report_location_flag">
+                </select>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">关联会话url</span>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" ng-model="agent.chat_extension_url" class="form-control"/>
+              </div>
+            </div>
+          </li>
+          <li class="agent-detail">
+            <div class="col-lg-8">
+              <div class="col-lg-3">
+                <span class="agent-detailtitle">自定义菜单</span>
+              </div>
+              <div class="col-lg-8">
+                <button type="button" class="btn btn-primary" ng-click="vm.setCustomMenu(vm.wecorpAgent)">设置</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="form-group" ng-if="vm.showSubmintButtonFlag == true">
+          <div class="row">
+            <div class="text-center">
+              <button type="button" class="btn btn-default" ng-click="vm.cancel()" style="margin-right: 30px;">
+                &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+              </button>
+              <button type="button" class="btn btn-primary" ng-click="vm.save()">保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

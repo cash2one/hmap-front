@@ -1,0 +1,155 @@
+
+<style>
+   .fb-ul{
+     list-style-type:none;
+     padding-left: 2%;
+     padding-right: 2%;
+     width: 100%;
+     border-bottom: 1px solid #18a689;
+     border-top:  1px solid #18a689;
+     border-right:  1px solid #18a689;
+     border-left:   8px solid #18a689;
+     margin-top: 2%;
+   }
+   .fb-ul-1{
+     padding: 0;
+   }
+  .fb-li-1{
+    padding-left: 2%;
+    padding-right: 2%;
+    list-style-type:none;
+    width: 100%;
+    height: 40px;
+    border:1px solid #dbdbdb;
+    background-color: #f9f9f9;
+  }
+
+   .demo_line_01{
+     padding: 0 20px 0;
+     margin: 10px 0;
+     line-height: 1px;
+     height:1px;
+     width:100%;
+     background: #dddddd;
+     overflow:hidden;
+   }
+
+  .fb-data{
+    height: 40px;
+    line-height: 40px;
+  }
+</style>
+
+<div class="row">
+  <div class="row">
+    <alert-error></alert-error>
+  </div>
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h5>信息反馈</h5>
+    </div>
+    <div class="ibox-content">
+      <div class="widget-body">
+        <div>
+          <form>
+            <div class="row">
+              <div class="col-md-3 ">
+                <label class="col-md-6 control-label" style="padding-top:4px;">用户类型：</label>
+                <div class="col-md-6 input-group date">
+                  <input type="text"  ng-model="vm.searchFeedback.userType" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="col-md-6 control-label" style="padding-top:5px;">反馈类型：</label>
+                  <div class="col-md-6 input-group date">
+                    <input type="text" ng-model="vm.searchFeedback.feedbackType" class="form-control">
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                <label class="col-md-6 control-label" style="padding-top:5px;">查询时间：</label>
+                <div class="col-md-6">
+                  <p class="input-group">
+                    <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" name="start" id="start"
+                           ng-model="vm.searchFeedback.startDate" is-open="vm.picker3.open"/>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker3')">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="col-md-6 control-label" style="padding-top:5px;">至：</label>
+                <div class="col-md-6">
+                  <p class="input-group">
+                    <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" name="end" id="end"
+                           ng-model="vm.searchFeedback.endDate"  is-open="vm.picker4.open"/>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.openCalendarL($event, 'picker4')">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-3">
+                <label class="col-md-6 control-label" style="padding-top:5px;">工号：</label>
+                <div class="col-md-6 input-group date">
+                  <input type="text"  ng-model="vm.searchFeedback.userId" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="col-md-6 control-label" style="padding-top:5px;">关键词：</label>
+                <div class="col-md-6 input-group date" >
+                  <input type="text"  ng-model="vm.searchFeedback.feedbackData" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="col-md-offset-3 col-md-9 input-group date">
+                  <input type="submit" class="btn btn-w-m btn-primary" value="查询" ng-click="vm.search()"/>&nbsp;
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.createFeedback()">创建</button>&nbsp;
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.printFeedback()">导出</button>&nbsp; &nbsp; &nbsp; &nbsp;
+                  <button ng-repeat="feedback in vm.feedbacks|limitTo:1" class="btn btn-w-m btn-primary" type="button" ng-click="vm.queryNotReply()"> {{feedback.count}}个未回复</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="">
+              <ul class="fb-ul" ng-repeat="feedback in vm.feedbacks ">
+                <li class="fb-li">
+                  <div class="fb-data"><span> {{feedback.userName}}  【{{feedback.userType}}】</span>  {{feedback.feedbackDate}}</div>
+                  <div class="demo_line_01">-</div>
+                  <div class="fb-data">{{feedback.feedbackData}}  </div>
+                    <textarea class="form-control"   type="text"   ng-model="vm.feedbacks[$index].replyData"></textarea>
+                  <br/>
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.insert(feedback.feedbackId,vm.feedbacks[$index].replyData)">回复</button>
+                  <br/>
+                  <br/>
+                  <ul class="fb-ul-1" ng-repeat="feedbackReply in feedback.hmapFeedbackReplyDTOs ">
+                    <li class="fb-li-1">
+                      <div class="fb-data"> {{feedbackReply.userName}} 回复 ：{{feedbackReply.replyData}}  {{feedbackReply.replyDate}}</div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+
+          <div class="text-center">
+            <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+            <uib-pagination class="pagination-sm"
+                            total-items="vm.totalItems"
+                            ng-model="vm.page"
+                            ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

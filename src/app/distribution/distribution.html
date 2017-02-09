@@ -1,0 +1,96 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="row">
+      <alert-error></alert-error>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>应用管理</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="widget-body">
+          <form>
+            <div class="row">
+              <div class="col-md-5">
+                <label class="col-md-3 control-label" style="padding-top:5px;">名称</label>
+
+                <div class="col-md-9 input-group date">
+                  <input type="text" placeholder="模糊查询" ng-model="vm.searchApp.appName" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <label class="col-md-3 control-label" style="padding-top:5px;">平台</label>
+
+                <div class="col-md-9 input-group date">
+                  <select class="form-control" ng-model="vm.searchApp.appTerrace">
+                    <option ng-repeat="x in vm.staff" value="{{x.code}}">{{x.description}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-5">
+              </div>
+
+              <div class="col-md-5">
+                <div class="col-md-offset-3 col-md-9 input-group date">
+                  <button class="btn btn-white" type="button" ng-click="vm.clear()">重置</button>
+                  <input type="submit" class="btn btn-w-m btn-primary" value="查询" ng-click="vm.search()"/>&nbsp;
+                  <button class="btn btn-w-m btn-primary" type="button"  ui-sref="distribution.upload">新增应用</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive" style="margin-top: 50px;">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>操作</th>
+                <th>序号</th>
+                <th>图标</th>
+                <th>名称</th>
+                <th>最新版本</th>
+                <th>平台</th>
+                <th>简介</th>
+                <th>更新时间</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr ng-repeat="app in vm.apps">
+                <td>
+                  <a><i class="fa fa-desktop text-navy" ui-sref="viewApp({appId:app.appId})">查看</i></a>
+                  <a><i class="fa fa-edit text-navy" ui-sref="distribution.edit({appId:app.appId})">编辑</i></a>
+                  <!--<a><i class="fa fa-download text-warning" ui-sref="downloadApp({appVersionId:app.appVersionId})">下载</i></a>-->
+                </td>
+                <td>{{$index+1}}</td>
+                <td><img id="appImg" height="30" width="30" src="{{app.appIcon}}" style="border:0"/></td>
+                <td>{{app.appName}}</td>
+                <td>{{app.versionMark}}</td>
+                <td>{{app.appPlatform}}</td>
+                <td>{{app.appDescription}}</td>
+                <td>{{app.uploadingDate}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-center">
+            <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+            <uib-pagination class="pagination-sm"
+                            total-items="vm.totalItems"
+                            ng-model="vm.page"
+                            ng-change="vm.pageChanged()">
+            </uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

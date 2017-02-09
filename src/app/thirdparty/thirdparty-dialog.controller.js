@@ -8,9 +8,9 @@
     .module('hmapFront')
     .controller('ThirdpartyDialogController', ThirdpartyDialogController);
 
-  ThirdpartyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Thirdparty'];
+  ThirdpartyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Thirdparty','toastr'];
 
-  function ThirdpartyDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, Thirdparty) {
+  function ThirdpartyDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, Thirdparty,toastr) {
     var vm = this;
 
     vm.thirdparty = entity;
@@ -40,6 +40,7 @@
     }
 
     function onSaveSuccess(result) {
+      toastr.success('保存成功！','信息提示');
       $scope.$emit('hmapFront:thirdpartyUpdate', result);
       $uibModalInstance.close(result);
       vm.isSaving = false;
@@ -68,7 +69,7 @@
 
     function load(id) {
       if (id) {
-        console.log('loadone');
+        //console.log('loadone');
         Thirdparty.get({id: id}, function (result) {
           vm.thirdparty = result.rows[0];
         });

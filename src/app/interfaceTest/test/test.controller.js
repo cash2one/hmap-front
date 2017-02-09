@@ -21,7 +21,7 @@
       return TestService.findHeaderAndLineByLine(line)
         .then(function (data) {
           vm.header = data.rows[0];
-          console.log("result headerAndLine:" + angular.toJson(data));
+          //console.log("result headerAndLine:" + angular.toJson(data));
 
         });
 
@@ -41,14 +41,14 @@
       return TestService.updateParamsExample(vm.example)
         .then(function (data) {
           vm.result = data.success;
-          console.log("save example:" + vm.result);
+          //console.log("save example:" + vm.result);
         })
 
     }
 
 
     vm.copyInputExample = function () {
-      console.log("inputExample:" + vm.example.inputExample);
+      //console.log("inputExample:" + vm.example.inputExample);
       vm.inputParams = vm.example.inputExample;
     }
 

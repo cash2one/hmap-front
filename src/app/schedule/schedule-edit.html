@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>日程编辑</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">megId</label>
+                <div class="col-lg-8">
+                  <input type="text" id="info" name="info" ng-model="vm.schedule.info" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">类型</label>
+                <div class="col-lg-8">
+                  <input type="text" id="state" name="state" ng-model="vm.schedule.state" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">url</label>
+                <div class="col-lg-8">
+                  <input type="text" id="url" name="url" ng-model="vm.schedule.url" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">试卷id</label>
+                <div class="col-lg-8">
+                  <input type="text" id="paperId" name="paperId" ng-model="vm.schedule.paperId" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">演讲人</label>
+                <div class="col-lg-8">
+                  <input type="text" id="perName" name="perName" ng-model="vm.schedule.perName" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">演讲人2</label>
+                <div class="col-lg-8">
+                  <input type="text" id="perName2" name="perName2" ng-model="vm.schedule.perName2" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">演讲人介绍</label>
+                <div class="col-lg-8">
+                  <input type="text" id="perTitle" name="perTitle" ng-model="vm.schedule.perTitle" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">演讲人介绍2</label>
+                <div class="col-lg-8">
+                  <input type="text" id="perTitle2" name="perTitle2" ng-model="vm.schedule.perTitle2" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">演讲人照片</label>
+                <div class="col-lg-8">
+                  <input type="text" id="perPhoto" name="perPhoto" ng-model="vm.schedule.perPhoto" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">地点</label>
+                <div class="col-lg-8">
+                  <input type="text" id="place" name="place" ng-model="vm.schedule.place" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">序号</label>
+                <div class="col-lg-8">
+                  <input type="text" id="orderNum" name="orderNum" ng-model="vm.schedule.orderNum" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">时间</label>
+                <div class="col-lg-8">
+                  <input type="text" id="time" name="time" ng-model="vm.schedule.time" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">会议内容</label>
+                <div class="col-lg-8">
+                  <input type="text" id="profile" name="profile" ng-model="vm.schedule.profile" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                  <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+                </button>
+                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

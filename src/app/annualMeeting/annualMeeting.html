@@ -1,0 +1,79 @@
+<div>
+  <div class="ibox-title">
+  <h2>年会管理</h2>
+
+  </div>
+  <div class="ibox-content">
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">年会名称</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchFullName" class="form-control" ng-model="vm.meeting.meetingTitle">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">主办城市</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchCompanyName" class="form-control" ng-model="vm.meeting.meetingCity">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button class="btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadSearch()">搜索</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button ui-sref="annualMeeting.new()" class="btn btn-w-m btn-primary" type="button" id="newMeeting">添加年会</button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button ui-sref="annualMeeting.meetThousand()" class="btn btn-w-m btn-primary" type="button" id="meetThousand">排行榜</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <th>年会名称</th>
+          <th>主办城市</th>
+          <th>年会时间</th>
+          <th>详细地址</th>
+          <th>总桌数</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="meeting in vm.meetings track by meeting.id">
+          <td ng-bind="meeting.meetingTitle"></td>
+          <td ng-bind="meeting.meetingCity"></td>
+          <td ng-bind="meeting.meetingDate"></td>
+          <td ng-bind="meeting.meetingAddr"></td>
+          <td ng-bind="meeting.meetingTable"></td>
+          <td>
+            <a ui-sref="annualMeeting.edit({id:meeting.id})"><i class="fa fa-edit text-primary">编辑</i></a>
+            <a ui-sref="annualMeeting.show({id:meeting.id})"><i class="fa fa-eye text-primary">查看</i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

@@ -16,9 +16,11 @@
     vm.totalItems = null;
     vm.functions=[];
     vm.loadAll = loadAll;
+    vm.functionSearch=[];
     vm.transition = transition;
     vm.pageChanged=pageChanged;
     vm.itemsPerPage = paginationConstants.itemsPerPage;
+    vm.loadByName = loadByName;
     vm.loadAll();
 
     function loadAll () {
@@ -28,13 +30,18 @@
       }, onSuccess, onError);
     }
 
+    function loadByName(){
+        vm.functionSearch.page=vm.page;
+        vm.functionSearch.pagesize=paginationConstants.itemsPerPage;
+          Function.query().query(vm.functionSearch,onSuccess,onError);
+    }
     function onSuccess(data, headers) {
       vm.functions = data.rows;
       vm.totalItems =  data.total;
-      console.log(vm.functions);
+      //console.log(vm.functions);
     }
     function onError(error) {
-      console.log('error');
+      //console.log('error');
     }
     function transition () {
       $state.transitionTo($state.$current, {
@@ -43,7 +50,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       loadAll();
     };
   }

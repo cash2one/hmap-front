@@ -1,0 +1,63 @@
+<div class="ibox-content">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">功能资源</h4>
+  </div>
+  <div class="modal-body">
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>选择</th>
+          <th>ID</th>
+          <th>名称</th>
+          <th>URL</th>
+          <th>类型</th>
+          <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <input type="radio" ng-model="$parent.vm.selectedResource" name="functionEnrty"
+                   ng-value=""/>
+          </td>
+          <td colspan="5">不选择</td>
+        </tr>
+        <tr ng-repeat="resource in vm.resources">
+          <td><input type="radio" ng-model="$parent.vm.selectedResource" name="functionEnrty" ng-value="resource"/></td>
+          <td>{{resource.resourceId}}</a></td>
+          <td>{{resource.name}}</a></td>
+          <td>{{resource.type}}</td>
+          <td>{{resource.url}}</td>
+          <td>{{resource.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-center">
+    <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+    <uib-pagination class="pagination-sm"
+                    total-items="vm.totalItems"
+                    ng-model="vm.page"
+                    ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+    </div>
+  <div class="modal-footer">
+    <div class="row">
+    <button type="button" class="btn btn-primary" ng-click="vm.save()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 确定</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+    </button>
+    <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+  </div>
+  </div>
+</div>
+

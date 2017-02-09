@@ -15,11 +15,15 @@
     vm.page = 1;
     vm.totalItems = null;
     vm.loadAll = loadAll;
+    vm.loadByName=loadByName;
     vm.transition = transition;
+    vm.searchResource=[];
     vm.pageChanged=pageChanged;
     vm.itemsPerPage = paginationConstants.itemsPerPage;
 
     vm.loadAll();
+
+
     function loadAll () {
       Resource.query().query({
         page: vm.page,
@@ -27,14 +31,20 @@
       }, onSuccess, onError);
     }
 
+    function loadByName(){
+      vm.searchResource.page=vm.page;
+      vm.searchResource.pagesize=paginationConstants.itemsPerPage;
+      Resource.query().query(vm.searchResource,onSuccess,onError);
+    }
+
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
+      //console.log('onSuccess');
+      //console.log(data);
       vm.resources = data.rows;
       vm.totalItems =  data.total;
     }
     function onError(error) {
-      console.log('error');
+      //console.log('error');
 
     }
     function transition () {
@@ -44,7 +54,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       loadAll();
     };
   }

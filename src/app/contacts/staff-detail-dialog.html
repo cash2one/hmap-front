@@ -1,0 +1,50 @@
+
+<div class="ibox-content">
+  <div class="modal-header">详细资料</div>
+
+  <div class="modal-body ">
+
+    <form role="form">
+      <div class="form-group"><label>姓名</label>
+        <span>{{vm.staff.empName}}</span></div>
+
+      <div class="form-group"><label>工号</label>
+        <span>{{vm.staff.empCode}}</span>
+      </div>
+      <div class="form-group"><label>手机</label>
+        <span>{{vm.staff.mobile}}</span>
+      </div>
+      <div class="form-group"><label>邮箱</label>
+        <span>{{vm.staff.email}}</span>
+      </div>
+      <div class="form-group"><label>职位</label>
+        <span>{{vm.staff.positionName}}</span>
+      </div>
+      <div class="form-group"><label>性别</label>
+        <span>{{vm.staff.gender}}</span>
+      </div>
+      <div class="form-group"><label>员工状态</label>
+        <span>{{vm.staff.empStatus}}</span>
+      </div>
+
+
+
+    </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <button type="button" class="btn btn-primary" ng-click="vm.saveTag()">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
+      </button>
+      <button type="button" class="btn btn-danger" ng-click="vm.saveTag()">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 删除</span>
+      </button>
+      <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+      </button>
+      <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div>
+  <div class="ibox-title">
+  <h2>会议日程</h2>
+
+  </div>
+  <div class="ibox-content">
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+          <label class="col-lg-4 control-label">题目</label>
+          <div class="col-lg-8">
+            <input type="text" id="searchInfo" class="form-control" ng-model="vm.schedule.info">
+          </div>
+        </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">地点</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchPlace" class="form-control" ng-model="vm.schedule.place">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+              <button class="btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadSearch()">搜索</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>操作</th>
+          <th>序号</th>
+          <th>题目</th>
+          <!--<th>类型</th>-->
+          <!--<th>URL</th>-->
+          <!--<th>试卷id</th>-->
+          <th>演讲人1</th>
+          <th>介绍</th>
+          <th>演讲人2</th>
+          <th>介绍</th>
+          <!--<th>照片</th>-->
+          <th>地点</th>
+          <!--<th>序号</th>-->
+          <th>时间</th>
+          <!--<th>内容</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="schedule in vm.schedules track by schedule.id">
+          <td>
+            <a ui-sref="schedule.edit({id:schedule.id})"><i class="fa fa-edit text-primary">编辑</i></a>
+          </td>
+          <td ng-bind="$index+1">1</td>
+          <td ng-bind="schedule.info"></td>
+          <!--<td ng-bind="schedule.state"></td>-->
+          <!--<td ng-bind="schedule.url"></td>-->
+          <!--<td ng-bind="schedule.paperId"></td>-->
+          <td ng-bind="schedule.perName"></td>
+          <td ng-bind="schedule.perTitle"></td>
+          <td ng-bind="schedule.perName2"></td>
+          <td ng-bind="schedule.perTitle2"></td>
+          <!--<td ng-bind="schedule.perPhoto"></td>-->
+          <td ng-bind="schedule.place"></td>
+          <!--<td ng-bind="schedule.orderNum"></td>-->
+          <td ng-bind="schedule.time"></td>
+          <!--<td ng-bind="schedule.profile"></td>-->
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

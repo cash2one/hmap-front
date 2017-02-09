@@ -1,0 +1,45 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="row">
+      <alert-error></alert-error>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>授权信息</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="widget-body">
+          <button class="btn btn-w-m btn-primary" type="button" ui-sref="interfaceAuth.add">
+            新增
+          </button>
+        </div>
+
+        <br/>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>应用名称</th>
+              <th>授权时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="interfaceAuth in vm.interfaceAuthes">
+              <td>{{$index+1}}</td>
+              <td>{{interfaceAuth.appName}}</td>
+              <td>{{interfaceAuth.creationDate}}</td>
+              <td>
+                <a ng-click="vm.delete(interfaceAuth)">删除</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

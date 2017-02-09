@@ -3,43 +3,48 @@
  */
 
 (function () {
-    'use strict';
+  'use strict';
 
-    angular.module('hmapFront')
-        .controller('AddLineController', AddLineController);
+  angular.module('hmapFront')
+    .controller('AddLineController', AddLineController);
 
-    AddLineController.$inject = ['AddLineService', '$state','entity'];
+  AddLineController.$inject = ['AddLineService', '$state', 'entity'];
 
-    function AddLineController(AddLineService,$state,entity) {
-        var vm = this;
-        vm.line = entity;
-        vm.add = add;
-        vm.clear = clear;
+  function AddLineController(AddLineService, $state, entity) {
+    var vm = this;
+    vm.line = entity;
+    vm.add = add;
+    vm.clear = clear;
 
-        vm.flag = [
-            {code : "Y", name : "是"},
-            {code : "N", name : "否"}
-        ];
+    vm.flag = [
+      {code: "Y", name: "是"},
+      {code: "N", name: "否"}
+    ];
 
+    function add() {
+      AddLineService.query(vm.line, onSuccess, onError);
+    }
 
-        function add(){
-            return AddLineService.addLine(vm.line)
-                .then(function(data){
-                    vm.result = data;
-                    if(data.success){
-                        return $state.go("line",{headerId:entity.headerId});
-                    }
-                });
+    function onSuccess(data, headers) {
+      //console.log('onSuccess');
+      //console.log(angular.toJson(data));
+      vm.result = data;
+      if (data.success) {
+        return $state.go("line", {headerId: entity.headerId});
+      }
+    }
 
-        }
-
-        function clear(){
-            $state.go("line",{headerId:entity.headerId});
-        }
-
-
+    function onError(error) {
+      //console.log('error');
 
     }
+
+    function clear() {
+      $state.go("line", {headerId: entity.headerId});
+    }
+
+
+  }
 
 
 })();

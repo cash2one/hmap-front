@@ -23,13 +23,59 @@
           entity: ['$stateParams',
             function ($stateParams) {
               return {
-                page:null,
-                pagesize:null
+                page: null,
+                pagesize: null
               };
             }
           ]
         }
 
+      })
+      .state('header.edit', {
+        parent: 'app',
+        params: {
+          header: ""
+        },
+        url: "/header/{headerId}",
+        views: {
+          'body': {
+            templateUrl: "app/interfaceManage/header/header-detail.html",
+            controller: 'HeaderDetailController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          entity: ['$stateParams',
+            function ($stateParams) {
+              return {
+                headerId: $stateParams.headerId
+
+              };
+            }
+          ]
+        }
+
+      })
+      .state('header.new', {
+        parent: 'app',
+        params: {
+          header: ""
+        },
+        url: "/new/header",
+        views: {
+          'body': {
+            templateUrl: "app/interfaceManage/header/header-detail.html",
+            controller: 'HeaderDetailController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          entity: function () {
+            return {
+              headerId: null
+            };
+          }
+        }
       });
   }
 })();

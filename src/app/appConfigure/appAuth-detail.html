@@ -1,0 +1,274 @@
+<style>
+  span {
+    font-size: 15px;
+  }
+
+  .menu-bcackground {
+    background-color: #f3f3f4;
+  }
+
+  .menu-bcackground-selected {
+    background-color: #eaeaea;
+  }
+  div{
+    outline:none;
+  }
+
+  .border {
+    border-bottom: 1px solid #c8cacd;
+    position: relative;
+    left: 25%;
+    width: 55%;
+  }
+</style>
+<form name="addForm" role="form" ng-submit="vm.save()">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionspan">修改app配置</h4>
+  </div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='oldFile' || vm.ischecked=='oldFile']"
+       ng-mouseenter="vm.mouseIn = 'oldFile'">
+    <div class="row" ng-click="vm.check('oldFile')">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">应用Logo</span>
+        </div>
+        <div class="col-md-9">
+          <div ng-if="vm.ischecked=='oldFile'">
+            <input ng-model="vm.file" ng-change="vm.changeFile()" ngf-select accept="image/*" name="file" size="1"
+                   style="position:absolute;opacity:0;z-index:100;cursor:pointer;width:80px;height:80px;" type="file">
+          </div>
+          <div>
+            <img style="width:80px;height:80px" ngf-src="vm.oldFile">
+          </div>
+          <div ng-if="vm.ischecked=='oldFile'">
+            <div>
+              建议上传图片尺寸为640x640，大小不超过5M。
+            </div>
+            <br/>
+
+            <div class="border" style="left: 0"></div>
+            <br/>
+            <button type="button" class="btn btn-default" ng-click="vm.nocheck($event)">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="button" ng-click="vm.submitFile()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <a><i class="fa fa-edit text-navy">编辑</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='appId']"
+       ng-mouseenter="vm.mouseIn='appId'">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">AppID</span>
+        </div>
+        <div class="col-md-9">
+          <span class="control-span">{{vm.hmsAppAuth.appId}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='appSecret' || vm.ischecked=='appSecret']"
+       ng-mouseenter="vm.mouseIn='appSecret'">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">AppSecret</span>
+        </div>
+        <div class="col-md-9">
+          <span class="control-span">{{vm.hmsAppAuth.appSecret}}</span>
+        </div>
+      </div>
+      <div class="col-md-1" ng-click="vm.refreshSecret()">
+        <a><i class="fa fa-edit text-navy">刷新</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='userName']"
+       ng-mouseenter="vm.mouseIn='userName'">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">创建人</span>
+        </div>
+        <div class="col-md-9">
+          <span class="control-span">{{vm.hmsAppAuth.userName}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='appName' || vm.ischecked=='appName']"
+       ng-mouseenter="vm.mouseIn='appName'">
+    <div class="row" ng-click="vm.check('appName')">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">应用名</span>
+        </div>
+        <div class="col-md-9">
+          <span ng-if="vm.ischecked!='appName'" class="control-span">{{vm.hmsAppAuth.appName}}</span>
+
+          <div ng-if="vm.ischecked=='appName'">
+            <input type="text" class="form-control" style="border: 1px solid #c8cacd;" name="appName"
+                   ng-model="vm.hmsAppAuth.appName" required>
+            <br/>
+
+            <div class="border" style="left: 0"></div>
+            <br/>
+            <button type="button" class="btn btn-default" ng-click="vm.nocheck($event)">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="button" ng-click="vm.save()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <a><i class="fa fa-edit text-navy">编辑</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='appType']"
+       ng-mouseenter="vm.mouseIn='appType'">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">应用类型</span>
+        </div>
+        <div class="col-md-9">
+          <span class="control-span">{{vm.hmsAppAuth.appType}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='appAuzMode']"
+       ng-mouseenter="vm.mouseIn='appAuzMode'">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">授权模式</span>
+        </div>
+        <div class="col-md-9">
+          <span ng-if="vm.hmsAppAuth.appAuzMode=='password'" class="control-span">密码模式</span>
+          <span ng-if="vm.hmsAppAuth.appAuzMode=='client_credentials'" class="control-span">客户端模式</span>
+          <span ng-if="vm.hmsAppAuth.appAuzMode=='authorization_code'" class="control-span">授权码模式</span>
+          <!--<div ng-if="vm.ischecked=='appAuzMode'">-->
+          <!--<select class="form-control" ng-model="vm.hmsAppAuth.appAuzMode"-->
+          <!--style="border: 1px solid #c8cacd;" required>-->
+          <!--<option ng-repeat="x in vm.appAuzMode" value="{{x.code}}">{{x.name}}</option>-->
+          <!--</select>-->
+          <!--<br/>-->
+          <!--<div class="border" style="left: 0"></div>-->
+          <!--<br/>-->
+          <!--<button type="button" class="btn btn-default" ng-click="vm.nocheck($event)">-->
+          <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消-->
+          <!--</button>-->
+          <!--<button type="button" ng-click="vm.save()" class="btn btn-primary">-->
+          <!--<span class="glyphicon glyphicon-save"></span>&nbsp;保存-->
+          <!--</button>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.hmsAppAuth.appType=='Web应用'" class="border"></div>
+  <div ng-if="vm.hmsAppAuth.appType=='Web应用'" class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='permission' || vm.ischecked=='permission']"
+       ng-mouseenter="vm.mouseIn='permission'">
+    <div class="row" ng-click="vm.check('permission')">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">可见范围</span>
+        </div>
+        <div class="col-md-9">
+          <div ng-if="vm.ischecked!='permission'">
+          <div class="multiple-select-box form-control ui-select-container ui-select-multiple ui-select-bootstrap m-b text-left "  readOnly>
+      <span class="ui-select-match-item btn btn-default btn-xs" draggable="true"
+            aria-disabled="false" ng-repeat="data in vm.permissionData">
+        <i class="{{data.dataIcon}}"></i>{{data.dataValue}}</span>
+          </div>
+          </div>
+
+          <div ng-if="vm.ischecked=='permission'">
+            <permission-selector permission-data="vm.permissionData"></permission-selector>
+            <br/>
+
+            <div class="border" style="left: 0"></div>
+            <br/>
+            <button type="button" class="btn btn-default" ng-click="vm.nocheck($event)">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="button" ng-click="vm.savePermission()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <a><i class="fa fa-edit text-navy">编辑</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="modal-body"
+       ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[vm.mouseIn=='downloadUrl' || vm.ischecked=='downloadUrl']"
+       ng-mouseenter="vm.mouseIn='downloadUrl'">
+    <div class="row" ng-click="vm.check('downloadUrl')">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-2">
+          <span class="control-span">下载地址</span>
+        </div>
+        <div class="col-md-9">
+          <span ng-if="vm.ischecked!='downloadUrl'" class="control-span">{{vm.hmsAppAuth.downloadUrl}}</span>
+
+          <div ng-if="vm.ischecked=='downloadUrl'">
+            <input type="text" class="form-control" style="border: 1px solid #c8cacd;" name="downloadUrl"
+                   ng-model="vm.hmsAppAuth.downloadUrl" required>
+            <br/>
+
+            <div class="border" style="left: 0"></div>
+            <br/>
+            <button type="button" class="btn btn-default" ng-click="vm.nocheck($event)">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="button" ng-click="vm.save()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <a><i class="fa fa-edit text-navy">编辑</i></a>
+      </div>
+    </div>
+  </div>
+  <!--<div class="modal-footer" style="text-align:center">-->
+  <!--<button type="button" class="btn btn-default" ng-click="vm.clear()">-->
+  <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;返回-->
+  <!--</button>-->
+  <!--</div>-->
+</form>

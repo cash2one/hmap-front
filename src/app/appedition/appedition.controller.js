@@ -3,12 +3,11 @@
 
   angular
     .module('hmapFront')
-    .controller('AppeditionController', AppeditionController);
-  AppeditionController.$inject = ['$scope','$state','Appedition','paginationConstants'];
+    .controller('AppEditionController', AppEditionController);
+  AppEditionController.$inject = ['$state','AppEdition','paginationConstants'];
   /** @ngInject */
-  function AppeditionController( $scope,$state, Appedition, paginationConstants) {
+  function AppEditionController($state, AppEdition, paginationConstants) {
     var vm = this;
-    $scope.num=0;
     vm.page = 1;
     vm.totalItems = null;
     vm.loadAll = loadAll;
@@ -19,20 +18,20 @@
     vm.loadAll();
 
     function loadAll() {
-      Appedition.query({
+      AppEdition.query({
         page: vm.page,
         pagesize: paginationConstants.itemsPerPage
       }, onSuccess, onError);
     }
 
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
-      vm.appeditions = data.rows;
+      ////console.log('onSuccess');
+      ////console.log(data);
+      vm.appEditions = data.rows;
       vm.totalItems =  data.total;
     }
     function onError(error) {
-      console.log('error');
+      ////console.log('error');
 
     }
     function transition () {
@@ -42,7 +41,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      ////console.log('Page changed to: ' +vm.page);
       loadAll();
     };
   }

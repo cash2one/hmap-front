@@ -1,3 +1,16 @@
+<script>
+  $(function () {
+    $("#uploadImg").change(function () {
+      var imgPath = $("#uploadImg").val();
+      var fileName = getFileName(imgPath);
+      $("#filePath").val(fileName);
+    });
+    function getFileName(o){
+      var pos=o.lastIndexOf("\\");
+      return o.substring(pos+1);
+    }
+  });
+</script>
 <form name="editForm" role="form"  ng-submit="vm.update()">
 
   <div class="modal-header">
@@ -36,39 +49,63 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" style="clear:both">
         <div class="form-group">
           <label class="control-label">应用类型</label>
-          <select class="form-control" ng-model="vm.hmsAppAuth.appType"
-                  style="width:300px;border: 1px solid grey;">
-            <option ng-repeat="x in vm.appType" value="{{x.name}}">{{x.name}}</option>
+          <select class="form-control" ng-model="vm.hmsAppAuth.appType" ng-change="vm.changeType()"
+                  style="width:300px;border: 1px solid grey;" required>
+            <option ng-repeat="x in vm.appType" value="{{x.code}}">{{x.name}}</option>
           </select>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <div class="row">
-            <div class="col-lg-10"><label class="control-label">App图标</label>
-              <input type="hidden" class="form-control" style="width: 300px;border: 1px solid grey;" name="appIcon"
-                     id="field_appIcon"
-                     ng-model="vm.hmsAppAuth.appIcon"
-                />
-              <input type="file" ng-model="vm.file" ngf-select name="file" accept="image/*"/></div>
-            <div class="col-lg-10">
-              <div style="font-size: 40px;">
+          <label class="control-label">授权模式</label>
+          <select class="form-control" ng-model="vm.hmsAppAuth.appAuzMode"
+                  style="width:300px;border: 1px solid grey;" required>
+            <option ng-repeat="x in vm.appAuzMode" value="{{x.code}}">{{x.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <!--<div class="row">-->
+            <!--<div class="col-lg-10">-->
+              <label class="control-label">App图标</label>
+              <!--<input type="hidden" class="form-control" style="width: 300px;border: 1px solid grey;" name="appIcon"-->
+                     <!--id="field_appIcon"-->
+                     <!--ng-model="vm.hmsAppAuth.appIcon"-->
+                <!--/>-->
+              <!--<input type="file" ng-model="vm.file" ngf-select name="file" accept="image/*"/>-->
+          <div>
+            <div style="float: left">
+              <input type="text" id="filePath" readonly="readonly" class="form-control"
+                     style="height:33px;width:300px;border:1px solid #E5E6E7;"/>
+            </div>
+            <a href="javascript:void(0);" class="input btn-primary">
+              浏览
+              <input type="file" id="uploadImg" class="uploadFile" ng-model="vm.file" ngf-select name="file"
+                     accept="image/*" required>
+            </a>
+          </div>
+            <!--</div>-->
+            <!--<div class="col-lg-10">-->
+              <div style="font-size: 40px;" ng-show="vm.imgShow">
                 <!--<img height="50" width="50" src="{{vm.hmsAppAuth.appIcon}}"/>-->
                 <img id="imgs" height="50" width="50" border="0" ngf-src="vm.file">
               </div>
-            </div>
-          </div>
-          <div
-            style="background-color:#1c92c7;width: 60px;height: 20px;border-radius: 5px;color: white;margin-top: 10px;"
+            <!--</div>-->
+          <!--</div>-->
+          <div ng-show="vm.varMay"
+            class="btn btn-primary"
+            style="margin-top: 0.5em"
             ng-click="vm.submitFile()">
-            <div ng-show="vm.varMay">开始上传</div>
-            <div ng-show="vm.varMays">上传成功</div>
+            <div >开始上传</div>
+            <!--<div ng-show="vm.varMays">上传成功</div>-->
           </div>
         </div>
       </div>
+
     </div>
   </div>
   <div class="modal-footer">
@@ -76,10 +113,10 @@
       <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Delete-->
     <!--</button>-->
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
     </button>
     <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+      <span class="glyphicon glyphicon-save"></span>&nbsp;保存
     </button>
   </div>
 </form>

@@ -1,0 +1,113 @@
+<form name="addForm" role="form" novalidate ng-submit="vm.save()" enctype="multipart/form-data">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label">应用logo</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <img height="50" width="50" src="{{vm.agent.round_logo_url}}"/>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <input type="file" class="form-control" name="code" id="field_img" ng-model="vm.image"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentName">应用名称</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentName"
+               ng-model="vm.agent.name" required
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentType">应用类型</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentType"
+               ng-model="vm.agent.type" required disabled="disabled"
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentId">应用ID</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentId"
+               ng-model="vm.agent.agentid" required disabled="disabled"
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentDesc">应用介绍</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentDesc"
+               ng-model="vm.agent.description" required
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentRedirect_domain">可信域名</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentRedirect_domain"
+               ng-model="vm.agent.redirect_domain" required
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label" for="field_agentChat_extension_url">关联到会话</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" name="code" id="field_agentChat_extension_url"
+               ng-model="vm.agent.chat_extension_url" required
+          />
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit"  class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

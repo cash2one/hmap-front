@@ -1,0 +1,14 @@
+
+  <div class="form-inline">
+    <div
+      class="multiple-select-box form-control ui-select-container ui-select-multiple ui-select-bootstrap m-b text-left ">
+      <span class="ui-select-match-item btn btn-default btn-xs" tabindex="-1" type="button" role="button"
+            draggable="true"
+            aria-disabled="false" ng-repeat="data in vm.permissionData">
+        <i class="{{data.dataIcon}}"></i>{{data.dataValue}}</span>
+    </div>
+
+     <i class="fa fa-edit"></i> <a href="" ng-click="vm.open()">可见范围</a>
+
+  </div>
+

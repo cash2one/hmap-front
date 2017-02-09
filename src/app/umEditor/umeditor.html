@@ -1,0 +1,396 @@
+<style>
+  .ueditor {
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+  .edui-editor {
+    width: 100% !important;
+  }
+  .ueditorForm {
+    max-width: 1500px;
+  }
+
+  .edui-editor-iframeholder {
+    min-height: 450px !important;
+    width: 100% !important;
+  }
+
+  .edui-editor-bottomContainer {
+    display: none !important;
+  }
+
+  .ibox-content {
+    border: 1px solid gainsboro;
+    /*padding-top: 50px;*/
+  }
+
+  .font1 {
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    color: #222;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .font2 {
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .font3 {
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    color: #222;
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  /*右侧*/
+  .tpl_list {
+    border: 1px solid #e7e7eb;
+    border-top-width: 0;
+    padding-left: 0;
+    list-style-type: none;
+  }
+  .tpl_item {
+    border-top: 1px solid #e7e7eb;
+    background-color: #fff;
+    text-align: left;
+    padding-left: 20px;
+    line-height: 50px;
+    cursor: pointer;
+  }
+  .tpl_item:hover {
+    border: 1px solid #43b548;
+    margin: 0 -1px -1px;
+    position: relative;
+    z-index: 1;
+    color: #43b548;
+    zoom: 1;
+  }
+
+
+  /*左侧添加图文*/
+  .item_default{
+    color: #c0c0c0;
+    text-align: center;
+    height: 88px;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #ececec;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item_other{
+    width: 51%;
+    height: 70px;
+    float: right;
+    color: #c0c0c0;
+    text-align: center;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #ececec;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item_other img{
+    height: 70px;
+    width: 100%;
+  }
+
+  .item_default img{
+    height: 88px;
+    width: 100%;
+  }
+  .create_access_primary {
+    display: block;
+    border: 2px dotted #d9dadc;
+    line-height: 60px;
+    font-size: 0;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .appmsg_add {
+    margin: 0;
+    border-top-width: 0;
+    line-height: 90px;
+  }
+  .imgTitle {
+    padding-right: 10px;
+  }
+  .image_text_opereate{
+    font-size: 14px;
+    padding-top: 0;
+    line-height: 28px;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6)!important;
+  }
+  .image_text_title{
+    font-size: 14px;
+    padding-top: 0;
+    /*line-height: 28px;*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6)!important;
+    word-break: break-all;
+    max-height: 30%;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0 8px;
+    color: #fff;
+  }
+  .image_text_title_other{
+    width: 40%;
+    float: left;
+    word-break: break-all;
+    max-height: 90%;
+    overflow: hidden;
+  }
+  .image_text_first{
+    position:relative;
+    height: 108px;
+    border: 1px solid #e7e7eb;
+    cursor: pointer;
+    padding: 10px;
+  }
+  .image_text_other{
+    position:relative;
+    height:95px;
+    border: 1px solid #e7e7eb;
+    cursor: pointer;
+    padding: 10px;
+  }
+.select_image_text{
+  border: 2px solid #43b548
+}
+
+
+</style>
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>图文编辑</h5>
+        </div>
+        <div class="ibox-content col-lg-12">
+              <input type="file" id="coverImg" accept="image/*" style="display: none;">
+              <div class="col-lg-2" style="width:220px;">
+                <div style="padding: 10px 20px 0;">
+                  <h4 class="font1">图文列表</h4>
+                </div>
+                <div style="padding: 20px">
+                  <div id="imageTextList">
+                    <div index="{{$index}}" id="imageText{{item}}" ng-repeat="item in vm.articleArr" ng-class="{'image_text_first':$index==0,'image_text_other':$index!=0,'select_image_text':item==vm.curShowCount}"
+                         ng-click="vm.imageTextSelected(item)"
+                         ng-mouseover="vm.onMouseOverImageText(item)" ng-mouseout="vm.onMouseOutImageText()">
+
+                      <!--repeatFinish="vm.imageTextSelected(item)"-->
+
+                      <h4 name="imageTextTitle" ng-class="{true:'image_text_title font2',false:'image_text_title_other font1'}[$index==0]">
+                        <p name="title">标题:{{vm.articles[item].contentTitle}}</p>
+                      </h4>
+                      <h4 class="image_text_opereate" style="z-index: 99;" ng-show="vm.show==item" id="opreate{{item}}">
+                        <a class="font2" name="down" href="javascript:void(0);" ng-click="vm.imageTextDown($index)" ng-show="$index<vm.articleArr.length-1" style="float: left" title="向下">
+                          <img ng-src="assets/images/umEdit/down.png">
+                        </a>
+                        <a class="font2" name="up" href="javascript:void(0);" ng-click="vm.imageTextUp($index)" ng-show="$index>0" style="float: left" title="向上">
+                          <img ng-src="assets/images/umEdit/up.png">
+                        </a>
+                        <a class="font2" name="delete" href="javascript:void(0);" ng-click="vm.imageTextDel($index)" ng-show="$index>0" style="float: right" title="删除">
+                          <img ng-src="assets/images/umEdit/delete.png">
+                        </a>
+                      </h4>
+                      <div name="imageTextCover" ng-class="{true:'item_default',false:'item_other'}[$index==0]">
+                        <img ng-src="assets/images/umEdit/picture.png" name="coverImg" ng-if="vm.articles[item].contentCover==null">
+                        <img ngf-src="vm.articles[item].contentCover" name="coverImg" ng-if="vm.articles[item].contentCover!=null">
+                      </div>
+                    </div>
+                  </div>
+                  <a ng-click="vm.addImageText()" id="imageTextAdd" title="添加一篇图文" class="create_access_primary appmsg_add" id="js_add_appmsg" href="javascript:void(0);">
+                    <img class="imgTitle" ng-src="assets/images/umEdit/cc-plus.png">
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <form class="form-horizontal ng-pristine ng-valid ueditorForm" id="form">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label">标题</label>
+                        <div class="col-lg-11">
+                          <input type="text" name="title" ng-model="vm.article.contentTitle" ng-change="vm.titleInput()"
+                                 class="form-control ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false"
+                                 placeholder="请输入文章标题">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label">作者</label>
+                        <div class="col-lg-11">
+                          <input type="text" name="author" ng-model="vm.article.contentAuthor"
+                                 class="form-control ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false"
+                                 placeholder="请输入文章作者">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label">正文</label>
+                        <div class="col-lg-11">
+                          <div id="myUeditor" class="ueditor" ng-model="vm.article.contentBody  "></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-2">
+                          <input type="checkbox" name="isShowContentSourceUrl" ng-model="vm.article.isShowContentSourceUrl">
+                          <span class="font1">原文链接</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row" ng-show="vm.article.isShowContentSourceUrl">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label"></label>
+                        <div class="col-lg-8">
+                          <input type="text" name="contentSourceUrl" ng-model="vm.article.contentSourceUrl" maxlength="200"  class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-3">模版</label>
+                        <div class="col-lg-8">
+                          <select class="form-control" id="userRole" name="userRole" ng-model="vm.article.templateId" ng-options="e.id as e.templateName for e in vm.templates" required>
+                            <option value="">请选择</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-4">
+                          <span class="font1">发布样式编辑器</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-6">
+                          <span class="font1">{{vm.coverRemark}}</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label"></label>
+                        <div class="col-lg-8">
+                          <button type="button" ng-click="vm.localUpLoad('coverImg')"  class="btn btn-primary">本地上传</button>
+                          <button type="button" class="btn btn-primary" ng-click="vm.insertImage('cover')">从图片库中选取</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label"></label>
+                        <div class="col-lg-8">
+                          <input type="hidden" name="cover" ng-model="vm.article.contentCover">
+                          <img width="100px" height="100px" name="coverImg" ngf-src="vm.article.contentCover" >
+                          <span name="coverDescription"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label">摘要</label>
+                        <div class="col-lg-11">
+                         <textarea cols="30" rows="5" id="subject" ng-model="vm.article.contentSubject"
+                              class="form-control ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false"
+                              placeholder="请输入文章摘要100字以内"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <label class="col-lg-1 control-label"></label>
+                        <div class="col-lg-11 pull-right m-t-n-xs">
+                          <a class="btn btn-w-m btn-info" ng-click="vm.submitEdit()">保存</a>
+                          <a class="btn btn-w-m btn-info" ng-click="vm.send(vm.article)">发布</a>
+                          <a class="btn btn-w-m btn-info" ng-click="vm.perview()">预览</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg-2">
+                <div style="max-width: 200px">
+                  <div style="padding: 10px 20px 0;">
+                    <h4 class="c">多媒体</h4>
+                  </div>
+                  <div style="padding: 20px;">
+                    <ul class="tpl_list" id="multiMediaList">
+                      <li class="tpl_item img" ng-click="vm.insertImage('content')">
+                        <img class="imgTitle" ng-src="assets/images/umEdit/picture.png">
+                        图片
+                      </li>
+                      <li class="tpl_item" ng-click="vm.insertRedio(this)" data-toggle="modal" data-target="#mediaModal2">
+                        <img class="imgTitle" ng-src="assets/images/umEdit/radio.png">
+                        视频
+                      </li>
+                      <li class="tpl_item" ng-click="vm.insertMusic(this)" data-toggle="modal" data-target="#mediaModal3">
+                        <img class="imgTitle" ng-src="assets/images/umEdit/music.png">
+                        音乐
+                      </li>
+                      <li class="tpl_item" ng-click="vm.insertVote(this)" data-toggle="modal" data-target="#mediaModal4">
+                        <img class="imgTitle" ng-src="assets/images/umEdit/vote.png">
+                        投票
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -17,9 +17,7 @@
               <div class="col-lg-6">
                 <label class="col-lg-3 control-label">用户类型</label>
                 <div class="col-lg-8">
-                  <select class="form-control" id="userType" name="userType" ng-model="vm.user.userType" ng-options="e.id as e.name for e in type" >
-                    <option value="">请选择</option>
-                  </select>
+                  <lookup-select lookup-value="vm.user.userType" lookup-type="HMS.USER_TYPE"></lookup-select>
                 </div>
                 </div>
             </div>
@@ -77,13 +75,25 @@
               <div class="col-lg-6">
                 <label class="col-lg-3 control-label">初始密码</label>
                 <div class="col-lg-8">
-                  <input type="password" id="passwordInit" name="passwordInit" ng-model="vm.user.passwordEncrypted" class="form-control">
+                  <input type="password" id="passwordInit" name="passwordInit" ng-model="vm.user.password" class="form-control">
                 </div>
               </div>
               <div class="col-lg-6">
                 <label class="col-lg-3 control-label">状态</label>
                 <div class="col-lg-8">
-                  <select class="form-control" id="userState" name="userState" ng-model="vm.user.status" ng-options="e.id as e.name for e in state" >
+                  <select class="form-control" id="userState" name="userState" ng-model="vm.user.status" ng-options="e.id as e.name for e in vm.state" >
+                    <option value="">请选择</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">角色</label>
+                <div class="col-lg-8">
+                  <select class="form-control" id="userRole" name="userRole" ng-model="vm.user.roleId" ng-options="e.roleId as e.roleName for e in vm.roles" required>
                     <option value="">请选择</option>
                   </select>
                 </div>

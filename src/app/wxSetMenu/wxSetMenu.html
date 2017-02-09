@@ -1,0 +1,76 @@
+<div>
+  <div class="ibox-title">
+  <h2>会议日程</h2>
+
+  </div>
+  <div class="ibox-content">
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+          <label class="col-lg-4 control-label">菜单名</label>
+          <div class="col-lg-8">
+            <input type="text" id="searchMenuName" class="form-control" ng-model="vm.menu.menuName">
+          </div>
+        </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">上级ID</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchParentId" class="form-control" ng-model="vm.menu.parentId">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+              <button class="btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadSearch()">搜索</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button class="btn btn-w-m btn-primary" type="button" id="setMenu" ng-click="vm.setMenu()">更新菜单</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>操作</th>
+          <th>序号</th>
+          <th>ID</th>
+          <th>菜单类型</th>
+          <th>菜单名</th>
+          <th>上级ID</th>
+          <!--<th>资源内容</th>-->
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="menu in vm.menus track by menu.id">
+          <td>
+            <a ui-sref="wxSetMenu.edit({id:menu.id})"><i class="fa fa-edit text-primary">编辑</i></a>
+          </td>
+          <td ng-bind="$index+1">1</td>
+          <td ng-bind="menu.id"></td>
+          <td ng-bind="menu.menuType"></td>
+          <td ng-bind="menu.menuName"></td>
+          <td ng-bind="menu.parentId"></td>
+          <!--<td ng-bind="menu.content"></td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

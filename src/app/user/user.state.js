@@ -24,7 +24,7 @@
       })
       .state('user.new', {
         parent: 'app',
-        url: "/new",
+        url: "/user/new",
         views: {
           'body': {
             templateUrl: "app/user/user-new.html",
@@ -40,6 +40,7 @@
                   phone: null,
                   startActiveDate: null,
                   endActiveDate: null,
+                  password:null,
                   passwordEncrypted: null,
                   state: null,
                 };
@@ -50,7 +51,7 @@
       })
       .state('user.edit', {
         parent: 'app',
-        url: "/:id/edit",
+        url: "/user/:id/edit",
         views: {
           'body': {
             templateUrl: "app/user/user-new.html",

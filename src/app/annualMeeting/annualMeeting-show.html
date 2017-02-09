@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>年会信息查看</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">年会名称</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingTitle}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">主办城市</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingCity}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">详细地址</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingAddr}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">年会时间</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingDate}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">地点经度</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingAddrLong}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">地点维度</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingAddrLati}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">总桌数</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.meetingTable}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">每桌人数</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.tableSeat}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">每排桌数</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.colTable}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">排列方式</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.arrangement}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">增长阈值</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.thresholdPercentage}}</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">增长比率</label>
+
+              <div class="col-lg-8">
+                <label>{{vm.meeting.hmsAnnualMeeting.increasePercentage}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="vm.meeting.hmsAnnualMeeting.needSplit" style="background-color: #e5e6e7">
+          <div class="form-group" ng-repeat="split in vm.meeting.splitList">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="col-lg-3">
+                  <label class="control-label">区域</label>
+                </div>
+                <div class="col-lg-8 input-group">
+                  <label>{{split.splitName}}区</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">桌位</label>
+                <div class="col-lg-8 form-group">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <label>从{{split.startNum}}桌</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <label>到{{split.endNum}}桌</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" ui-sref="annualMeeting.seat({id:vm.meeting.hmsAnnualMeeting.id,needSplit:vm.meeting.hmsAnnualMeeting.needSplit})">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;桌位信息
+              </button>
+              <button type="button" class="btn btn-default" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;返回
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

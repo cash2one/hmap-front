@@ -1,0 +1,71 @@
+<form name="addForm" role="form" ng-submit="vm.save()">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">新建app配置</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row" style="text-align:center">
+      <div style="text-align:center">
+        <input id="uploadImg" ng-model="vm.file" ng-change="vm.changeFile()" ngf-select accept="image/*" required name="file" size="1" style="left:calc(50% - 60px);position:absolute;opacity:0;z-index:100;cursor:pointer;width:120px;height:120px;" type="file">
+        <img id="js_avator" style="width:120px;height:120px" ngf-src="vm.oldFile">
+      </div>
+      <div>
+        建议上传图片尺寸为640x640，大小不超过5M。
+      </div>
+      <div ng-show="vm.varMay" class="btn btn-primary"
+           style="margin-top: 0.5em"
+           ng-click="vm.submitFile()">
+        <div>开始上传</div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <div class="form-group">
+          <input type="hidden" class="form-control" ng-model="vm.hmsAppAuth.Id"/>
+          <label class="control-label" for="field_appName">应用名称</label>
+          <input type="text" class="form-control" style="width:100%;border: 1px solid #c8cacd;" name="appName"
+                 id="field_appName"
+                 ng-model="vm.hmsAppAuth.appName" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <div class="form-group">
+
+          <label class="control-label">应用类型</label>
+          <input type="text" class="form-control" style="width:100%;border: 1px solid #c8cacd;" name="appType"
+                 ng-init="vm.hmsAppAuth.appType='Web应用'" ng-model="vm.hmsAppAuth.appType" required disabled>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <div class="form-group">
+          <label class="control-label">授权模式</label>
+          <select class="form-control" ng-model="vm.hmsAppAuth.appAuzMode"
+                  ng-init="vm.hmsAppAuth.appAuzMode='authorization_code'" style="width:100%;border: 1px solid #c8cacd;" required disabled>
+            <option ng-repeat="x in vm.appAuzMode" value="{{x.code}}">{{x.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <permission-selector permission-data="vm.permissionData"></permission-selector>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align:center">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+    </button>
+    <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+    </button>
+  </div>
+</form>

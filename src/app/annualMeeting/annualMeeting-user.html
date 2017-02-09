@@ -1,0 +1,37 @@
+<div>
+  <div class="ibox-title">
+  <h2>人员信息</h2>
+
+  </div>
+  <div class="ibox-content">
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <th>姓名</th>
+          <th>工号</th>
+          <th>加入时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="staff in vm.staffs track by staff.id">
+          <td ng-bind="staff.empName"></td>
+          <td ng-bind="staff.empNo"></td>
+          <td ng-bind="staff.creationDate"></td>
+          <td>
+            <a ui-sref="meetingUsers.change({userId:staff.empNo,meetingId:staff.meetingId})"><i class="fa fa-edit text-primary">换桌</i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

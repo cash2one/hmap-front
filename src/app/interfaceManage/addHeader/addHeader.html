@@ -201,12 +201,28 @@
 
           <div class="form-group">
             <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统类型</label>
+
+                <div class="col-lg-8">
+
+                  <select class="form-control" ng-model="vm.header.systemType" name="systemType" id="systemType">
+                    <option ng-repeat="x in vm.systemTypes" value="{{x.value}}">{{x.description}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
               <div class="text-center">
                 <button type="button" class="btn btn-default" ng-click="vm.cancel()">
-                  &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+                  &nbsp;&nbsp;取消&nbsp;&nbsp;
                 </button>
                 <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-                  &nbsp;&nbsp;Save&nbsp;&nbsp;
+                  &nbsp;&nbsp;保存&nbsp;&nbsp;
                 </button>
               </div>
             </div>

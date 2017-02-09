@@ -26,7 +26,7 @@
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(function (response) {
-        console.log("find header,line" + angular.toJson(response.data));
+        //console.log("find header,line" + angular.toJson(response.data));
         return response.data;
       })
     };
@@ -38,7 +38,7 @@
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(function (response) {
-        console.log("find example:" + angular.toJson(response.data));
+        //console.log("find example:" + angular.toJson(response.data));
         return response.data;
       })
 
@@ -51,7 +51,7 @@
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(function (response) {
-        console.log("update example:" + angular.toJson(response.data));
+        //console.log("update example:" + angular.toJson(response.data));
         return response.data;
       })
 

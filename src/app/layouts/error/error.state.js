@@ -1,39 +1,46 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('hmapFront')
-        .config(stateConfig);
+  angular
+    .module('hmapFront')
+    .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+  stateConfig.$inject = ['$stateProvider'];
 
-    function stateConfig($stateProvider) {
-        $stateProvider
-            .state('error', {
-                url: '/error',
-                data: {
-                    authorities: [],
-                    pageTitle: 'error.title'
-                },
-               templateUrl: 'app/layouts/error/error.html'
-                //views: {
-                //    'content@': {
-                //        templateUrl: 'app/layouts/error/error.html'
-                //    }
-                //}
-            })
-            .state('accessdenied', {
-                //parent: 'app',
-                url: '/accessdenied',
-                data: {
-                    authorities: []
-                },
-                templateUrl: 'app/layouts/error/accessdenied.html'
-                //views: {
-                //    'content@': {
-                //
-                //    }
-                //}
-            });
-    }
+  function stateConfig($stateProvider) {
+    $stateProvider
+      .state('error', {
+        url: '/error',
+        parent: 'app',
+        data: {
+          authorities: [],
+          pageTitle: 'error.title'
+        },
+        views: {
+          'body': {
+            templateUrl: 'app/layouts/error/error.html'
+          }
+        }
+        //views: {
+        //    'content@': {
+        //        templateUrl: 'app/layouts/error/error.html'
+        //    }
+        //}
+      })
+      .state('accessdenied', {
+        parent: 'app',
+        url: '/accessdenied',
+        views: {
+          'body': {
+            templateUrl: 'app/layouts/error/accessdenied.html'
+          }
+        }
+
+        //views: {
+        //    'content@': {
+        //
+        //    }
+        //}
+      });
+  }
 })();

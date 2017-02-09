@@ -1,81 +1,87 @@
 /**
  * Created by user on 2016/8/3.
  */
-(function (){
+(function () {
   'use strict';
 
   angular.module('hmapFront')
-    .controller('HeaderController',HeaderController);
+    .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['HeaderService','$state','$scope','paginationConstants','entity'];
+  HeaderController.$inject = ['HeaderService', '$state', 'paginationConstants', 'entity'];
 
-  function HeaderController(HeaderService,$state,$scope,paginationConstants,entity){
-      var vm = this;
+  function HeaderController(HeaderService, $state, paginationConstants, entity) {
+    var vm = this;
     vm.header = entity;
 
     vm.page = 1;
     vm.totalItems = null;
-    vm.transition = transition;
-    vm.pageChanged=pageChanged;
     vm.itemsPerPage = paginationConstants.itemsPerPage;
-
-    //var page = vm.page;
-    //var pageSize = paginationConstants.itemsPerPage;
     vm.header.page = vm.page;
-    vm.header.pagesize = paginationConstants.itemsPerPage;
+    vm.header.pagesize = vm.itemsPerPage;
+    vm.authTypes = [
+      {value: "BASIC_AUTH", description: "BasicAuth验证"},
+      {value: "OAUTH2", description: "OAuth2.0验证"},
+      {value: "NO_AUTH", description: "无验证"}
+    ];
 
-    getAllHeader(vm.header);
+    vm.transition = transition;
+    vm.pageChanged = pageChanged;
+    vm.search = search;
+    vm.reset = reset;
+    vm.loadAll=loadAll;
 
-    function getAllHeader(header){
-      return HeaderService.getHeaders(header)
-        .then(function(data){
-          vm.headerAll = data.rows;
-          vm.totalItems =  data.total;
-          console.log("===="+angular.toJson(vm.headerAll));
-          //return  vm.headerAll;
-        });
+    vm.loadAll();
 
+
+    function loadAll() {
+      //console.log("00000:" + angular.toJson(vm.header));
+      //selectSystemType();
+      HeaderService.queryAll().query(vm.header, onSuccess, onError)
     }
 
-    vm.search = function(){
+    function onSuccess(data, headers) {
+      //console.log('onSuccess');
+      //console.log(angular.toJson(data));
+      vm.headerAll = data.rows;
+      vm.totalItems = data.total;
+    }
+
+    function onError(error) {
+      //console.log('error');
+    }
+
+    function search() {
       //每次搜索的时候把page设为 1
       vm.header.page = vm.page = 1;
-      vm.header.pagesize = paginationConstants.itemsPerPage;
+      vm.header.pagesize = vm.itemsPerPage;
 
-      if(vm.header.interfaceCode!=null && vm.header.interfaceCode === ""){
+      if (vm.header.interfaceCode != null && vm.header.interfaceCode === "") {
         vm.header.interfaceCode = undefined;
       }
-      if(vm.header.headerName!=null && vm.header.headerName === ""){
-        vm.header.headerName = undefined;
+      if (vm.header.name != null && vm.header.name === "") {
+        vm.header.name = undefined;
       }
-      getAllHeader( vm.header);
+      loadAll();
+    };
+
+    function reset() {
+      vm.header.name = undefined;
+      vm.header.interfaceCode = undefined;
     }
 
 
-    function transition () {
+    function transition() {
       $state.transitionTo($state.$current, {
         page: vm.page
       });
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' + vm.page);
       vm.header.page = vm.page;
-      vm.header.pagesize = paginationConstants.itemsPerPage;
-      getAllHeader(vm.header);
+      vm.header.pagesize = vm.itemsPerPage;
+      loadAll();
     };
-
-
-    $scope.editHeader = function(header){
-      $state.go("editHeader",{header:header});
-    };
-
-    $scope.addHeader = function(){
-      $state.go("addHeader");
-    }
-
-
-
   }
 
 

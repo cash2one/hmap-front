@@ -8,18 +8,21 @@
     .module('hmapFront')
     .controller('SchedulerController', SchedulerController);
 
-  SchedulerController.$inject = ['$timeout', '$scope','$state', '$stateParams','User','entity','uibDateParser'];
+  SchedulerController.$inject = ['$timeout', 'TaskDetali','$state', '$stateParams','User','entity','uibDateParser'];
 
-  function SchedulerController(paginationConstants, $scope, $state, $stateParams, User, entity, uibDateParser) {
+  function SchedulerController(paginationConstants, TaskDetali, $state, $stateParams, User, entity, uibDateParser) {
     var vm = this;
     vm.loadAll = loadAll;
     vm.getScheduler = getScheduler;
-    vm.scheduler = entity;
+    vm.schedulers = [];
     vm.clear = clear;
     vm.start = start;
     vm.standby = standby;
+    vm.jobs=[];
     vm.load=load;
-
+    vm.pauseall=pauseall;
+    vm.resumeall=resumeall;
+    vm.load();
     vm.loadAll();
 
     function clear() {
@@ -27,25 +30,42 @@
     }
 
     function start() {
-
+      TaskDetali.SchedulerStart().start({},loadSuccess, loadError);
     }
     function standby() {
-
+      TaskDetali.SchedulerStandby().standby({},loadSuccess, loadError);
+    }
+    function pauseall() {
+      TaskDetali.SchedulerPauseall().pauseall({},loadSuccess, loadError);
+    }
+    function resumeall() {
+      TaskDetali.SchedulerResumeall().resumeall({},loadSuccess, loadError);
+    }
+    function load(){
+      TaskDetali.SchedulerInfo().info({},loadSuccess, loadError)
+    }
+    function loadSuccess(data, headers) {
+      //console.log('loadSuccess');
+      //console.log(data);
+      vm.schedulers = data.rows;
+    }
+    function loadError(error) {
+      //console.log('error');
     }
     function loadAll() {
-      User.query({
+      TaskDetali.SchedulerQuery().query({
         page: vm.page,
         pagesize: paginationConstants.itemsPerPage
       }, onSuccess, onError);
     }
-    function onSuccess(result) {
-      $scope.$emit('hmapFront:userUpdate', result);
-      vm.isSaving = true;
-      $state.go('user');
+    function onSuccess(data, headers) {
+      //console.log('onSuccess');
+      //console.log(data);
+      vm.jobs = data.rows;
+      vm.totalItems =  data.total;
     }
-
-    function onError() {
-      vm.isSaving = false;
+    function onError(error) {
+      //console.log('error');
     }
 
     function getScheduler(id) {

@@ -1,0 +1,189 @@
+<toaster-container></toaster-container>
+<div class="wrapper wrapper-content">
+  <div class="contact-item">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group">
+          <input class="form-control" type="text">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-primary glyphicon glyphicon-search">
+          </button> </span></div>
+      </div>
+      <div class="col-lg-9 text-center">
+
+        <h3>企业通讯录</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 corp-tree">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content mailbox-content">
+          <div class="file-manager">
+            <div class="row">
+              <uib-tabset active="activeForm">
+
+                <uib-tab index="0" heading="组织架构" select="vm.selectOrg()">
+                  <div js-tree="vm.treeConfig" ng-model="vm.jsTreeData" tree="vm.treeInstance"
+                       tree-events-obj="vm.treeEventsObj"></div>
+                </uib-tab>
+
+                <uib-tab index="1" heading="标签" select="vm.selectTag()">
+
+                  <div class="form-group text-center m-t">
+                    <button class="btn btn-success" ng-click="vm.openTagModal()">新建标签</button>
+                  </div>
+                  <div class="form-group m-t">
+                    <h3>我的标签</h3>
+
+                    <div class="table-responsive">
+                      <table class="table table table-hover table-striped">
+                        <tbody>
+                        <tr ng-repeat="tag in vm.allTags">
+                          <td width="50%"><a href="" ng-click="vm.tagDetail()"> <i class="fa fa-flag"></i>{{tag.tagName}}</a></td>
+                          <td width="50%" align="right">
+                            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                              <a href="" id="simple-dropdown" class="btn btn-xs btn-primary" uib-dropdown-toggle><i
+                                class="fa fa-pencil"></i></a>
+                              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-dropdown">
+                                <li role="menuitem"><a href="" ng-click="vm.updateTag(tag.id)">重命名</a></li>
+                                <li role="menuitem"><a href="" ng-click="vm.deleteTag(tag.id)">删除</a></li>
+                                <li role="menuitem"><a href="" ng-click="vm.lockTag(tag.id)">加锁</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </uib-tab>
+
+              </uib-tabset>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 animated fadeInRight corp-tree">
+      <div class="content" ng-show="vm.isOrgShow">
+        <div class="row">
+          <div id="org-views" ui-view="" class="ng-scope">
+            <fieldset class="ng-scope">
+              <h2>{{vm.currentDept.deptName}}</h2>
+            </fieldset>
+            <fieldset class="m-t-md ng-scope">
+              <a ui-sref="forms.wizard.step_two" class="btn btn-primary" href="/forms/wizard/step_two">新建成员</a>
+              <a ui-sref="forms.wizard.step_two" class="btn btn-primary" href="/forms/wizard/step_two">批量导入</a>
+              <a ui-sref="forms.wizard.step_two" class="btn btn-primary" href="/forms/wizard/step_two">批量导出</a>
+            </fieldset>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th width="10%">操作</th>
+                <th width="20%">姓名</th>
+                <th width="20%">账号</th>
+                <th width="20%">手机</th>
+                <th width="20%">邮箱</th>
+                <th width="10%">状态</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr ng-show="vm.isSpinnerShow">
+                <td colspan="6">
+                  <div class="spiner-example">
+                    <div class="sk-spinner sk-spinner-pulse"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr ng-repeat="staff in vm.staffs track by staff.userId" ng-show="vm.isStaffShow">
+                <td>
+                  <input type="checkbox"/>
+                </td>
+                <td>{{staff.userName}}</td>
+                <td>{{staff.accountNumber}}</td>
+                <td>{{staff.mobile}}</td>
+                <td>{{staff.email}}</td>
+                <td>{{staff.empStatus}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center">
+            <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+            <uib-pagination class="pagination-sm"
+                            total-items="vm.totalItems"
+                            ng-model="vm.page"
+                            ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" ng-show="vm.isTagShow">
+        <div class="row">
+          <div id="tag-views" ui-view="" class="ng-scope">
+            <fieldset class="ng-scope">
+              <h2>{{vm.currentDept.deptName}}</h2>
+            </fieldset>
+            <fieldset class="m-t-md ng-scope">
+              <a ui-sref="forms.wizard.step_two" class="btn btn-primary" href="/forms/wizard/step_two">新增成员</a>
+              <a ui-sref="forms.wizard.step_two" class="btn btn-primary" href="/forms/wizard/step_two">标签详情</a>
+            </fieldset>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th width="10%">操作</th>
+                <th width="20%">名称</th>
+                <th width="20%">部门</th>
+                <th width="10%">状态</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr ng-show="vm.isSpinnerShow">
+                <td colspan="4">
+                  <div class="spiner-example">
+                    <div class="sk-spinner sk-spinner-pulse"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr ng-repeat="staff in vm.staffs track by staff.userId" ng-show="vm.isStaffShow">
+                <td>
+                  <input type="checkbox"/>
+                </td>
+                <td>{{staff.userName}}</td>
+                <td>{{staff.accountNumber}}</td>
+                <td>{{staff.empStatus}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center">
+            <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+            <uib-pagination class="pagination-sm"
+                            total-items="vm.totalItems"
+                            ng-model="vm.page"
+                            ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

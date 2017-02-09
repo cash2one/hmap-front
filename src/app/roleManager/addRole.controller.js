@@ -9,34 +9,29 @@
   angular.module('hmapFront')
     .controller('AddRoleController', AddRoleController);
 
-  AddRoleController.$inject = ['RoleService', '$scope', '$state', '$uibModalInstance'];
+  AddRoleController.$inject = ['RoleService', '$scope', '$state', '$uibModalInstance','toastr'];
 
-  function AddRoleController(RoleService, $scope, $state, $uibModalInstance) {
+  function AddRoleController(RoleService, $scope, $state, $uibModalInstance,toastr) {
     var vm = this;
-    vm.role = null;
+    vm.role = {};
     vm.clear = clear;
     vm.add = add;
 
     function add() {
-      console.log("role:" + angular.toJson(vm.role));
-      return RoleService.addRole(vm.role)
-        .then(function (data) {
-          console.log("resultData:" + angular.toJson(data));
-          if (data.success) {
-            $uibModalInstance.close();
-            return $state.go('rolemanager', null, {reload: true});
-          }
-
-        });
-
+      RoleService.addRole().save(vm.role,onSuccess,onError);
     };
 
+    function onSuccess(data, headers) {
+      toastr.success('保存成功！','信息提示');
+      $uibModalInstance.close(data);
+    }
+    function onError(error) {
+      //console.log('error');
+    }
 
     function clear() {
       $uibModalInstance.dismiss('cancel');
     }
-
-
   }
 
 

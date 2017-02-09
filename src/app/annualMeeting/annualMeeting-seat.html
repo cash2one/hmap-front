@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>年会桌位信息</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="form-group">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="col-lg-8">
+                  <button ng-click="vm.creatTable()" class="btn btn-w-m btn-primary">新增桌位</button>
+                </div>
+              </div>
+              <div class="col-lg-4" ng-if="vm.hasSplit">
+                  <div class="input-group">
+                    <label class="col-lg-3 control-label">区域</label>
+                    <div class="col-lg-8 input-group">
+                      <input type="text" id="splitName" name="splitName"
+                             ng-model="vm.splitName" class="form-control">
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div ng-repeat="meeting in vm.meetings" class="row col-lg-2 col-sm-4">
+              <div class="input-group" style="width:90%">
+                <div ui-sref="meetingUsers({id:meeting.id})">
+                  <input readonly class="form-control" style="text-align:center;background-color: #f9f9f9;" value="{{meeting.tableNumber}}桌/{{meeting.availableSeat}}" type="button">
+                </div>
+                <div class="input-group-btn">
+                  <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">{{meeting.status=='Y'?'可用':'禁用'}}<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right">
+                    <li ng-repeat="x in vm.tableState"><a ng-click="meeting.status=x.code;vm.savetable(meeting)">{{x.name}}</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

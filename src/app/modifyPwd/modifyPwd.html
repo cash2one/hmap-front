@@ -1,0 +1,81 @@
+<div class="row">
+  <alert-error></alert-error>
+</div>
+
+<div class="ibox-title">
+  <h5>修改密码</h5>
+  <div class="ibox-tools">
+    <a class="collapse-link">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="fa fa-wrench"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+      <li><a href="#">Config option 1</a>
+      </li>
+      <li><a href="#">Config option 2</a>
+      </li>
+    </ul>
+    <a class="close-link">
+      <i class="fa fa-times"></i>
+    </a>
+  </div>
+</div>
+<div class="ibox-content">
+      <form class="form-horizontal" name="form" ng-submit="vm.modifyPwd()" >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-4 control-label">原密码</label>
+              <div class="col-lg-8">
+                  <input type="password" class="form-control" ng-model="vm.oldPwd" required />
+              </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-4 control-label">新密码</label>
+              <div class="col-lg-8">
+                <input type="password" class="form-control" ng-model="vm.newPwd" required/>
+              </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-4 control-label">确认密码</label>
+              <div class="col-lg-8">
+                <input type="password" class="form-control" ng-model="vm.reNewPwd" required />
+              </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-4 control-label"></label>
+              <div class="col-lg-8">
+                <button type="submit"  ng-disabled="form.$invalid" class="btn btn-primary">确定修改</button>
+              </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+
+      </form>
+  </div>
+</div>

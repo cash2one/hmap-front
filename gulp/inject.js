@@ -19,13 +19,17 @@ gulp.task('inject', ['scripts'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.src, '/app/**/*.css'),
     path.join(conf.paths.src, '/assets/font-awesome/css/font-awesome.min.css'),
-    path.join(conf.paths.src, '/assets/css/style.css'),
-    path.join(conf.paths.src, '/assets/css/animate.css')
+    path.join(conf.paths.src, '/styles/style.css'),
+    path.join(conf.paths.src, '/styles/animate.css')
   ], { read: false });
 
   var injectScripts = gulp.src([
+
     path.join(conf.paths.src, '/app/**/*.module.js'),
     path.join(conf.paths.src, '/app/**/*.js'),
+    path.join(conf.paths.src, '/utils/**/*.js'),
+    path.join(conf.paths.src, '/directive/**/*.js'),
+    //path.join(conf.paths.src, '/ueditor/ueditor.config.js'),
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js'),
   ])

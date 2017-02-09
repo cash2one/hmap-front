@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>APP版本管理 / 新增版本</h5>
+      </div>
+      <div class="ibox-content">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+          <input name="appId" id="appId" type="hidden" value="">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">版本序号</label>
+                <div class="col-lg-8">
+                  <input name="orderNum" placeholder="版本将会从小到达,只能输入整数" class="form-control" id="orderNum" type="text" ng-model="vm.appeditionLine.orderNum" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">版本号</label>
+                <div class="col-lg-8">
+                  <input name="editionCode" placeholder="版本号作为版本标识" class="form-control" id="editionCode" type="text" ng-model="vm.appeditionLine.editionCode">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">更新类型</label>
+                <div class="col-lg-8">
+                  <!--<select name="appPlatform" class="form-control" id="appPlatform" ng-model="vm.appedition.appEquipment"><option value="iOS">iOS</option><option value="Android">Android</option><option value="Windows Phone">Windows Phone</option></select>-->
+                  <select class="form-control" id="updateType" name="updateType" ng-model="vm.appeditionLine.updateType" ng-options="e.id as e.name for e in vm.updateTypes" >
+                  </select>
+            </div>
+          </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">下载地址</label>
+                <div class="col-lg-8">
+                  <input name="downloadUrl" placeholder="" class="form-control" id="downloadUrl" type="text" ng-model="vm.appeditionLine.downloadUrl">
+                </div>
+              </div>
+              </div>
+            </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">是否是最小版本</label>
+                <div class="col-lg-8">
+                  <!--<select name="enableFlag" class="form-control" id="enableFlag" ng-model="vm.appedition.enableFlag"><option value="Y" selected="">是</option><option value="N">否</option></select>-->
+                  <select class="form-control" id="isMinimumEdition" name="isMinimumEdition" ng-model="vm.appeditionLine.isMinimumEdition" ng-options="s.id as s.name for s in vm.state" >
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">是否是最新版本</label>
+                <div class="col-lg-8">
+                  <!--<select name="enableFlag" class="form-control" id="enableFlag" ng-model="vm.appedition.enableFlag"><option value="Y" selected="">是</option><option value="N">否</option></select>-->
+                  <select class="form-control" id="isLatestEdition" name="isLatestEdition" ng-model="vm.appeditionLine.isLatestEdition" ng-options="s.id as s.name for s in vm.state" >
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">是否有效</label>
+                <div class="col-lg-8">
+                  <!--<select name="enableFlag" class="form-control" id="enableFlag" ng-model="vm.appedition.enableFlag"><option value="Y" selected="">是</option><option value="N">否</option></select>-->
+                  <select class="form-control" id="enableFlag" name="enableFlag" ng-model="vm.appeditionLine.enableFlag" ng-options="s.id as s.name for s in vm.state" >
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="col-lg-2 control-label" style="width: 12.5%;">更新内容</label>
+                <div class="col-lg-10">
+                  <textarea name="updateMessage" placeholder="" class="form-control" id="updateMessage" style="height:200px" ng-model="vm.appeditionLine.updateMessage">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+            </button>
+            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

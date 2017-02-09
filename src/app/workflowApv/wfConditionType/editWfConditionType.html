@@ -1,0 +1,109 @@
+<alert-error></alert-error>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5 ng-if="vm.editOrCreate=='create'">工作流筛选条件-新增</h5>
+        <h5 ng-if="vm.editOrCreate=='edit'">工作流筛选条件-修改</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">来源系统名称</label>
+
+              <div class="col-lg-8">
+                  <input type="text" ng-model="vm.wfConditionType.apiHeaderName" class="form-control" readonly="true"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+
+
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">筛选条件代码</label>
+
+                <div class="col-lg-8">
+                  <input type="hidden" ng-model="vm.wfConditionType.id">
+                  <input class="form-control" type="text" ng-model="vm.wfConditionType.conditionTypeCode" required>
+
+                </div>
+                </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">筛选条件名称</label>
+
+              <div class="col-lg-8">
+
+                <input class="form-control" type="text" ng-model="vm.wfConditionType.conditionTypeName" required>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="col-lg-3 control-label">获取筛选条件内容接口名称</label>
+
+              <div class="col-lg-8">
+                <div class="input-group">
+                  <input type="text" ng-model="vm.wfConditionType.getWfConditionApiName" class="form-control" readonly="true"/>
+                    <span class="input-group-btn"><button type="button" ng-click="vm.goSelectLine()"
+                                                          class="btn btn-primary glyphicon glyphicon-search"></button></span>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="row">
+              <div class="text-center">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">
+                  &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">保存</button>
+              </div>
+            </div>
+          </div>
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

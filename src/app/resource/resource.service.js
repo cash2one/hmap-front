@@ -21,13 +21,7 @@
       return $resource(resourceUrl, {}, {
         'query': { method: 'GET',isArray:false},
         'get': {
-          method: 'GET',
-          transformResponse: function (data) {
-            if (data) {
-              data = angular.fromJson(data);
-            }
-            return data;
-          }
+          method: 'GET'
         },
         'update': {method: 'PUT'}
       });

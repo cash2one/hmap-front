@@ -1,0 +1,299 @@
+<alert-error></alert-error>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>接口信息</h5>
+
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal" name="editHeader" role="form" ng-submit="vm.update()">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统代码</label>
+
+                <div class="col-lg-8">
+                  <input type="hidden" ng-model="vm.header.headerId">
+                  <input type="hidden" ng-model="vm.header.headerTlId">
+                  <input class="form-control" type="text" ng-model="vm.header.interfaceCode" required>
+
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统名称</label>
+
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="vm.header.name" required>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">接口类型</label>
+
+                <div class="col-lg-8">
+                  <lookup-select lookup-value="vm.header.interfaceType" lookup-type=" HMS.INTERFACE_TYPE"></lookup-select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">系统地址</label>
+
+                <div class="col-lg-8">
+                  <input type="url" ng-model="vm.header.domainUrl" class="form-control" required>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">启用Mock</label>
+
+                <div class="col-lg-8">
+                  <lookup-select lookup-value="vm.header.isMock" lookup-type="SYS.YES_NO"></lookup-select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">Mock地址</label>
+
+                <div class="col-lg-8">
+                  <input type="url" ng-model="vm.header.mockUrl" class="form-control">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <div class="col-lg-offset-3 col-lg-8">
+                  <button type="button" ladda="vm.syncLoading" ng-click="vm.syncLines()"
+                          class="ladda-button btn btn-primary" data-style="slide-right">
+                    {{vm.syncMsg}}
+                  </button>
+                </div>
+                <div class="col-lg-6">
+                </div>
+
+              </div>
+            </div>
+</div>
+            <div class="form-group">
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">请求方法</label>
+
+                  <div class="col-lg-8">
+                    <!--<select class="form-control" ng-model="vm.header.requestMethod"-->
+                    <!--ng-options="a for a in vm.requestMethod" required>-->
+                    <!--</select>-->
+                    <lookup-select lookup-value="vm.header.requestMethod" lookup-type="HMS.REQUEST_METHOD"></lookup-select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">请求形式</label>
+
+                  <div class="col-lg-8">
+                    <lookup-select lookup-value="vm.header.requestFormat" lookup-type="HMS.REQUEST_FORMAT"></lookup-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">请求报文格式</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.requestContenttype" placeholder="例如，application/json">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">请求接收类型</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.requestAccept" placeholder="例如，application/json">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">应用名称</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" ng-model="vm.header.thirdpartyId">
+                      <option ng-repeat="x in vm.thirdpartys" value="{{x.id}}">{{x.appName}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">是否需要校验</label>
+                  <div class="col-lg-8">
+                    <lookup-select lookup-value="vm.header.authType" lookup-type="HMS.AUTH_TYPE"
+                                   on-change="vm.change()"></lookup-select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-group" ng-show="vm.header.isBasic">
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">校验用户名</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.authUsername">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">校验用密码</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.authPassword">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" ng-show="vm.header.isAuth">
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">Token地址</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.accessTokenUrl">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">授权模式</label>
+
+                  <div class="col-lg-8">
+                    <lookup-select lookup-value="vm.header.grantType" lookup-type="HMS.AUTH_GRANT_TYPE"></lookup-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" ng-show="vm.header.isAuth">
+              <div class="row">
+
+
+                <div class="col-lg-6">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">SOAP报文前缀</label>
+
+                  <div class="col-lg-8">
+                    <textarea class="form-control" type="text" ng-model="vm.header.bodyHeader"></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">SOAP报文后缀</label>
+
+                  <div class="col-lg-8">
+                    <textarea class="form-control" type="text" ng-model="vm.header.bodyTail"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">命名空间</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.namespace">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">映射类</label>
+
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" ng-model="vm.header.mapperClass">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">系统类型</label>
+
+                  <div class="col-lg-8">
+                    <lookup-select lookup-value="vm.header.systemType" lookup-type="HMS.SYSTEM_TYPE"></lookup-select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">是否有效</label>
+
+                  <div class="col-lg-8">
+                    <select class="form-control" ng-model="vm.header.enableFlag">
+                      <option ng-repeat="x in vm.flag" value="{{x.code}}">{{x.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="text-center">
+                  <button type="button" class="btn btn-default" ng-click="vm.cancel()">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;
+                  </button>
+                  <button type="submit" ng-disabled="editHeader.$invalid || vm.isSaving" class="btn btn-primary">
+                    &nbsp;&nbsp;保存&nbsp;&nbsp;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

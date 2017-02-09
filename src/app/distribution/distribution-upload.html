@@ -1,0 +1,42 @@
+<style>
+  .tag-box {
+    margin: 20px 0;
+    text-align: center;
+    border: dashed 1px #ccc;
+    height:200px;
+  }
+  .uploader {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-family: Arial;
+    font-size: 118px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    opacity: 0;
+  }
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="rows tag-box">
+    <div class="form-group">
+      <div class="row">
+        <input type="file" id="uploadApp" class="uploader" ng-model="vm.appFile" ngf-select name="appFile"  ng-change="vm.uploadApp(vm.appFile)">
+      </div>
+      <div class="row">
+        <div ng-show="vm.varMayApp" class="btn btn-primary"
+             style="margin-top: 0.5em"
+             ng-click="vm.uploadApp(vm.appFile)">
+          <div>立刻上传</div>
+        </div>
+
+      </div>
+      <div class="row"><span>点击按钮选择应用的安装包，或拖拽文件到此区域，支持.ipa和.apk文件</span></div>
+
+      <uib-progressbar max="100" value="vm.progressPercentage"><span style="color:white; white-space:nowrap;">{{vm.progressPercentage}}%</span></uib-progressbar>
+      <div ng-show="vm.varMaysApp">
+        <img src="../assets/images/check.png">
+      </div>
+    </div>
+  </div>
+</div>

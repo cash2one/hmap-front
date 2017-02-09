@@ -22,8 +22,8 @@
       Thirdparty.get({id: id}, function(result) {
 
         vm.thirdparty = result.rows[0];
-        console.log(vm.thirdparty);
-        console.log(vm.thirdparty.appName);
+        //console.log(vm.thirdparty);
+        //console.log(vm.thirdparty.appName);
       });
     }
   }

@@ -6,11 +6,11 @@
 
   angular
     .module('hmapFront')
-    .controller('AppeditionDialogController', AppeditionDialogController);
+    .controller('AppEditionDialogController', AppEditionDialogController);
 
-  AppeditionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity','Appedition'];
+  AppEditionDialogController.$inject = ['AppAuthService','$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity','AppEdition','toastr','paginationConstants'];
 
-  function AppeditionDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, Appedition) {
+  function AppEditionDialogController(AppAuthService,$timeout, $scope, $stateParams, $uibModalInstance, entity, AppEdition,toastr,paginationConstants) {
     var vm = this;
 
     vm.appedition = entity;
@@ -20,14 +20,28 @@
     vm.popupOpen = popupOpen;
     vm.load=load;
 
+    vm.disabled = false;
+    vm.searchApp={};
+    vm.hmsAppAuth = null;
+    var hmsAppAuth = vm.hmsAppAuth;
+    vm.page = 1;
+    vm.totalItems = null;
+    vm.itemsPerPage = paginationConstants.itemsPerPage;
+    var page = vm.page;
+    var pagesize = paginationConstants.itemsPerPage;
+
+
+
     vm.load(vm.appedition.id);
 
-    $scope.Equipments = [
+    loadAllAppAuth(hmsAppAuth, page, pagesize);
+
+    vm.Equipments = [
       {id:'iOS',name:'iOS'},
       {id:'Android',name:'Android'},
       {id:'Windows Phone',name:'Windows Phone'}
     ];
-    $scope.state = [
+    vm.state = [
       {id:'Y',name:'是'},
       {id:'N',name:'否'}
     ];
@@ -43,13 +57,14 @@
     function save() {
       vm.isSaving = true;
       if (vm.appedition.id !== null) {
-        Appedition.update(vm.appedition, onSaveSuccess, onSaveError);
+        AppEdition.update(vm.appedition, onSaveSuccess, onSaveError);
       } else {
-        Appedition.save(vm.appedition, onSaveSuccess, onSaveError);
+        AppEdition.save(vm.appedition, onSaveSuccess, onSaveError);
       }
     }
 
     function onSaveSuccess(result) {
+      toastr.success('保存成功！','信息提示');
       $scope.$emit('hmapFront:appeditionUpdate', result);
       $uibModalInstance.close(result);
       vm.isSaving = true;
@@ -78,11 +93,29 @@
 
     function load(id) {
       if (id) {
-        console.log('loadone');
-        Appedition.get({id: id}, function (result) {
+        ////console.log('loadone');
+        vm.disabled = true;
+        AppEdition.get({id: id}, function (result) {
           vm.appedition = result.rows[0];
+          vm.appId = vm.appedition.appId;
         });
       }
     }
+
+    function loadAllAppAuth(hmsAppAuth, page, pagesize) {
+      vm.searchApp.page = vm.page;
+      vm.searchApp.pagesize = paginationConstants.itemsPerPage;
+      AppAuthService.findAppAuth().query(vm.searchApp, onSuccess, onError);
+    }
+
+    function onSuccess(data, headers) {
+      vm.result = data.rows;
+      vm.totalItems = data.total;
+    }
+
+    function onError(error) {
+      console.log('error');
+    }
+
   }
 })();

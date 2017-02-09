@@ -4,7 +4,7 @@
 
   angular
     .module('hmapFront')
-    .constant('malarkey', malarkey)
-    .constant('moment', moment);
-
+    .constant('VERSION', "0.0.1-SNAPSHOT")
+    .constant('DEBUG_INFO_ENABLED', true)
+  ;
 })();

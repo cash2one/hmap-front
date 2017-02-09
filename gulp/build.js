@@ -71,8 +71,10 @@ gulp.task('html', ['inject', 'partials'], function () {
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
-  return gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot,otf,svg,ttf,woff,woff2}'))
+  return gulp.src( [path.join(conf.paths.src, '/assets/font-awesome/fonts/*.{eot,otf,svg,ttf,woff,woff2}'),
+      path.join(conf.paths.src, '/assets/fonts/*.{eot,otf,svg,ttf,woff,woff2}')]
+  )
+    //.pipe($.filter(''))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
@@ -95,18 +97,18 @@ gulp.task('clean', function () {
 });
 //生成正式环境环境配置文件
 gulp.task('config-sit', function () {
-  gulp.src('config/baseconfig_sit.json')
+  gulp.src('envConfig/baseconfig_sit.json')
     .pipe(gulpNgConfig('hmapFront',{createModule: false}))
     .pipe(rename("baseconfig.constants.js"))
-    .pipe(gulp.dest('src/app/constant'))
+    .pipe(gulp.dest('src/utils/constant'))
 });
 
 //生成开发环境环境配置文件
 gulp.task('config-dev', function () {
-  gulp.src('config/baseconfig_dev.json')
+  gulp.src('envConfig/baseconfig_dev.json')
     .pipe(gulpNgConfig('hmapFront',{createModule: false}))
     .pipe(rename("baseconfig.constants.js"))
-    .pipe(gulp.dest('src/app/constant'))
+    .pipe(gulp.dest('src/utils/constant'))
 });
 gulp.task('build', ['config-dev','html', 'fonts', 'other']);
 gulp.task('build-dev', ['config-dev','html', 'fonts', 'other']);

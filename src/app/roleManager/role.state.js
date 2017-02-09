@@ -10,9 +10,9 @@
 
   function routerConfig($stateProvider) {
     $stateProvider
-      .state('rolemanager', {
+      .state('role', {
         parent: 'app',
-        url: "/rolemanager",
+        url: "/role",
         views: {
           'body': {
             templateUrl: "app/roleManager/roleManage.html",
@@ -21,9 +21,9 @@
           }
         }
       })
-      .state('rolemanager.add', {
-        parent: 'rolemanager',
-        url: "/rolemanager/add",
+      .state('role.add', {
+        parent: 'role',
+        url: "/add",
         onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
           $uibModal.open({
             templateUrl: 'app/roleManager/addRole.html',
@@ -32,19 +32,19 @@
             backdrop: 'static',
             size: 'lg'
           }).result.then(function () {
-              console.log("role go1");
-              $state.go('rolemanager', null, {reload: true});
+              //console.log("role go1");
+              $state.go('role', null, {reload: true});
             }, function () {
-              console.log("role go2");
-              $state.go('rolemanager');
+              //console.log("role go2");
+              $state.go('role');
             });
         }]
       })
-      .state('rolemanager.edit', {
-        parent: 'rolemanager',
-        url: "/rolemanager/edit/:roleId",
+      .state('role.edit', {
+        parent: 'role',
+        url: "/edit/:roleId",
         onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
-          //console.log($uibModal);
+          ////console.log($uibModal);
           $uibModal.open({
             templateUrl: 'app/roleManager/editRole.html',
             controller: 'EditRoleController',
@@ -53,18 +53,18 @@
             size: 'lg',
             resolve: {
               entity: function () {
-                console.log("entity:"+angular.toJson($stateParams.roleId));
+                //console.log("entity:"+angular.toJson($stateParams.roleId));
                 return {
                   roleId:$stateParams.roleId
                 };
               }
             }
           }).result.then(function () {
-              console.log("role go1");
-              $state.go('rolemanager', null, {reload: true});
+              //console.log("role go1");
+              $state.go('role', null, {reload: true});
             }, function () {
-              console.log("role go2");
-              $state.go('rolemanager');
+              //console.log("role go2");
+              $state.go('role');
             });
         }]
       })

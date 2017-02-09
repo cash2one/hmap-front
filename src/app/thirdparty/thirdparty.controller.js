@@ -26,14 +26,13 @@
     }
 
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
+      //console.log('onSuccess');
+      //console.log(data);
       vm.thirdpartys = data.rows;
       vm.totalItems =  data.total;
     }
     function onError(error) {
-      console.log('error');
-
+      //console.log('error');
     }
     function transition () {
       $state.transitionTo($state.$current, {
@@ -42,7 +41,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       loadAll();
     };
   }

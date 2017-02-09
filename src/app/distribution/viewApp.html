@@ -1,0 +1,107 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="row">
+      <alert-error></alert-error>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>应用查看</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="widget-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="col-lg-12 pull-right m-t-n-xs">
+                    <!--<g:link action="upAppv" params="[appId:app.id]">-->
+                    <button type="button" class="btn btn-w-m btn-info" ui-sref="viewApp.addAppVersion({appId:vm.app.appId})">
+                      <i class="glyphicon glyphicon-cloud-upload"></i>上传新版本
+                    </button>
+                    <!--</g:link>-->
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                  <div class="col-lg-8 pull-right m-t-n-xs">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <div class="col-md-12"
+                 style="height: 180px;background-color : #F5F5F5; margin:10px auto; border-top: solid 2px #56bc94;  ">
+              <div class="col-md-8">
+                <div style="height: 70px">
+                  <p style="font-size: 20px ;margin: 10px;font-weight: 500">{{vm.app.appName}}</p>
+
+                  <p style="font-size: 14px ;margin: 10px ;">最新版本:{{vm.app.versionMark}} </p>
+                </div>
+                <hr>
+                <div>
+                  <p style="font-size: 18px ;margin: 10px ;">APP ID :{{vm.app.appId}} </p>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div style="height: 160px;text-align:center;margin-top: 20px ">
+                  <a ui-sref="downloadApp({randomCode:vm.app.randomCode})">
+                    <img src="{{vm.app.appIcon}}" height="125px" width="125px"
+                         style='border-radius:24px;border:1px #CCCCCC solid;'>
+                  </a>
+
+                  <p style="text-align: center;margin-bottom: 0px;">
+                    <a style="color:#56bc94;" ui-sref="downloadApp({randomCode:vm.app.randomCode})">查看应用</a>
+                  </p>
+                </div>
+
+              </div>
+              <div class="col-md-2">
+                <div style="height: 160px;text-align:center;margin-top: 20px ">
+                  <img src="{{vm.app.qrCode}}" height="125px" width="125px" style='border:1px #CCCCCC solid;'>
+
+                  <p style="text-align: center;margin-bottom: 0px;">扫描二维码下载</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="headline">
+              <h3>版本信息</h3>
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>操作</th>
+                <th>版本</th>
+                <th>下载次数</th>
+                <th>大小</th>
+                <th>最新版本</th>
+                <th>更新时间</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr ng-repeat="appVersion in vm.appVersions">
+                <td>
+                  <a><i class="fa fa-desktop text-navy"
+                          ui-sref="downloadApp({randomName:appVersion.randomName})">查看</i></a>
+                  <!--<a href="http://qiniu-app-cdn.pgyer.com/b574d9ff4555cbe5e1a11186daa08b6f.ipa?e=1476778815&amp;attname=%E5%B1%B1%E9%B9%B0%E7%BA%B8%E4%B8%9A.ipa&amp;token=6fYeQ7_TVB5L0QSzosNFfw2HU8eJhAirMF5VxV9G:L8Nm9pTKNeLqchPa08y0dsnctho="><i class="fa fa-download text-warning">下载</i></a>-->
+                  <a ng-click="vm.downLoadApp(appVersion.appFile,appVersion)"><i class="fa fa-download text-warning">下载</i></a>
+                </td>
+                <td>{{appVersion.versionMark}}</td>
+                <td>{{appVersion.downloadNum}}</td>
+                <td>{{appVersion.appSize}}</td>
+                <td>{{appVersion.enableNew == 'Y'? '是':'否'}}</td>
+                <td>{{appVersion.uploadingDate}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

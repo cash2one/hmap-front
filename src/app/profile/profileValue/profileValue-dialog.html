@@ -1,0 +1,56 @@
+<form name="addForm" role="form" novalidate ng-submit="vm.save()">
+
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">编辑或新增维护</h4>
+  </div>
+  <div class="modal-body">
+    <!--<div class="form-group" ng-show="vm.code.codeId">-->
+    <!--<label >ID</label>-->
+    <!--<input type="text" class="form-control"-->
+    <!--ng-model="vm.code.codeId" readonly/>-->
+    <!--</div>-->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_valueId">层级</label>
+          <select class="form-control" ng-model="vm.profileValue.levelId" name="valueId" id="field_valueId" ng-mouseleave="vm.loadValue()">
+            <option value="10">全局</option>
+            <option value="20">角色</option>
+            <option value="30">用户</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_levelValue">层级值</label>
+          <select class="form-control" ng-model="vm.profileValue.levelValue" name="levelValue" id="field_levelValue">
+            <option ng-repeat="x in vm.levels" value="{{x.levelValue}}">{{x.levelName}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="field_profileValue">配置值</label>
+          <input type="text" class="form-control" name="profileValue" id="field_profileValue"
+                 ng-model="vm.profileValue.profileValue" required
+            />
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>

@@ -1,13 +1,25 @@
 <div class="ibox-content">
-  <div class="row">
-    <h2>选择资源</h2>
-    <br/>
-    <button type="button" class="btn btn-primary"  ng-click="vm.save()">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>保存</span>
-    </button>
-    <button type="button" class="btn btn-primary"  ng-click="vm.clear()">
-      <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
-    </button>
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">选择资源</h4>
+  </div>
+  <div class="modal-body">
+  <form>
+    <div class="row">
+    <div class="col-md-6">
+      <label class="col-md-6 control-label" style="padding-top:5px;">名称：</label>
+      <div class="col-md-6 input-group date" >
+        <input type="text"  ng-model="vm.searchResource.name" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <input type="submit" class="btn btn-w-m btn-primary" value="查询" ng-click="vm.search()"/>
+    </div>
+  </div>
+  </form>
+    <div class="row">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -36,6 +48,19 @@
                       total-items="vm.totalItems"
                       ng-model="vm.page"
                       ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+    </div>
+  <div class="modal-footer">
+    <div class="row">
+      <button type="button" class="btn btn-primary" ng-click="vm.save()">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 确定</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+      </button>
+      <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
     </div>
   </div>
 </div>

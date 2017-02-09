@@ -1,11 +1,13 @@
 
  {
    "BaseConfig": {
-     "url": "http://10.211.110.174/wecorp",
+     "url":"http://mobile-app.hand-china.com/hms_downloadbe",
+     "debugEnable":false,
      "backUrls": [
        "/api",
        "/oauth/token",
-       "/metrics"
+       "/metrics",
+       "/appDownload"
      ],
      "authenticatedUrls": [
        "/api",

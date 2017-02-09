@@ -7,9 +7,9 @@
     angular.module('hmapFront')
         .factory('EditLineService', EditLineService);
 
-    EditLineService.$inject = ['$http'];
+    EditLineService.$inject = ['$resource'];
 
-    function EditLineService($http) {
+    function EditLineService($resource) {
 
         var service = {
             updateLine: updateLine,
@@ -17,32 +17,19 @@
         };
         return service;
 
-        function getLine(lineId) {
+        function getLine() {
             var resourceUrl = '/api/queryLine';
-            return $http.post(resourceUrl, {lineId: lineId}, {
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                }
-            }).then(function (response) {
-                console.log("queryLine接口", angular.toJson(response));
-                return response.data;
-            });
+          return $resource(resourceUrl, {}, {
+            'get': {method: 'POST'}
+          });
 
         }
 
-        function updateLine(newLine) {
+        function updateLine() {
             var resourceUrl = '/api/updateLine';
-            var data = newLine;
-            console.log("url=" + angular.toJson(data));
-
-            return $http.post(resourceUrl, data, {
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                }
-            }).then(function (response) {
-                console.log("addLine接口", angular.toJson(response));
-                return response.data;
-            });
+          return $resource(resourceUrl, {}, {
+            'update': {method: 'POST'}
+          });
 
         }
 

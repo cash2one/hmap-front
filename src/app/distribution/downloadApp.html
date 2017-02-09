@@ -1,0 +1,50 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="row">
+      <alert-error></alert-error>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>应用下载</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="widget-body">
+          <div class="container" style="margin-top:20px">
+            <ul class="pull-left breadcrumb">
+              <li><p style="font-size: 20px ;color: rgba(61, 82, 90, 0.75)">{{vm.downloadApp.appName}}</p></li>
+              <li>版本:{{vm.downloadApp.lastestVersion}}</li>
+              <li>大小:{{vm.downloadApp.appSize}}</li>
+              <li>时间:{{vm.downloadApp.uploadingDate}}</li>
+            </ul>
+          </div>
+
+          <hr style="margin:0">
+
+          <div style="text-align:center;margin-top:30px;">
+            <img ngf-src="vm.downloadApp.appIcon" height="125px"
+                 width="125px" style='border-radius:30px;border:1px #CCCCCC solid;'/>
+          </div>
+
+          <div style="text-align:center;margin:20px 0 10px">
+            <button type="button" class="btn btn-lg" style="background-color: #4096B2;border-color: #4096B2;color: #FFFFFF;" ng-click="vm.downLoad()"><i class="glyphicon glyphicon-cloud-download"></i>&nbsp下载安装</button>
+          </div>
+
+          <div style="text-align:center;">
+            <span class="label" style="background-color: #43C2EB;color:#FFFFFF;">适用于{{vm.downloadApp.appPlatform}}设备</span>
+          </div>
+
+          <div style="margin:0 20px">
+            <hr style=" height:2px;border:none;border-top:2px dotted #CCCCCC; max-width:1200px">
+          </div>
+
+          <div style="text-align:center;">
+            或者用手机扫描下面的二维码安装
+            <br />
+            <br />
+            <img ngf-src="vm.downloadApp.qrCode" style="width:200px; height:200px;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

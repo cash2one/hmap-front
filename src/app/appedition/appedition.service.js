@@ -2,12 +2,12 @@
   'use strict';
   angular
     .module('hmapFront')
-    .factory('Appedition', Appedition);
+    .factory('AppEdition', AppEdition);
 
-  Appedition.$inject = ['$resource'];
+  AppEdition.$inject = ['$resource'];
 
-  function Appedition ($resource) {
-    var resourceUrl = '/api/appeditionApp/:id';
+  function AppEdition ($resource) {
+    var resourceUrl = '/api/appEditionApp/:id';
 
     return $resource(resourceUrl, {}, {
       'query': { method: 'GET',isArray: false},

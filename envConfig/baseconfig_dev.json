@@ -1,11 +1,13 @@
-
- {
+{
    "BaseConfig": {
-     "url": "http://10.211.110.174/wecorp",
+     "version":"1.0.1-SNAPSHOT",
+     "url":"http://wechat.hand-china.com/zzy",
+     "debugEnable":true,
      "backUrls": [
        "/api",
        "/oauth/token",
-       "/metrics"
+       "/metrics",
+       "/appDownload"
      ],
      "authenticatedUrls": [
        "/api",

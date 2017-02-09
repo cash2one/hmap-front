@@ -45,93 +45,102 @@
           <div class="form-group">
             <label class="col-md-4 control-label">功能描述</label>
 
-            <div class="col-md-6"><input type="text" ng-model="vm.function.functionDescription" class="form-control"/>
+            <div class="col-md-8"><input type="text" ng-model="vm.function.functionDescription" class="form-control"/>
             </div>
+
           </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-md-6" ng-if="vm.editOrCreate=='Edit'">
           <div class="form-group">
+
             <label class="col-md-4 control-label">父级功能</label>
 
-            <div class="col-md-6"><input type="text" ng-model="vm.function.parentFunctionName" class="form-control"/>
+            <div class="col-md-8">
+              <div class="input-group">
+                <input type="text" ng-model="vm.function.parentFunctionName" class="form-control" readOnly="true" />
+
+              <span class="input-group-btn"><button type="button" ui-sref="function.parent"
+                                                    class="btn btn-primary glyphicon glyphicon-search"></button></span>
+              </div>
             </div>
           </div>
-        </div>
+          </div>
       </div>
+          <p></p>
+
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+              <div class="form-group" ng-if="vm.editOrCreate=='Edit'">
+                <label class="col-md-4 control-label">入口页面</label>
+
+                <div class="col-md-8">
+                  <div class="input-group">
+                    <input type="text" ng-model="vm.function.resourceName" class="form-control" readOnly="true"/>
+                    <span class="input-group-btn"><button type="button" ui-sref="function.entry"
+                                                    class="btn btn-primary glyphicon glyphicon-search"></button></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
       <p></p>
 
+      <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">保存</button>
+    </div>
+    <br/><br/>
+
+    <div class="ibox-content" ng-if="vm.editOrCreate=='Edit'">
+      <div class="row"><h2><span>功能资源</span></h2></div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-md-4 control-label">入口页面</label>
-            <div class="col-md-6">
-              <input type="text" ng-model="vm.function.resourceName" class="form-control"/>
-            </div>
-            <div class="col-md-2">
+        <button type="button" class="btn btn-primary" ui-sref="function.addResource({id:vm.function.functionId})">
+          添加
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="vm.saveFunctionResource()">
+          保存
+        </button>
+        <button type="button" class="btn btn-danger" ng-click="vm.deleteFunctionResource()">
+          删除
+        </button>
+        <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+      </div>
 
-              <button type="button" class="btn btn-primary glyphicon glyphicon-search"></button>
-
-            </div>
-          </div>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th><input type="checkbox" ng-click="vm.toggleAll()" ng-model="vm.isAllSelected"></th>
+              <th>ID</th>
+              <th>名称</th>
+              <th>URL</th>
+              <th>类型</th>
+              <th>描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="resource in vm.function.resources|filter:vm.isNotDelete">
+              <td><input type="checkbox" ng-model="resource.deleteFlag" ng-true-value="'Y'" ng-false-value="'N'"/></td>
+              <td>{{resource.resourceId}}</a></td>
+              <td>{{resource.name}}</a></td>
+              <td>{{resource.url}}</td>
+              <td>{{resource.type}}</td>
+              <td>{{resource.description}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
-
-  </div>
-  <p></p>
-
-  <p></p>
-  <button type="button"
-          ui-sref="function"
-          class="btn btn-info">
-    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> 后退</span>
-  </button>
-  <button type="button" class="btn btn-primary" ng-click="vm.saveOrUpdate()">
-    <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
-  </button>
-</div>
-<br/><br/>
-
-<div class="ibox-content">
-  <div class="row"><h2><span>功能资源</span></h2></div>
-  <div class="row">
-    <button type="button" class="btn btn-primary" ui-sref="function.addResource({id:vm.function.functionId})">
-      <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>添加</span>
-    </button>
-    <button type="button" class="btn btn-primary" ng-click="vm.saveFunctionResource()">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 保存</span>
-    </button>
-    <button type="button" class="btn btn-danger" ng-click="vm.deleteFunctionResource()">
-      <span class="glyphicon glyphicon-trash"></span>&nbsp;<span> 删除</span>
-    </button>
-    <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
-  </div>
-
-  <div class="row">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th><input type="checkbox" ng-click="vm.toggleAll()" ng-model="vm.isAllSelected"></th>
-          <th>ID</th>
-          <th>名称</th>
-          <th>URL</th>
-          <th>类型</th>
-          <th>描述</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="resource in vm.function.resources|filter:vm.isNotDelete">
-          <td><input type="checkbox" ng-model="resource.deleteFlag" ng-true-value="'Y'" ng-false-value="'N'"/></td>
-          <td>{{resource.resourceId}}</a></td>
-          <td>{{resource.name}}</a></td>
-          <td>{{resource.type}}</td>
-          <td>{{resource.url}}</td>
-          <td>{{resource.description}}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="text-center">
+        <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+        <uib-pagination class="pagination-sm"
+                        total-items="vm.totalItems"
+                        ng-model="vm.page"
+                        ng-change="vm.pageChanged()"></uib-pagination>
+      </div>
     </div>
   </div>
-</div>
-</div>

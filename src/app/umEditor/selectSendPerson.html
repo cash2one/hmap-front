@@ -1,0 +1,88 @@
+<style>
+  .modal_body{
+    padding:0;
+  }
+</style>
+
+<form>
+<div class="modal_body">
+  <div class="row">
+    <div class="col-lg-3">
+       <div class=" corp-tree">
+              <uib-tabset active="activeForm">
+                <uib-tab index="0" heading="组织架构" select="vm.selectOrg()">
+                  <div js-tree="vm.treeConfig" ng-model="vm.jsTreeData" tree="vm.treeInstance"
+                       tree-events-obj="vm.treeEventsObj"></div>
+                </uib-tab>
+              </uib-tabset>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="content" ng-show="vm.isOrgShow">
+          <div id="org-views" ui-view="" class="ng-scope">
+            <fieldset class="ng-scope">
+              <h2>{{vm.currentDept.deptName}}</h2>
+            </fieldset>
+          </div>
+          <div class="">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th width="10%">操作</th>
+                <th width="20%">姓名</th>
+                <th width="20%">账号</th>
+                <th width="20%">手机</th>
+                <th width="20%">邮箱</th>
+                <th width="10%">状态</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr ng-show="vm.isSpinnerShow">
+                <td colspan="6">
+                  <div class="spiner-example">
+                    <div class="sk-spinner sk-spinner-pulse"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr ng-repeat="staff in vm.staffs track by staff.userId" ng-show="vm.isStaffShow">
+                <td>
+
+                  <input type="checkbox" ng-checked="vm.isChecked(staff.userName)"
+                         ng-click="vm.updateSelection($event,staff.userName)" />
+                </td>
+                <td>{{staff.userName}}</td>
+                <td>{{staff.accountNumber}}</td>
+                <td>{{staff.mobile}}</td>
+                <td>{{staff.email}}</td>
+                <td>{{staff.empStatus}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center">
+            <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+            <uib-pagination class="pagination-sm"
+                            total-items="vm.totalItems"
+                            ng-model="vm.page"
+                            ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+          <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;取消
+        </button>
+        <button type="submit" ng-click="vm.save()" class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span>&nbsp;发送
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>

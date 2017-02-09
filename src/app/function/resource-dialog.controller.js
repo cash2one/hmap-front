@@ -11,13 +11,16 @@
     .module('hmapFront')
     .controller('ResourceDialogController', ResourceDialogController);
 
-  ResourceDialogController.$inject = ['Function', 'paginationConstants', 'entity', '$uibModalInstance','$state'];
+  ResourceDialogController.$inject = ['Function', 'paginationConstants', 'entity', '$uibModalInstance','$state','toastr'];
 
-  function ResourceDialogController(Function, paginationConstants, entity, $uibModalInstance,$state) {
+  function ResourceDialogController(Function, paginationConstants, entity, $uibModalInstance,$state,toastr) {
     var vm = this;
-    vm.page = 1;
+
     vm.function = entity;
     vm.function.resources=[];
+    vm.searchResource=[];
+    vm.page = 1;
+    vm.search=search;
     vm.itemsPerPage = paginationConstants.itemsPerPage;
     vm.totalItems = null;
     vm.isAllSelected = false;
@@ -38,18 +41,24 @@
       }, onSuccess, onError);
     }
 
+    function search(){
+      vm.searchResource.page=vm.page;
+      vm.searchResource.pagesize=paginationConstants.itemsPerPage;
+      Function.queryResource().query(vm.searchResource,onSuccess,onError);
+    }
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
+      //console.log('onSuccess');
+      //console.log(data);
       vm.resources = data.rows;
       vm.totalItems = data.total;
     }
-    function onAddResourceSuccess(data, headers) {
-      vm.clear();
-      $state.go('function.detail');
+    function onAddResourceSuccess(data) {
+      toastr.success('保存成功！','信息提示');
+      $uibModalInstance.close(data);
     }
+
     function onError(error) {
-      console.log('error');
+      //console.log('error');
 
     }
 
@@ -60,7 +69,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' + vm.page);
+      //console.log('Page changed to: ' + vm.page);
       loadAll();
     };
     function clear() {

@@ -10,27 +10,33 @@
   AddHeaderService.$inject = ['$resource', '$http'];
 
   function AddHeaderService($resource, $http) {
-
     var service = {
-      addHeader: addHeader
+      query : query,
+      querySystemType : querySystemType
     };
     return service;
 
-    function addHeader(newHeader) {
+    function query() {
       var resourceUrl = '/api/addHeader';
-      var data = newHeader;
-
-      return $http.post(resourceUrl, data, {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        }
-      }).then(function (response) {
-        console.log("测试post接口", angular.toJson(response));
-        return response.data;
+      return $resource(resourceUrl, {}, {
+        'query': {method: 'POST', isArray: false}
       });
-
     }
 
+    function querySystemType(){
+      var resourceUrl = '/api/queryAllHeader';
+      return $resource(resourceUrl, {}, {
+        'get': {
+          method: 'GET',
+          transformResponse: function (data) {
+            if (data) {
+              data = angular.fromJson(data);
+            }
+            return data;
+          }
+        }
+      });
+    }
 
   }
 

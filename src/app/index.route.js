@@ -11,9 +11,6 @@
       .state('app', {
         abstract: true,
         url: "/app",
-        //templateUrl: "app/layouts/content.html",
-        //controller: 'MainController',
-        //controllerAs: 'main',
         views:{
           'content@':{
             templateUrl: 'app/layouts/content.html'

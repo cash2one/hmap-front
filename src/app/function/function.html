@@ -6,7 +6,14 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-4 no-padding-left">
+        <div class="col-lg-6">
+          <label class="col-lg-3 control-label">功能名称</label>
+          <div class="col-lg-6">
+            <input type="text" id="searchFunctioName" class="form-control" ng-model="vm.functionSearch.functionName">
+          </div>
+          <button class="col-lg-3 btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadByName()">搜索</button>
+        </div>
+        <div class="col-lg-6">
           <button class="btn btn-primary" ui-sref="function.new">
             <span class="glyphicon glyphicon-plus"></span>
             新建功能

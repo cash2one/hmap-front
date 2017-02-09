@@ -1,0 +1,75 @@
+<script>
+  $(function(){
+    $("#uploadApp").change(function () {
+      var appPath = $("#uploadApp").val();
+      var fileName = getFileName(appPath);
+      $("#appFilePath").val(fileName);
+    });
+  });
+  function getFileName(o){
+    var pos=o.lastIndexOf("\\");
+    return o.substring(pos+1);
+  }
+</script>
+<form name="addVersionForm" role="form" novalidate ng-submit="vm.saveAddVersion()">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">新增版本</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="versionMark">版本号</label>
+          <input type="text" class="form-control" name="versionMark" id="versionMark"
+                 ng-model="vm.addAppVersion.versionMark"
+            />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="appFilePath">应用上传</label>
+
+          <div>
+            <div style="float: left">
+              <input type="text" id="appFilePath" readonly="readonly" class="form-control"
+                     style="height:33px;width:300px;border:1px solid #E5E6E7;"/>
+            </div>
+            <a href="javascript:void(0);" class="input btn-primary">
+              浏览
+              <input type="file" id="uploadApp" class="uploadFile" ng-model="vm.appFile" ngf-select name="appFile">
+            </a>
+          </div>
+          <div ng-class="{progress: true, 'progress-striped': vm.striped}" ng-show="vm.versionProgressShow"
+               style="width: 300px;">
+            <div ng-class="['progress-bar', vm.style]" ng-style="{width: vm.progressPercentage + '%'}">
+              <div>{{vm.progressPercentage}}%</div>
+            </div>
+          </div>
+          <div ng-show="vm.varMayAppVersion" class="btn btn-primary"
+               style="margin-top: 0.5em"
+               ng-click="vm.uploadApp(vm.appFile)">
+            <div>开始上传</div>
+          </div>
+          <div ng-show="vm.varMaysAppVersion">
+            <img src="../assets/images/check.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+    </button>
+    <button type="submit" ng-disabled="addVersionForm.$invalid || vm.isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+    </button>
+  </div>
+</form>
+

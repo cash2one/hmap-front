@@ -1,0 +1,151 @@
+<style>
+  .font {
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    color: #222;
+    font-size: 14px;
+    font-weight: 400;
+  }
+</style>
+<div class="row">
+  <alert-error></alert-error>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>调试平台</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a>
+              </li>
+              <li><a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <!--<div class="hr-line-dashed"></div>-->
+        <div class="ibox-content" style="font-size: 14px;">
+          <form class="form-horizontal" name="editForm" role="form" novalidate ng-submit="vm.sendMessage()">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label">推送类型</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" ng-model="vm.pushMethod" required>
+                      <option value="jPush">Jpush</option>
+                      <option value="sms">短信</option>
+                      <option value="email">邮件</option>
+                    </select>
+                    <!--<lookup-select lookup-value="vm.pushMethod" lookup-type="HMS.MESSAGE.TYPE"></lookup-select>-->
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label">推送对象</label>
+                  <div class="col-lg-8" ng-if="vm.pushMethod=='jPush'">
+                   <!-- <label class="radio-inline">
+                      <input type="radio" name="jpushType" ng-model="vm.jpushType" value="all"> 所有人
+                    </label>-->
+                    <label class="radio-inline">
+                      <input type="radio" name="jpushType" ng-model="vm.jpushType" value="tag"> 设备标识
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="jpushType" ng-model="vm.jpushType" value="alias"> 设备别名
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="jpushType" ng-model="vm.jpushType" value="registration"> Registration ID
+                    </label>
+                  </div>
+                  <div class="col-lg-8" ng-if="vm.pushMethod!='jPush'">
+                    <input type="text" ng-model="vm.sendObject" required
+                           ng-attr-placeholder="{{vm.pushMethod=='sms'?'输入手机号码,以逗号分隔':
+                           vm.pushMethod=='email'?'输入邮箱,以逗号分隔':''}}" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+              <div class="row" ng-if="vm.pushMethod=='jPush'">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label"></label>
+                  <div class="col-lg-8">
+                       <div style="padding-top: 10px;" ng-if="vm.jpushType=='all'">将向应用所有的注册用户推送此消息</div>
+                        <div ng-if="vm.jpushType!='all'">
+                           <input type="text" style="margin-top: 10px;" ng-model="vm.sendObject"  required
+                                  ng-attr-placeholder="{{vm.jpushType=='tag'?'输入标签,以逗号分隔':
+                                  vm.jpushType=='alias'?'输入别名,以逗号分隔':vm.jpushType=='registration'?'输入Registration ID,以逗号分隔':''}}" class="form-control">
+                        </div>
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label">消息模板</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" ng-model="vm.messageTemplateIndex"  required>
+                      <option ng-repeat="template in vm.templates[vm.pushMethod]" value="{{$index}}">{{template.title}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label">请求内容</label>
+                  <template-content content="{{vm.templates[vm.pushMethod][vm.messageTemplateIndex].content}}"
+                                    content-var="vm.contentVar"></template-content>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <label class="col-lg-4 control-label">响应内容</label>
+                  <div class="col-lg-8">
+                    <textarea  ng-model="vm.retMsg"  rows="10" cols="20" class="form-control" ng-disabled="true"></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="col-lg-8 pull-right m-t-n-xs">
+                    <button type="submit" ng-disabled="editForm.$invalid || vm.isSending" class="btn btn-w-m btn-info">发送</button>
+                  </div>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+</div>
+

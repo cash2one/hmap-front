@@ -1,0 +1,103 @@
+<div class="ibox-content">
+  <div class="modal-header">选择范围</div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+
+      <ui-select multiple sortable="true" ng-model="vm.selectedData" theme="bootstrap" class="form-control m-b" title="输入搜索条件" on-select="vm.onSelectCallback($item, $model)"on-remove="vm.onRemoveCallback($item, $model)" reset-search-input="true">
+        <ui-select-match><i class="{{$item.dataIcon}}"></i> {{$item.dataValue}}</ui-select-match>
+        <ui-select-choices repeat="data in vm.searchData" refresh="vm.permissionAutocomplete($select.search)" refresh-delay="500">
+          <i class="{{data.dataIcon}}"></i> {{data.dataValue}}
+        </ui-select-choices>
+
+      </ui-select>
+
+      </div>
+    </div>
+    <div class="row"></div>
+    <div class="row">
+      <uib-tabset active="activeForm">
+
+        <uib-tab index="0" heading="部门" select="vm.selectOrg()">
+          <div class="row corp-tree">
+            <div class="col-md-12"> <div js-tree="vm.treeConfig" ng-model="vm.jsTreeData" tree="vm.treeInstance"
+                                         tree-events-obj="vm.deptTreeEventsObj"></div></div>
+          </div>
+
+        </uib-tab>
+        <uib-tab index="1" heading="标签" select="vm.selectTag()">
+          <div class="row corp-tree">
+            <div class="col-md-12">
+              <div class="form-group m-t">
+                <h3>我的标签</h3>
+                <div class="table-responsive">
+                  <table class="table table table-hover table-striped">
+                    <tbody>
+                    <tr ng-repeat="tag in vm.allTransferedTags">
+                      <td width="80%"><a href="" ng-click="vm.tagDetail()"> <i class="fa fa-tag"></i>{{tag.dataValue}}</a></td>
+                      <td width="20%" align="right"><input type="checkbox" ng-click="vm.checkedData(tag,$event)"  ng-model="tag.checked" ng-true-value="'Y'" ng-false-value="'N'"/> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+        <uib-tab index="2" heading="成员" select="vm.selectDetail()">
+          <div class="row">
+            <div class="col-md-5 corp-tree"><div js-tree="vm.detailTreeConfig" ng-model="vm.jsMemberTreeData" tree="vm.memberTreetailInstance"
+                                       tree-events-obj="vm.memberTreeEventsObj"></div></div>
+            <div class="col-md-7">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                  <tr ng-show="vm.isSpinnerShow">
+                    <td colspan="6">
+                      <div class="spiner-example">
+                        <div class="sk-spinner sk-spinner-pulse"></div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr ng-repeat="staff in vm.allTransferedStaffs track by staff.dataId" ng-show="vm.isStaffShow">
+
+                    <td align="left" width="80%">{{staff.dataValue}}</td>
+                    <td align="right" width="20%">
+                      <input type="checkbox" ng-click="vm.checkedData(staff,$event)" ng-model="staff.checked" ng-true-value="'Y'" ng-false-value="'N'"/>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-center m-b">
+                <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+                <uib-pagination class="pagination-sm"
+                                total-items="vm.totalItems"
+                                ng-model="vm.page"
+                                ng-change="vm.pageChanged()"></uib-pagination>
+              </div>
+            </div>
+          </div>
+
+        </uib-tab>
+      </uib-tabset>
+
+    </div>
+
+    <div class="modal-footer">
+      <div class="row">
+        <button type="button" class="btn btn-primary" ng-click="vm.close()">
+          <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 确定</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+          <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+        </button>
+        <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+      </div>
+    </div>
+  </div>
+</div>

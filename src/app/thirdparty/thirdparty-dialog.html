@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_appName">App Name</label>
+          <label class="control-label" for="field_appName">应用名称</label>
           <input type="text" class="form-control" name="appName" id="field_appName"
                  ng-model="vm.thirdparty.appName"
             />
@@ -25,7 +25,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_appCode">App Code</label>
+          <label class="control-label" for="field_appCode">应用代码</label>
           <input type="text" class="form-control" name="appCode" id="field_appCode"
                  ng-model="vm.thirdparty.appCode"
             />
@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_appDesc">App Desc</label>
+          <label class="control-label" for="field_appDesc">应用描述</label>
           <input type="text" class="form-control" name="appDesc" id="field_appDesc"
                  ng-model="vm.thirdparty.appDesc"
             />
@@ -43,7 +43,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_appIcon">App Icon</label>
+          <label class="control-label" for="field_appIcon">应用ICON</label>
           <input type="text" class="form-control" name="appIcon" id="field_appIcon"
                  ng-model="vm.thirdparty.appIcon"
             />
@@ -75,7 +75,7 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_expiredDate">Expired Date</label>
+          <label class="control-label" for="field_expiredDate">过期时间</label>
 
           <p class="input-group">
             <input type="text" class="form-control" uib-datepicker-popup name="expiredDate" id="field_expiredDate"
@@ -90,7 +90,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_appHomepage">App HomePage</label>
+          <label class="control-label" for="field_appHomepage">应用首页</label>
           <input type="text" class="form-control" name="appName" id="field_appHomepage"
                  ng-model="vm.thirdparty.appHomepage"/>
 
@@ -101,7 +101,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_freeFlag">Free Flag</label>
+          <label class="control-label" for="field_freeFlag">是否免费</label>
           <input type="checkbox"  name="freeFlag" id="field_freeFlag"
                  ng-model="vm.thirdparty.freeFlag"  ng-true-value="'Y'" ng-false-value="'N'"
             />
@@ -109,7 +109,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label" for="field_enableFlag">Enable Flag</label>
+          <label class="control-label" for="field_enableFlag">是否有效</label>
           <input type="checkbox"  name="enableFlag" id="field_enableFlag"
                  ng-model="vm.thirdparty.enableFlag" ng-true-value="'Y'" ng-false-value="'N'"
             />
@@ -121,10 +121,10 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Cancel
+      <span class="glyphicon glyphicon-ban-circle"></span>取消
     </button>
     <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;Save
+      <span class="glyphicon glyphicon-save"></span>保存
     </button>
   </div>
 </form>

@@ -1,0 +1,251 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox-title">
+      <h2>年会信息编辑</h2>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">年会名称</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="meetingTitle" name="meetingTitle" ng-model="vm.meeting.hmsAnnualMeeting.meetingTitle"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">主办城市</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="meetingCity" name="meetingCity" ng-model="vm.meeting.hmsAnnualMeeting.meetingCity"
+                         class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">详细地址</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="meetingAddr" name="meetingAddr" ng-model="vm.meeting.hmsAnnualMeeting.meetingAddr"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">年会时间</label>
+
+                <div class="col-lg-8 input-group">
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup name="meetingDate" id="meetingDate"
+                           ng-model="vm.meeting.hmsAnnualMeeting.meetingDate" datepicker-options="vm.dateOptions" is-open="vm.isOpen"/>
+
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="vm.popupOpen()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">地点经度</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="meetingAddrLong" name="meetingAddrLong" ng-model="vm.meeting.hmsAnnualMeeting.meetingAddrLong"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">地点维度</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="meetingAddrLati" name="meetingAddrLati" ng-model="vm.meeting.hmsAnnualMeeting.meetingAddrLati"
+                         class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">总桌数</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="number" id="meetingTable" name="meetingTable" ng-model="vm.meeting.hmsAnnualMeeting.meetingTable"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">每桌人数</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="number" id="tableSeat" name="tableSeat" ng-model="vm.meeting.hmsAnnualMeeting.tableSeat"
+                         class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">每排桌数</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="number" id="colTable" name="colTable" ng-model="vm.meeting.hmsAnnualMeeting.colTable"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">排列方式</label>
+
+                <div class="col-lg-8 input-group">
+                  <div class="input-group" style="width:100%">
+                    <input readonly class="form-control" ng-model="vm.meeting.hmsAnnualMeeting.arrangement" type="text">
+
+                    <div class="input-group-btn">
+                      <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">选择<span
+                        class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu pull-right">
+                        <li ng-repeat="x in vm.arrangementType"><a
+                          ng-click="vm.meeting.hmsAnnualMeeting.arrangement=x.code">{{x.name}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">增长阈值</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="thresholdPercentage" name="thresholdPercentage"
+                         ng-model="vm.meeting.hmsAnnualMeeting.thresholdPercentage" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">增长比率</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="increasePercentage" name="increasePercentage"
+                         ng-model="vm.meeting.hmsAnnualMeeting.increasePercentage" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">logoURL</label>
+
+                <div class="col-lg-8 input-group">
+                  <input type="text" id="logo" name="logo"
+                         ng-model="vm.meeting.hmsAnnualMeeting.logo" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">需要自动增长</label>
+
+                <div class="col-lg-8 input-group">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <input type="checkbox" id="needAdd" name="needSplit" ng-model="vm.meeting.hmsAnnualMeeting.attribute1"
+                               style="outline:none">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">需要划分区域</label>
+
+                <div class="col-lg-8 input-group">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <input type="checkbox" id="needSplit" name="needSplit" ng-model="vm.meeting.hmsAnnualMeeting.needSplit"
+                               style="outline:none">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group" ng-if="vm.meeting.hmsAnnualMeeting.needSplit">
+                        <button type="button" class="btn btn-primary" ng-click="vm.addSplit()">增加区域</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div ng-if="vm.meeting.hmsAnnualMeeting.needSplit">
+            <div class="form-group" ng-repeat="split in vm.meeting.splitList">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="col-lg-3">
+                    <label class="control-label">区域</label>
+                  </div>
+                  <div class="col-lg-8 input-group">
+                    <input type="text" class="form-control" ng-model="split.splitName">
+                    <span class="input-group-addon">区</span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-lg-3 control-label">桌位</label>
+                  <div class="col-lg-8 form-group">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">从</span>
+                          <input type="number" class="form-control" ng-model="split.startNum">
+                          <span class="input-group-addon">桌</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">到</span>
+                          <input type="number" class="form-control" ng-model="split.endNum">
+                          <span class="input-group-addon">桌</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="text-center">
+                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-save"></span>&nbsp;保存
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                  <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;返回
+                </button>
+                <button type="button" ng-if="vm.isSaving" class="btn btn-primary" ng-click="vm.creatTables()">
+                  <span class="glyphicon glyphicon-import"></span>&nbsp;生成桌数据
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

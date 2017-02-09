@@ -20,47 +20,36 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>应用名称</th>
-        <th>应用描述</th>
-        <th>应用代码</th>
-        <th>应用图标</th>
-        <th>Key</th>
-        <th>Secret</th>
-        <th>是否付费</th>
-        <th>过期时间</th>
-        <th>是否有效</th>
-        <th>主页</th>
-        <th>操作</th>
+        <th style="width: 10%;">操作</th>
+        <th style="width: 10%;">应用名称</th>
+        <th style="width: 10%;">应用描述</th>
+        <th style="width: 10%;">应用代码</th>
+        <th style="width: 10%;">应用图标</th>
+        <th style="width: 10%;">Key</th>
+        <th style="width: 10%;">是否付费</th>
+        <th style="width: 10%;">过期时间</th>
+        <th style="width: 10%;">是否有效</th>
+        <th style="width: 10%;">主页</th>
+
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat="thirdparty in vm.thirdpartys track by thirdparty.id">
+        <td class="text-left">
+          <div class="btn-group flex-btn-group-container">
+            <a ui-sref="thirdparty.edit({id:thirdparty.id})"><i class="fa fa-edit text-navy">编辑</i></a>
+          </div>
+        </td>
         <td><a ui-sref="thirdparty-detail({id:thirdparty.id})">{{thirdparty.appName}}</a></td>
         <td>{{thirdparty.appDesc}}</td>
         <td>{{thirdparty.appCode}}</td>
         <td>{{thirdparty.appIcon}}</td>
         <td>{{thirdparty.appKey}}</td>
-        <td>{{thirdparty.appSecret}}</td>
         <td>{{thirdparty.freeFlag}}</td>
         <td>{{thirdparty.expiredDate}}</td>
         <td>{{thirdparty.enableFlag}}</td>
         <td>{{thirdparty.appHomePage}}</td>
-        <td class="text-right">
-          <div class="btn-group flex-btn-group-container">
-            <button type="submit"
-                    ui-sref="thirdparty-detail({id:thirdparty.id})"
-                    class="btn btn-info btn-sm">
-              <span class="glyphicon glyphicon-eye-open"></span>
-              <span class="hidden-xs hidden-sm">查看</span>
-            </button>
-            <button type="submit"
-                    ui-sref="thirdparty.edit({id:thirdparty.id})"
-                    class="btn btn-primary btn-sm">
-              <span class="glyphicon glyphicon-pencil"></span>
-              <span class="hidden-xs hidden-sm">编辑</span>
-            </button>
-          </div>
-        </td>
+
       </tr>
       </tbody>
     </table>

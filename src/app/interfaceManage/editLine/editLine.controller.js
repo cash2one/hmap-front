@@ -3,52 +3,60 @@
  */
 
 (function () {
-    'use strict';
+  'use strict';
 
-    angular.module('hmapFront')
-        .controller('EditLineController', EditLineController);
+  angular.module('hmapFront')
+    .controller('EditLineController', EditLineController);
 
-    EditLineController.$inject = ['EditLineService', '$state', 'entity'];
+  EditLineController.$inject = ['EditLineService', '$state', 'entity'];
 
-    function EditLineController(EditLineService, $state, entity) {
-        var vm = this;
-        vm.line = entity;
-        vm.update = update;
-        vm.clear = clear;
+  function EditLineController(EditLineService, $state, entity) {
+    var vm = this;
+    vm.line = entity;
+    vm.update = update;
+    vm.clear = clear;
 
-        var lineId = vm.line.lineId;
-        getLine(lineId);
+    var lineId = vm.line.lineId;
+    getLine(lineId);
 
-        vm.flag = [
-            {code: "Y", name: "是"},
-            {code: "N", name: "否"}
-        ];
+    vm.flag = [
+      {code: "Y", name: "是"},
+      {code: "N", name: "否"}
+    ];
 
-        function getLine(lineId) {
-            return EditLineService.getLine(lineId)
-                .then(function (data) {
-                    console.log("Result=" + angular.toJson(data.rows));
-                    return vm.line = data.rows[0];
-                });
-        }
+    //根据lineId获取line
+    function getLine(lineId) {
+      EditLineService.getLine().get({lineId: lineId}, onSuccess, onError);
+    };
 
-        function update() {
-            return EditLineService.updateLine(vm.line)
-                .then(function (data) {
-                    vm.result = data;
-                    if (data.success) {
-                        return $state.go("line", {headerId: vm.line.headerId});
-                    }
-                });
+    function onSuccess(data, headers) {
+      vm.line = data.rows[0];
+    };
+    function onError(error) {
+      //console.log('get line error');
+    };
 
-        }
+    //修改
+    function update() {
+      EditLineService.updateLine().update(vm.line, updateSuccess, updateError);
+    };
+    function updateSuccess(data, headers) {
+      vm.result = data;
+      if (data.success) {
+        return $state.go("line", {headerId: vm.line.headerId});
+      }
+    };
+    function updateError(error) {
+      //console.log('update line error');
+    };
 
-        function clear() {
-            $state.go("line", {headerId: vm.line.headerId});
-        }
+
+    function clear() {
+      $state.go("line", {headerId: vm.line.headerId});
+    };
 
 
-    }
+  }
 
 
 })();

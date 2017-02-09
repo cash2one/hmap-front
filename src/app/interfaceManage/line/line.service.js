@@ -12,29 +12,22 @@
   function LineService($resource, $http) {
     var service = {
       getLines: getLines,
-      getHeaderByHeaderId:getHeaderByHeaderId
+      getLine: getLine,
+      insertLine:insertLine,
+      updateLine:updateLine
     };
     return service;
 
-
-    function getHeaderByHeaderId(header){
-      var resourceUrl = '/api/getHeaderByHeaderId';
-
-      var data = header;
-      console.log("header params:"+angular.toJson(data));
-
-      return $http.post(resourceUrl, data, {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        }
-      }).then(function (response) {
-        console.log("获取header接口", angular.toJson(response));
-        return response.data;
+    function getLine() {
+      var resourceUrl = '/api/queryLine';
+      return $resource(resourceUrl, {}, {
+        'get': {method: 'POST'}
       });
+
     }
 
     function getLines(line) {
-      console.log("line params:" + angular.toJson(line));
+      //console.log("line params:" + angular.toJson(line));
 
       var resourceUrl = '/api/getLinesByHeaderId';
 
@@ -43,11 +36,24 @@
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(function (response) {
-        console.log("获取Lines接口", angular.toJson(response));
+        //console.log("获取Lines接口", angular.toJson(response));
         return response.data;
       });
 
 
+    }
+
+    function updateLine() {
+      var resourceUrl = '/api/updateLine';
+      return $resource(resourceUrl, {}, {
+        'update': {method: 'POST'}
+      });
+    }
+    function insertLine(){
+      var resourceUrl = '/api/insertLine';
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST', isArray: false}
+      });
     }
 
   }

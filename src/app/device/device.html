@@ -1,0 +1,162 @@
+<div class="row wrapper border-bottom white-bg page-heading"><h2>设备管理</h2></div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+
+    <div class="col-lg-3">
+      <div class="widget style1 navy-bg">
+        <div class="row text-center">平台数</div>
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-android fa-3x"></i>
+            <span>{{vm.platform.android}}</span>
+          </div>
+          <div class="col-xs-offset-4 col-xs-4 text-center">
+            <i class="fa fa-apple fa-3x"></i>
+            <span>{{vm.platform.ios}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4">
+      <div class="widget style1 lazur-bg">
+        <div class="row text-center">用户数</div>
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <h2>5055</h2>
+            <span>总用户</span>
+          </div>
+          <div class="col-xs-3 text-center">
+            <h2>20</h2>
+            <span>已激活</span>
+          </div>
+          <div class="col-xs-5 text-center">
+            <h2>200000</h2>
+            <span>已授权</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3">
+      <div class="widget style1 yellow-bg">
+        <div class="row text-center">设备数</div>
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <h2>10</h2>
+            <span>在线</span>
+          </div>
+          <div class="col-xs-offset-4 col-xs-4 text-center">
+            <h2>200</h2>
+            <span>已激活</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>版本分布图</h5>
+        </div>
+        <div class="ibox-content">
+          <div>
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="vm.data" chart-labels="vm.labels" chart-series="vm.series" char-options="vm.barOptions" chart-dataset-override="vm.datasetOverride1"
+                    height="140" responsive=true> chart-series="series"
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title"><h5>设备状态</h5></div>
+        <div class="ibox-content">
+          <canvas id="pie" class="chart chart-pie"
+                  chart-data="vm.piedata" chart-labels="vm.pielabels" char-options="vm.pieoptions"
+                  chart-dataset-override="vm.datasetOverride2" height="140" responsive=true>
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ibox">
+    <div class="ibox-title">设备列表</div>
+    <div class="ibox-content">
+      <div class="row">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <label class="col-sm-2 col-xs-2 control-label">用户名</label>
+
+                <div class="col-sm-7 col-xs-7">
+                  <input type="text" id="searchUserName" class="form-control" ng-model="vm.foundByName">
+                </div>
+                <button class="col-sm-2 col-xs-2 btn btn-w-m btn-primary" type="button" id="searchBtn"
+                        ng-click="vm.loadByName()">
+                  搜索
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th style="width: 8%">品牌</th>
+              <th style="width: 5%;">型号</th>
+              <th style="width: 7%">操作系统</th>
+              <th style="width: 5%">操作系统版本</th>
+              <th style="width: 5%;">客户端版本</th>
+              <th style="width: 20%">用户名</th>
+              <th style="width: 10%">创建时间</th>
+              <th style="width: 20%">IME</th>
+              <th style="width: 5%">状态</th>
+              <th style="width: 15%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="device in vm.devices track by device.deviceId">
+              <td><i class="fa fa-android"></i>{{device.deviceBrand}}</td>
+              <td ng-bind="device.deviceType"></td>
+              <td ng-bind="device.operationSystem"></td>
+              <td ng-bind="device.operationSystemVersion"></td>
+              <td ng-bind="device.clientVersion"></td>
+              <td ng-bind="device.deviceUser"></td>
+              <td ng-bind="device.creationDate"></td>
+              <td><a ui-sref="device.detail({id:device.deviceId})">{{device.ime}}</a> </td>
+              <td><span ng-if="device.deviceFlag=='N'">不可用</span>  <span ng-if="device.deviceFlag!='N'">可用</span></td>
+              <td>
+                <a ng-if="device.deviceFlag=='Y'"
+                   ng-href="javascript:void(0)"
+                   ng-click="vm.changeFlag(device.deviceId)">注销</a>
+                <a ng-if="device.deviceFlag=='Y'"
+                   ng-href="javascript:void(0)"
+                   ng-click="vm.changeFlag(device.deviceId)">禁用</a>
+                <a ng-if="device.deviceFlag=='Y'"
+                   ng-href="javascript:void(0)"
+                   ng-click="vm.changeFlag(device.deviceId)">擦除</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+          <uib-pagination class="pagination-sm"
+                          total-items="vm.totalItems"
+                          ng-model="vm.page"
+                          ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

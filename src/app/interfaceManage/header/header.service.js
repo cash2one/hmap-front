@@ -6,32 +6,60 @@
   angular.module('hmapFront')
     .factory('HeaderService', HeaderService);
 
-  HeaderService.$inject = ['$http'];
+  HeaderService.$inject = ['$http', '$resource'];
 
-  function HeaderService($http) {
+  function HeaderService($http, $resource) {
 
     var service = {
-      getHeaders: getHeaders
+      queryAll: queryAll,
+      update: update,
+      add:add,
+      query:query,
+      syncMock:syncMock
     };
     return service;
 
-    function getHeaders(header) {
-      var resourceUrl = '/api/queryAllHeader';
-
-      console.log("header param:" + angular.toJson(header));
-
-      return $http.post(resourceUrl, header, {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
+    function queryAll() {
+    var resourceUrl = '/api/queryAllHeader';
+    return $resource(resourceUrl, {}, {
+      'query': {method: 'POST', isArray: false},
+      'get': {
+        method: 'GET',
+        transformResponse: function (data) {
+          if (data) {
+            data = angular.fromJson(data);
+          }
+          return data;
         }
-      }).then(function (response) {
-        return response.data;
+      }
+    });
+    }
+    function update() {
+      var resourceUrl = '/api/updateHeader';
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST', isArray: false}
       });
-
-
     }
 
+    function add() {
+      var resourceUrl = '/api/addHeader';
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST', isArray: false}
+      });
+    }
 
+    function query(){
+      var resourceUrl = '/api/getHeaderByHeaderId';
+      return $resource(resourceUrl, {}, {
+        'query': {method: 'POST', isArray: false}
+      });
+    }
+    function syncMock(){
+      var resourceUrl = '/api/syncMockConfig';
+      return $resource(resourceUrl, {}, {
+        'save': {method: 'POST', isArray: false}
+      });
+    }
   }
 
 

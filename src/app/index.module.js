@@ -13,10 +13,25 @@
       'ngStorage',
       'ui.router',
       'ngCacheBuster',
-      'pascalprecht.translate',// Angular Translate
       'ui.bootstrap',
+      'ui.select',
       'ui.bootstrap.datetimepicker',
       'ngFileUpload',
-      'toastr']);
+      'ngJsTree',
+      'angular-loading-bar',
+      'ng.ueditor',
+      'toastr',
+      'datatables',
+      'datatables.bootstrap',
+      'as.sortable',
+      'angular-ladda',
+      'ng-sweet-alert',
+      'chart.js'])
+      //.config(function (cfpLoadingBarProvider) {cfpLoadingBarProvider.includeSpinner = true;
+  .run(run);
 
+  run.$inject = ['stateHandler'];
+  function run(stateHandler) {
+    stateHandler.initialize();
+  }
 })();

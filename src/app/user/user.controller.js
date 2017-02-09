@@ -4,24 +4,34 @@
   angular
     .module('hmapFront')
     .controller('UserController', UserController);
-  UserController.$inject = ['$scope','$state','User','paginationConstants'];
+  UserController.$inject = ['$state','User','paginationConstants'];
   /** @ngInject */
-  function UserController( $scope,$state, User, paginationConstants) {
+  function UserController($state, User, paginationConstants) {
     var vm = this;
-    $scope.num=0;
     vm.page = 1;
     vm.totalItems = null;
     vm.loadAll = loadAll;
+    vm.loadByName = loadByName;
+    vm.queryByName = queryByName;
     vm.transition = transition;
     vm.pageChanged=pageChanged;
     vm.itemsPerPage = paginationConstants.itemsPerPage;
     vm.foundByName="";
-    vm.loadAll();
+    vm.loadByName();
 
-    $scope.loadByName = function(){
+    function loadByName(){
       User.get({
         id:vm.foundByName
       }, onSuccess, onError);
+    }
+    function queryByName(){
+      if(vm.foundByName==""){
+        vm.loadByName();
+      }else {
+        User.getByName({
+          name: vm.foundByName
+        }, onSuccess, onError);
+      }
     }
     function loadAll() {
       User.query({
@@ -30,13 +40,13 @@
       }, onSuccess, onError);
     }
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
+      //console.log('onSuccess');
+      //console.log(data);
       vm.users = data.rows;
       vm.totalItems =  data.total;
     }
     function onError(error) {
-      console.log('error');
+      //console.log('error');
     }
     function transition () {
       $state.transitionTo($state.$current, {
@@ -45,7 +55,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       loadAll();
     };
   }

@@ -6,13 +6,21 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-4 no-padding-left">
+        <div class="col-lg-6">
+          <label class="col-lg-3 control-label">资源名称</label>
+          <div class="col-lg-6">
+            <input type="text" id="searchResourceName" class="form-control" ng-model="vm.searchResource.name">
+          </div>
+          <button class="col-lg-3 btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadByName()">搜索</button>
+        </div>
+        <div class="col-lg-6">
           <button class="btn btn-primary" ui-sref="resource.new">
             <span class="glyphicon glyphicon-plus"></span>
             新建资源
           </button>
         </div>
       </div>
+
     </div>
     <br/>
 
@@ -31,8 +39,8 @@
         <tbody>
         <tr ng-repeat="resource in vm.resources track by resource.resourceId">
           <td><a ui-sref="resource.detail({id:resource.resourceId})">{{resource.name}}</a></td>
-          <td>{{resource.type}}</td>
           <td>{{resource.url}}</td>
+          <td>{{resource.type}}</td>
           <td>{{resource.loginRequire}}</td>
           <td>{{resource.accessCheck}}</td>
           <td>{{resource.description}}</td>

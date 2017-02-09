@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <alert-error></alert-error>
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+          ng-click="vm.clear()">&times;</button>
+  <h4 class="modal-title" id="myAfwkFunctionLabel">创建反馈</h4>
+</div>
+<div class="modal-body">
+  <form name="editForm" role="form" novalidate >
+    <!--<jhi-alert-error></jhi-alert-error>-->
+    <div class="row">
+      <div class="col-md-6">
+        <label class="col-md-6 control-label" style="padding-top:4px;">反馈类型：</label>
+        <div class="col-md-6 input-group date">
+          <input type="text"  ng-model="vm.feedback.feedbackType" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label">反馈内容 ：</label>
+          <textarea class="form-control"   type="text"   ng-model="vm.feedback.feedbackData"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+    取消
+  </button>
+  <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary" ng-click="vm.save()">
+    提交
+  </button>
+</div>

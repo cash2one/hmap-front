@@ -1,0 +1,83 @@
+<script>
+  $(function () {
+    $("#uploadImg").change(function () {
+      var imgPath = $("#uploadImg").val();
+      var fileName = getFileName(imgPath);
+      $("#filePath").val(fileName);
+    });
+    $("#uploadApp").change(function () {
+      var appPath = $("#uploadApp").val();
+      var fileName = getFileName(appPath);
+      $("#appFilePath").val(fileName);
+    });
+    function getFileName(o) {
+      var pos = o.lastIndexOf("\\");
+      return o.substring(pos + 1);
+    }
+  })
+</script>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="row">
+      <alert-error></alert-error>
+    </div>
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>新增应用</h5>
+      </div>
+      <div class="ibox-content">
+        <form name="addForm" class="reg-page" role="form" novalidate ng-submit="vm.saveAdd()">
+          <div class="rows">
+            <div class="col-md-5"></div>
+            <img ng-src="{{vm.distributionApp.appIcon}}" alt="" width="120px" height="120px"/>
+          </div>
+          <div class="rows" style="width:90%;margin-left: 5%;margin-right: 5%">
+            <div class="form-group">
+              <label class="control-label" for="appName">应用名称 *</label>
+              <input type="text" class="form-control" name="appName" id="appName"
+                     ng-model="vm.distributionApp.appName" required/>
+            </div>
+          </div>
+
+          <div class="rows" style="width:90%;margin-left: 5%;margin-right: 5%">
+            <div class="form-group">
+              <label class="control-label">平台</label>
+              <input type="text" class="form-control" name="appPlatform" id="appPlatform"
+                     ng-model="vm.distributionApp.appPlatform" readonly/>
+            </div>
+          </div>
+
+          <div class="rows" style="width:90%;margin-left: 5%;margin-right: 5%">
+            <div class="form-group">
+              <label class="control-label" for="lastestVersion">版本号 </label>
+              <input type="text" class="form-control" name="lastestVersion" id="lastestVersion"
+                     ng-model="vm.distributionApp.lastestVersion" readonly/>
+            </div>
+          </div>
+
+          <div class="rows" style="width:90%;margin-left: 5%;margin-right: 5%">
+            <div class="form-group">
+              <label class="control-label" for="appIntroduce">简介</label>
+            <textarea class="form-control" rows="5" name="appIntroduce" id="appIntroduce" style="resize:none;"
+                      ng-model="vm.distributionApp.appIntroduce"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <div class="text-center">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">
+                  &nbsp;&nbsp;取消&nbsp;&nbsp;
+                </button>
+                <button type="submit" ng-disabled="addForm.$invalid || vm.isSaving" class="btn btn-primary">
+                  &nbsp;&nbsp;保存&nbsp;&nbsp;
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

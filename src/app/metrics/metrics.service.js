@@ -17,7 +17,7 @@
 
         function getMetrics () {
             return $http.get('/metrics/metrics').then(function (response) {
-                console.log(response);
+                //console.log(response);
                 return response.data;
             });
         }

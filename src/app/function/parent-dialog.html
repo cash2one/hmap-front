@@ -1,0 +1,94 @@
+
+<div class="ibox-content">
+  <div class="modal-header">
+    <alert-error></alert-error>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myAfwkFunctionLabel">选择数据</h4>
+  </div>
+  <div class="modal-body">
+
+  <div class="row">
+    <div class="form-inline">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能名称</label>
+
+            <div class="col-md-8"><input type="text" ng-model="vm.queryFunction.functionName" class="form-control"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group"><label class="col-md-4 control-label">功能代码</label>
+            <div class="col-md-8"><input type="text" ng-model="vm.queryFunction.functionCode" class="form-control"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      </br>
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="form-group text-left">
+            <button type="button" class="btn btn-primary" ng-click="vm.search()">
+              <span class="glyphicon glyphicon-search">搜索</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped" width="70%">
+        <thead>
+        <tr>
+          <th>选择</th>
+          <th>功能名称</th>
+          <th>功能代码</th>
+          <th>功能描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <input type="radio" ng-model="$parent.vm.selectedFunction" name="parentFunction"
+                   ng-value=""/>
+          </td>
+          <td colspan="3">不选择</td>
+        </tr>
+        <tr ng-repeat="function in vm.functions track by function.functionId">
+          <td><input type="radio" ng-model="$parent.vm.selectedFunction" name="parentFunction"
+                     ng-value="function"/></td>
+          <td>{{function.functionName}}</td>
+          <td>{{function.functionCode}}</td>
+          <td>{{function.functionDescription}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <button type="button" class="btn btn-primary" ng-click="vm.save()">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 确定</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+      </button>
+      <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+    </div>
+  </div>
+</div>
+

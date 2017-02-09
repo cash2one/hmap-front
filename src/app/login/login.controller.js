@@ -8,15 +8,16 @@
     .module('hmapFront')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth'];
+  LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth','BaseConfig'];
   /** @ngInject */
-  function LoginController($rootScope, $state, $timeout,Auth) {
+  function LoginController($rootScope, $state, $timeout,Auth,BaseConfig) {
     var vm = this;
     vm.login = login;
     vm.changeImg=changeImg;
     vm.username = "";
     vm.password = "";
     vm.verifiCode = "";
+    vm.verifiCodeUrl=BaseConfig.url+"/verifiCode";
 
 
     function login (event) {
@@ -26,7 +27,7 @@
         password: vm.password,
         captcha:vm.captcha
       }).then(function () {
-        console.log("login");
+        //console.log("login");
         vm.authenticationError = false;
         $state.go('main');
 
@@ -50,7 +51,7 @@
     }
 
     function changeImg(){
-      console.log("changeImg");
+      //console.log("changeImg");
     }
   }
 })();

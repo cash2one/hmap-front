@@ -23,6 +23,7 @@
               entity: function () {
                 return {
                   jobName: null,
+                  jobStatus:null,
                   jobGroup: null,
                   jobClassName: null,
                   description: null,
@@ -70,7 +71,7 @@
         parent: 'taskDetali',
         url: "/new",
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-          console.log($uibModal);
+          //console.log($uibModal);
           $uibModal.open({
             templateUrl: "app/task/taskDetali/taskDetali-new.html",
             controller: 'TaskDetaliNewController',
@@ -92,10 +93,10 @@
               }
             }
           }).result.then(function() {
-              console.log("taskDetali go1");
+              //console.log("taskDetali go1");
               $state.go('taskDetali', null, { reload: true });
             }, function() {
-              console.log("taskDetali go2");
+              //console.log("taskDetali go2");
               $state.go('taskDetali');
             });
         }]
@@ -104,7 +105,7 @@
         parent: 'taskDetali',
         url: "/newCrom",
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-          console.log($uibModal);
+          //console.log($uibModal);
           $uibModal.open({
             templateUrl: "app/task/taskDetali/taskDetali-new-crom.html",
             controller: 'TaskDetaliNewCromController',
@@ -126,10 +127,50 @@
               }
             }
           }).result.then(function() {
-              console.log("taskDetali go1");
+              //console.log("taskDetali go1");
               $state.go('taskDetali', null, { reload: true });
             }, function() {
-              console.log("taskDetali go2");
+              //console.log("taskDetali go2");
+              $state.go('taskDetali');
+            });
+        }]
+      })
+      .state('taskDetali.show', {
+        parent: 'taskDetali',
+        url: "/:jobName/show",
+        onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+          //console.log($uibModal);
+          $uibModal.open({
+            templateUrl: "app/task/taskDetali/taskDetali-show.html",
+            controller: 'TaskDetaliShowController',
+            controllerAs: 'vm',
+            backdrop: 'static',
+            size: 'lg',
+            resolve: {
+              entity: function () {
+                return {
+                  jobName: $stateParams.jobName
+                };
+                //return {
+                //  jobName: null,
+                //  jobGroup: null,
+                //  description: null,
+                //  jobClassName: null,
+                //  start: null,
+                //  end: null,
+                //  previousFireTime: null,
+                //  fireTime: null,
+                //  scheduledFireTime: null,
+                //  nextFireTime: null,
+                //  cronExpression: null
+                //};
+              }
+            }
+          }).result.then(function() {
+              //console.log("taskDetali go1");
+              $state.go('taskDetali', null, { reload: true });
+            }, function() {
+              //console.log("taskDetali go2");
               $state.go('taskDetali');
             });
         }]

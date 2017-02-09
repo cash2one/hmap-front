@@ -1,0 +1,42 @@
+
+
+<alert-error></alert-error>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>微信企业号应用管理</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content" style="display: flex">
+        <ul class="app_box js_myContainer" style="position:relative;padding:0;">
+        <li style="list-style: none;position: relative;float: left;margin-right:10px;
+        margin-left:10px;margin-bottom: 10px;width: 104px;text-align: center;padding: 48px 6px 20px;" ng-repeat="agent in vm.agentList">
+          <a href="#app/wecorpAgentList/{{agent.agentid}}/wecorpAgent" class="logo_img border_alpha">
+            <img alt="image" class="img-circle" style="width:80px;height:80px;" src="{{agent.square_logo_url}}">
+          </a>
+          <h3 style="width:92px;text-align: center;font-size: 14px;font-weight: 400;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+            {{agent.name}}
+          </h3>
+        </li>
+       </ul>
+      </div>
+    </div>
+  </div>
+</div>

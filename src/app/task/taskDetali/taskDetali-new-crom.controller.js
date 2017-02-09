@@ -8,9 +8,9 @@
     .module('hmapFront')
     .controller('TaskDetaliNewCromController', TaskDetaliNewCromController);
 
-  TaskDetaliNewCromController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity','TaskDetaliCreate'];
+  TaskDetaliNewCromController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity','TaskDetali'];
 
-  function TaskDetaliNewCromController($timeout, $scope, $stateParams, $uibModalInstance, entity, TaskDetaliCreate) {
+  function TaskDetaliNewCromController($timeout, $scope, $stateParams, $uibModalInstance, entity, TaskDetali) {
     var vm = this;
 
     vm.taskDetali = entity;
@@ -38,7 +38,7 @@
       vm.taskDetali.startTime=vm.taskDetali.startTime.valueOf();
       vm.taskDetali.endTime=vm.taskDetali.endTime.valueOf();
       vm.isSaving = true;
-      TaskDetaliCreate.save(vm.taskDetali, onSaveSuccess, onSaveError);
+      TaskDetali.TaskDetaliCreate().save(vm.taskDetali, onSaveSuccess, onSaveError);
     }
 
     function onSaveSuccess(result) {
@@ -91,7 +91,7 @@
       var checkbox = $event.target;
       var action = (checkbox.checked?'add':'remove');
       updateSelected(action,id);
-      console.log("selected:"+$scope.selected);
+      //console.log("selected:"+$scope.selected);
     }
     $scope.isSelected = function(id){
       return $scope.selected.indexOf(id)>=0;
@@ -112,7 +112,7 @@
       var checkbox = $event.target;
       var action = (checkbox.checked?'add':'remove');
       updateSelectedAll(action);
-      console.log("selected:"+$scope.selected);
+      //console.log("selected:"+$scope.selected);
     }
   }
 })();

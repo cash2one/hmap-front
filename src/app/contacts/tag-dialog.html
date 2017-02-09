@@ -1,0 +1,32 @@
+<div class="ibox-content">
+  <div class="modal-header">新建标签</div>
+
+  <div class="modal-body ">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="col-md-3 control-label">标签名称</label>
+          <div class="col-md-9">
+          <input type="text" class="form-control" ng-model="vm.contactTag.tagName" required/></div>
+        </div>
+
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <button type="button" class="btn btn-primary" ng-click="vm.saveTag()">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span> 确定</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>关闭</span>
+      </button>
+      <!--<delete-button confirm="vm.deleteFunctionResource()" confirm-message="123"></delete-button>-->
+    </div>
+  </div>
+</div>

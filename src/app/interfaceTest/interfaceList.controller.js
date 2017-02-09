@@ -29,7 +29,7 @@
         .then(function (data) {
           vm.result = data.rows;
           vm.totalItems =  data.total;
-          console.log("result00000"+angular.toJson(data));
+          //console.log("result00000"+angular.toJson(data));
 
         });
 
@@ -42,7 +42,7 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       findHeaderAndLine(vm.page,pageSize);
     };
 

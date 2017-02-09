@@ -37,7 +37,7 @@
         parent: 'thirdparty',
         url: "/new",
         onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
-          console.log($uibModal);
+          //console.log($uibModal);
           $uibModal.open({
             templateUrl: 'app/thirdparty/thirdparty-dialog.html',
             controller: 'ThirdpartyDialogController',
@@ -62,10 +62,10 @@
               }
             }
           }).result.then(function () {
-              console.log("thirdparty go1");
+              //console.log("thirdparty go1");
               $state.go('thirdparty', null, {reload: true});
             }, function () {
-              console.log("thirdparty go2");
+              //console.log("thirdparty go2");
               $state.go('thirdparty');
             });
         }]
@@ -73,7 +73,7 @@
         parent: 'thirdparty',
         url: "/:id/edit",
         onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
-          console.log($uibModal);
+          //console.log($uibModal);
           $uibModal.open({
             templateUrl: 'app/thirdparty/thirdparty-dialog.html',
             controller: 'ThirdpartyDialogController',
@@ -88,10 +88,10 @@
               }
             }
           }).result.then(function () {
-              console.log("thirdparty go1");
+              //console.log("thirdparty go1");
               $state.go('thirdparty', null, {reload: true});
             }, function () {
-              console.log("thirdparty go2");
+              //console.log("thirdparty go2");
               $state.go('thirdparty');
             });
         }]

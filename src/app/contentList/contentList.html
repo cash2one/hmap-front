@@ -1,0 +1,84 @@
+<style>
+  .item_default img{
+    height: 120px;
+    width: 180px;
+  }
+
+  .table-font-center{
+    text-align: center;
+  }
+   .contentFontType{
+     line-height: 120px;
+     height: 120px;
+     overflow: hidden;
+
+  }
+
+</style>
+<div class="table-responsive table-font-center  ">
+  <table class="table table-striped  ">
+    <thead>
+    <tr >
+      <th class="col-md-1 table-font-center ">编辑</th>
+      <th class="col-md-2 table-font-center ">封面</th>
+      <th class="col-md-1 table-font-center ">标题</th>
+      <th class="col-md-1 table-font-center ">作者</th>
+      <th class="col-md-2 table-font-center ">创建时间</th>
+      <th class="col-md-1 table-font-center ">摘要</th>
+      <th class="col-md-1 table-font-center ">状态</th>
+      <th class="col-md-1 table-font-center ">删除</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="content in vm.contents">
+      <td class="col-md-1">
+        <div class="btn-group flex-btn-group-container contentFontType ">
+          <a ui-sref="sysConfig.edit({id:content.id})"><i class="fa fa-edit text-navy">编辑</i></a>
+        </div>
+      </td>
+      <td class="col-md-2">
+        <div name="imageTextCover" class="item_default">
+          <img ng-src="{{content.contentCover}}" name="coverImg" >
+        </div>
+      </td>
+      <td class="col-md-1">
+        <div class="contentFontType">
+        {{content.contentTitle}}
+        </div>
+      </td>
+      <td class="col-md-1">
+        <div class="contentFontType">
+        {{content.contentAuthor}}
+        </div>
+      </td>
+      <td class="col-md-2">
+        <div class="contentFontType">
+        {{content.creationDate}}
+        </div>
+      </td>
+      <td class="col-md-3" >
+        <div class="contentFontType">
+        {{content.contentSubject}}
+        </div>
+      </td>
+      <td class="col-md-1">
+        <div class="contentFontType">
+          {{content.contentAuthor}}
+        </div>
+      </td>
+      <td class="col-md-1">
+        <div class="btn-group flex-btn-group-container contentFontType ">
+          <a ui-sref="sysConfig.edit({id:content.id})"><i class="fa fa-edit text-navy">删除</i></a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-center">
+  <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+  <uib-pagination class="pagination-sm"
+                  total-items="vm.totalItems"
+                  ng-model="vm.page"
+                  ng-change="vm.pageChanged()"></uib-pagination>
+</div>

@@ -1,0 +1,157 @@
+<div>
+  <div class="ibox-title">
+  <h2>来宾管理</h2>
+
+  </div>
+  <div class="ibox-content">
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">姓名</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchFullName" class="form-control" ng-model="vm.guest.fullName">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">公司</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchCompanyName" class="form-control" ng-model="vm.guest.companyName">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">电话</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchCellPhone" class="form-control" ng-model="vm.guest.cellPhone">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">推荐人</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchInviter" class="form-control" ng-model="vm.guest.inviter">
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="col-lg-4 control-label">审批人</label>
+            <div class="col-lg-8">
+              <input type="text" id="searchApproveName" class="form-control" ng-model="vm.guest.approveName">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <label class="col-lg-8 control-label">通过审批</label>
+            <div class="col-lg-4">
+              <input type="checkbox" ng-true-value="'Y'" ng-false-value="'N'" ng-checked="false" id="searchState" ng-model="vm.guest.passState">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <label class="col-lg-8 control-label">签到</label>
+            <div class="col-lg-4">
+              <input type="checkbox" ng-true-value="'Y'" ng-false-value="'N'" ng-checked="false" id="searchSign" ng-model="vm.guest.sign">
+            </div>
+          </div>
+              <!--<div class="col-lg-4">-->
+                <!--<label class="col-lg-4 control-label">汉得员工</label>-->
+                <!--<div class="col-lg-8">-->
+                  <!--<input type="checkbox" value="" id="searchIsStaff" ng-model="vm.guest.isStaff">-->
+                <!--</div>-->
+              <!--</div>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+              <!--<div class="col-lg-2">-->
+                <!--<label class="col-lg-8 control-label">注销</label>-->
+                <!--<div class="col-lg-4">-->
+                  <!--<input type="checkbox" value="" id="searchStatusCode" ng-model="vm.guest.statusCode">-->
+                <!--</div>-->
+              <!--</div>-->
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+              <button class="btn btn-w-m btn-primary" type="button" id="searchBtn" ng-click="vm.loadSearch()">搜索</button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="col-lg-8">
+              <input type="file" ng-model="vm.file" ng-change="vm.fishUpload()" ngf-select name="imExcel" id="imExcel" style="display: none"/>
+              <button type="button" ng-click="vm.importExcel('imExcel')" class="btn btn-primary local_btn">导入Excel</button>
+              <button type="button" ng-click="vm.exportExcel()" class="btn btn-primary local_btn">导出Excel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>操作</th>
+          <th>序号</th>
+          <!--<th>状态码</th>-->
+          <th>性别</th>
+          <th>姓名</th>
+          <th>电话</th>
+          <th>微信号</th>
+          <th>邮箱</th>
+          <th>签到</th>
+          <!--<th>停车位</th>-->
+          <th>活动</th>
+          <th>员工</th>
+          <th>状态</th>
+          <th>审批人</th>
+          <th>审批时间</th>
+          <th>环境</th>
+          <th>来源</th>
+          <th>流水号</th>
+          <th>公司</th>
+          <th>职位</th>
+          <th>邀请人</th>
+          <th>工号</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="guest in vm.guests track by guest.id">
+          <td>
+            <a ng-if="guest.passState!='Y'" ng-click="vm.pass(guest)"><i class="fa fa-edit text-primary">审批</i></a>
+            <a ng-if="guest.sign!='Y'" ng-click="vm.sign(guest)"><i class="fa fa-sign-in text-info">签到</i></a>
+          </td>
+          <td ng-bind="$index+1">1</td>
+          <!--<td ng-bind="guest.statusCode"></td>-->
+          <td ng-bind="guest.gender"></td>
+          <td ng-bind="guest.fullName"></td>
+          <td ng-bind="guest.cellPhone"></td>
+          <td ng-bind="guest.wxopenId"></td>
+          <td ng-bind="guest.email"></td>
+          <td ng-bind="guest.sign"></td>
+          <!--<td ng-bind="guest.parkNum"></td>-->
+          <td ng-bind="guest.joinAct"></td>
+          <td ng-bind="guest.isStaff"></td>
+          <td ng-bind="guest.passState"></td>
+          <td ng-bind="guest.approveName"></td>
+          <td ng-bind="guest.approveDate"></td>
+          <td ng-bind="guest.equipment"></td>
+          <td ng-bind="guest.source"></td>
+          <td ng-bind="guest.sn"></td>
+          <td ng-bind="guest.companyName"></td>
+          <td ng-bind="guest.title"></td>
+          <td ng-bind="guest.inviter"></td>
+          <td ng-bind="guest.inviterId"></td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+      <uib-pagination class="pagination-sm"
+                      total-items="vm.totalItems"
+                      ng-model="vm.page"
+                      ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>

@@ -10,66 +10,52 @@
           <div class="form-group">
             <div class="row">
               <div class="col-lg-6">
-                <label class="col-lg-3 control-label">应用代码</label>
+                <label class="col-lg-3 control-label">APP名称</label>
                 <div class="col-lg-8">
-                  <input name="appCode" class="form-control" id="appCode" type="text"  ng-model="vm.appedition.appCode">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <label class="col-lg-3 control-label">应用名称</label>
-                <div class="col-lg-8">
-                  <input name="appName" class="form-control" id="appName" type="text" ng-model="vm.appedition.appName">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="col-lg-3 control-label">下载地址</label>
-                <div class="col-lg-8">
-                  <input name="downloadUrl" class="form-control" id="downloadUrl" type="text" ng-model="vm.appedition.appUrl">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <label class="col-lg-3 control-label">应用平台</label>
-                <div class="col-lg-8">
-                  <!--<select name="appPlatform" class="form-control" id="appPlatform" ng-model="vm.appedition.appEquipment"><option value="iOS">iOS</option><option value="Android">Android</option><option value="Windows Phone">Windows Phone</option></select>-->
-                  <select class="form-control" id="appPlatform" name="appPlatform" ng-model="vm.appedition.appEquipment" ng-options="e.id as e.name for e in Equipments" >
+                  <!--<input name="appCode" class="form-control" id="appCode" type="text"  ng-model="vm.appedition.appCode">-->
+                  <select class="form-control" id="authAppId" name="authAppId" ng-model="vm.appedition.appId" ng-options="e.appId as e.appName for e in vm.result" ng-disabled="vm.disabled">
                     <option value="">请选择</option>
                   </select>
                 </div>
               </div>
+              <div class="col-lg-6">
+                <label class="col-lg-3 control-label">APP主页</label>
+                <div class="col-lg-8">
+                  <input name="appHomepage" class="form-control" id="appHomepage" type="text" ng-model="vm.appedition.appHomepage">
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-6">
-                <label class="col-lg-3 control-label">最小版本</label>
+                <label class="col-lg-3 control-label">应用平台</label>
                 <div class="col-lg-8">
-                  <input name="minVersion" class="form-control" id="minVersion" type="text" ng-model="vm.appedition.oldEdition">
-                </div>
-              </div>
+                  <!--<select name="appPlatform" class="form-control" id="appPlatform" ng-model="vm.appedition.appEquipment"><option value="iOS">iOS</option><option value="Android">Android</option><option value="Windows Phone">Windows Phone</option></select>-->
+                  <select class="form-control" id="appPlatform" name="appPlatform" ng-model="vm.appedition.appEquipment" ng-options="e.id as e.name for e in vm.Equipments" >
+                    <option value="">请选择</option>
+                  </select>
+            </div>
+          </div>
               <div class="col-lg-6">
-                <label class="col-lg-3 control-label">最新版本</label>
+                <label class="col-lg-3 control-label">APP应用分享链接</label>
                 <div class="col-lg-8">
-                  <input name="newVersion" class="form-control" id="newVersion" type="text" ng-model="vm.appedition.newEdition">
+                  <input name="downloadUrl" class="form-control" id="downloadUrl" type="text" ng-model="vm.appedition.downloadUrl">
                 </div>
               </div>
             </div>
-          </div>
+         </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-6">
                 <label class="col-lg-3 control-label">是否有效</label>
                 <div class="col-lg-8">
                   <!--<select name="enableFlag" class="form-control" id="enableFlag" ng-model="vm.appedition.enableFlag"><option value="Y" selected="">是</option><option value="N">否</option></select>-->
-                  <select class="form-control" id="enableFlag" name="enableFlag" ng-model="vm.appedition.enableFlag" ng-options="s.id as s.name for s in state" >
+                  <select class="form-control" id="enableFlag" name="enableFlag" ng-model="vm.appedition.enableFlag" ng-options="s.id as s.name for s in vm.state" >
                     <option value="">请选择</option>
                   </select>
                 </div>
               </div>
-              <div class="col-lg-6"></div>
             </div>
           </div>
           <div class="modal-footer">

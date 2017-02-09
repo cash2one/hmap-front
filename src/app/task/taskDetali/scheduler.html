@@ -9,51 +9,61 @@
           <div class="row">
             <div class="col-lg-6">
               <h1 style="font-size: 100px;margin-left: auto;margin-right: auto">Standby</h1>
-              <a ng-click="vm.start">Start</a><br/>
-              <a ng-click="vm.standby">Standby</a>
+              <button class="btn btn-primary dim" type="button" ng-click="vm.start()">
+                <i class="glyphicon glyphicon-play-circle"> 开始</i>
+              </button><br/>
+              <button class="btn btn-danger dim" type="button" ng-click="vm.standby()">
+                <i class="glyphicon glyphicon-stop"> 停止</i>
+              </button><br/>
+              <button class="btn btn-warning dim" type="button" ng-click="vm.pauseall()">
+                <i class="glyphicon glyphicon-pause"> 暂停所有</i>
+              </button><br/>
+              <button class="btn btn-info dim" type="button" ng-click="vm.resumeall()">
+                <i class="glyphicon glyphicon-play"> 恢复所有</i>
+              </button>
             </div>
             <div class="col-lg-6">
               <table class="table table-hover">
-                <tbody>
+                <tbody ng-repeat="scheduler in vm.schedulers track by $index">
                   <tr>
                     <td>Name</td>
-                    <td ng-bind="vm.scheduler.schedulerName"></td>
+                    <td ng-bind="scheduler.schedulerName"></td>
                   </tr>
                   <tr>
                     <td>Instance Id</td>
-                    <td ng-bind="vm.scheduler.schedulerInstanceId"></td>
+                    <td ng-bind="scheduler.schedulerInstanceId"></td>
                   </tr>
                   <tr>
                     <td>Version</td>
-                    <td ng-bind="vm.scheduler.version"></td>
+                    <td ng-bind="scheduler.version"></td>
                   </tr>
                   <tr>
                     <td>Standby</td>
-                    <td ng-bind="vm.scheduler.inStandbyMode"></td>
+                    <td ng-bind="scheduler.inStandbyMode"></td>
                   </tr>
                   <tr>
                     <td>Started</td>
-                    <td ng-bind="vm.scheduler.started"></td>
+                    <td ng-bind="scheduler.started"></td>
                   </tr>
                   <tr>
                     <td>Running Since</td>
-                    <td ng-bind="vm.scheduler.runningSince"></td>
+                    <td ng-bind="scheduler.runningSince"></td>
                   </tr>
                   <tr>
                     <td>Jobs Executed</td>
-                    <td ng-bind="vm.scheduler.numberOfJobsExecuted"></td>
+                    <td ng-bind="scheduler.numberOfJobsExecuted"></td>
                   </tr>
                   <tr>
                     <td>Job Store Clustered</td>
-                    <td ng-bind="vm.scheduler.jobStoreClustered"></td>
+                    <td ng-bind="scheduler.jobStoreClustered"></td>
                   </tr>
                   <tr>
                     <td>Suupports Persistence</td>
-                    <td ng-bind="vm.scheduler.jobStoreSupportsPersistence"></td>
+                    <td ng-bind="scheduler.jobStoreSupportsPersistence"></td>
                   </tr>
                   <tr>
                     <td>Scheduler Remote</td>
-                    <td ng-bind="vm.scheduler.schedulerRemote"></td>
+                    <td ng-bind="scheduler.schedulerRemote"></td>
                   </tr>
                 </tbody>
               </table>
@@ -73,12 +83,12 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="scheduler in vm.jobs track by $index">
+                  <tr ng-repeat="job in vm.jobs track by $index">
                     <td><input type="checkbox" id={{job.jobName}} name="{{job.jobGroup}}" ng-checked="isSelected(job.jobName)" ng-click="updateSelection($event,job.jobName)"></td>
-                    <td ng-bind="scheduler.schedulerName"></td>
-                    <td ng-bind="scheduler.schedulerInstanceId"></td>
-                    <td ng-bind="scheduler.lastCheckinTime"></td>
-                    <td ng-bind="scheduler.checkinInterval"></td>
+                    <td ng-bind="job.schedName"></td>
+                    <td ng-bind="job.instanceName"></td>
+                    <td ng-bind="job.lastCheckinTime"></td>
+                    <td ng-bind="job.checkinInterval"></td>
                   </tr>
                   </tbody>
                 </table>

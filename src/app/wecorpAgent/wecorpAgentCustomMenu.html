@@ -1,0 +1,528 @@
+<style>
+  .custom_menu_preview_wrap {
+    width: 392px;
+    height: 642px;
+    margin: 30px auto;
+    position: relative;
+    background: url(https://res.wx.qq.com/mmocbiz/zh_CN/tmt/pc/dist/img/dev/custom_menu_bg_3fcfc347.png) 0 0 no-repeat;
+  }
+  .custom_menu_preview_content {
+    height: 438px;
+    top: 82px;
+    left: 22px;
+    width: 318px;
+  }
+  .custom_menu_preview_menu{
+    padding-top: 84px;
+    padding-left: 9px;
+  }
+  .custom_menu_preview_bar {
+    /*position: absolute;*/
+    height: 40px;
+    bottom: 81px;
+    right: 22px;
+    width: 272px;
+    margin-left: 60px;
+    display: flex;
+  }
+  .custom_menu_preview_item {
+    /*width: 90px;*/
+    /*position: relative;*/
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    height: 40px;
+    padding-top: 8px;
+    font-size: 14px;
+    display: inline-block;
+    border-left:1px solid #ccc
+  }
+  .as-sortable-dragging .custom_menu_preview_item {
+    /*width: 90px;*/
+    /*position: relative;*/
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    height: 40px;
+    padding-top: 8px;
+    font-size: 14px;
+    display: inline-block;
+    border:none;
+  }
+  .custom_menu_preview_button {
+    color: #242424;
+  }
+  #horizontal-container {
+    display: inline-block;
+  }
+  .as-sortable-dragging{
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin-left:-5px;
+  }
+  .as-sortable-dragging .custom_menu_preview_float_button_wrap{
+    left:0px;
+    margin-bottom:45px;
+  }
+  .custom_menu_arrow{
+    display: inline-block;
+    position: absolute;
+    bottom: -5px;
+    height: 5px;
+    width: 10px;
+    left: 50%;
+    margin-left: -5px;
+    vertical-align: middle;
+  }
+  .custom_menu_down{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: #ccc transparent transparent;
+    border-width: 5px 5px 0;
+    left: 0;
+    bottom: 0;
+  }
+  .custom_menu_up {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: #f1f1f1 transparent transparent;
+    border-width: 5px 5px 0;
+    left: 0;
+    bottom: 1px;
+  }
+  .custom_menu_preview_float_button_wrap.as-sortable-dragging{
+    position: absolute;
+    min-width: 140px;
+    /*left: 50%;*/
+    margin-left: -5px;
+    margin-top:0px;
+    /*bottom: 50px;*/
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f1f1f1;
+    text-align: center;
+  }
+  .custom_menu_preview_float_button_wrap{
+    position: absolute;
+    min-width: 140px;
+    /*left: 50%;*/
+    margin-left: -70px;
+    /*bottom: 50px;*/
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f1f1f1;
+    text-align: center;
+  }
+  .custom_menu_preview_float_button{
+    display: block;
+    color: #242424;
+    padding: 6px 10px;
+    border-top: 1px solid #ccc;
+  }
+
+  .as-sortable-dragging .custom_menu_preview_float_button{
+    /*width: 90px;*/
+    /*position: relative;*/
+    display: block;
+    color: #242424;
+    padding: 6px 10px;
+    border-top:none;
+  }
+
+  .icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("assets/images/wecorp_icon.png");
+    background-repeat: no-repeat!important;
+  }
+  .icon_arrow_down {
+    width: 8px;
+    height: 8px;
+    background-position: -64px -96px;
+  }
+  .icon_remove, .icon_remove_gray {
+    width: 16px;
+    height: 17px;
+    background-position: -160px -32px;
+  }
+  .icon_add {
+    width: 18px;
+    height: 18px;
+    background-position: 0 0;
+    vertical-align: middle;
+  }
+  .icon_edit_gray {
+    height: 16px;
+    width: 16px;
+    background-position: -192px -33px;
+  }
+  .icon_add_small {
+    width: 14px;
+    height: 14px;
+    background-position: -32px -160px;
+  }
+  .custom_menu_list .icon_remove {
+    margin: 8px 0 0 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  .custom_menu_name{
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 14px;
+    padding-left: 4px;
+  }
+
+  .custom_sub_menu_name{
+    height: 34px;
+    line-height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .menuPageBtn {
+    box-sizing: content-box;
+    display: inline-block;
+    height: 28px;
+    margin: 0;
+    padding: 0 10px;
+    min-width: 30px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    color: #222;
+    border: 1px solid #c8c8c8;
+    border-radius: 2px;
+    background: -moz-linear-gradient(top,#fdfdfd 0,#eff1f4 100%);
+    background: -webkit-linear-gradient(top,#fdfdfd 0,#eff1f4 100%);
+    background: -o-linear-gradient(top,#fdfdfd 0,#eff1f4 100%);
+    background: -ms-linear-gradient(top,#fdfdfd 0,#eff1f4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FDFDFD', endColorstr='#EFF1F4', GradientType=0);
+    background: linear-gradient(top,#fdfdfd 0,#eff1f4 100%);
+    cursor: default;
+    -webkit-user-select: none;
+  }
+  .custom_menu_addName {
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .btndisabled{
+    background-image:none;
+    background-color:#e3e3e3;
+    pointer-events:none;
+    color: #969696;
+  }
+  .menu-bcackground{
+    background-color: #ffffff;
+  }
+  .menu-bcackground-selected{
+    background-color: #eaeaea;
+  }
+  .menu-width-0{
+    width:0px;
+  }
+  .menu-width-1{
+    width:270px;
+  }
+  .menu-width-2{
+    width:135px;
+  }
+  .menu-width-3{
+    width:92px;
+  }
+
+  .submenu-style--1{
+    margin-top:-51px;
+  }
+  .submenu-style--2{
+    margin-top:-84px;
+  }
+  .submenu-style--3{
+    margin-top:-117px;
+  }
+  .submenu-style--4{
+    margin-top:-150px;
+  }
+  .submenu-style--5{
+    margin-top:-183px;
+  }
+
+
+
+  .submenu-style-1{
+    margin-left:64px;
+  }
+  .submenu-style-2{
+    margin-left:-3px;
+  }
+  .submenu-style-3{
+    margin-left:-28px;
+  }
+
+  .tr-selected{
+    background-color: red;
+  }
+  .tr-unselected{
+  }
+</style>
+<alert-error></alert-error>
+<div class="row" id="menuBody">
+  <div class="col-lg-8">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>自定义菜单</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content" style="padding-left: 0;padding-right: 0;padding-top: 10px">
+        <ul style="margin-bottom:0px;list-style: none;text-align: center;overflow: auto;padding-left: 0px;border-bottom: 1px solid #e5e5e5;">
+        <li style="list-style: none">
+          <div class="col-lg-12" style="padding-top: 5px;padding-bottom: 10px;width:92%">
+            可创建最多 3 个一级菜单，每个一级菜单下可创建最多 5 个二级菜单。编辑中的菜单不会马上被用户看到，请放心调试。
+          </div>
+        </li>
+          <a class="menuPageBtn btn_margin_right js_add_menu " ng-click="vm.addMenu()" ng-class="{3:'disabled btndisabled'}[vm.menus.button.length]" style="margin-bottom: 8px;"><span class="icon icon_add"></span><span class="hide">添加菜单</span></a>
+        </ul>
+
+        <ul  data-ng-model="vm.menus.button" style="list-style: none;text-align: left;overflow: auto;padding-left: 0px;color:black">
+          <li  ng-repeat="menu in vm.menus.button"  style="list-style: none;text-align: left;overflow: auto;">
+            <div  ng-init="inputShow=false" class="col-lg-12" style="padding-bottom: 5px;padding-top: 5px;border-bottom: 1px solid #e5e5e5;" ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[show]"  ng-mouseenter="show = true" ng-mouseleave="show = false">
+              <span class="icon icon_arrow_down"></span>
+              <span class="custom_menu_name " ng-show="inputShow == false">{{menu.name}}</span>
+              <input  focus-me="{{inputShow}}"   type="text" class="custom_menu_input js_add_2_menu js_input_limit" ng-show="inputShow == true" ng-blur="inputShow = false"     ng-model="menu.name" style="    line-height: 24px;font-size: 14px;margin-bottom: 4px;margin-top: 0px;width:130px">
+              <a class="icon icon_edit_gray js_change_name" ng-show="show == true" style="position: absolute;left: 160px;top: 14px;"   ng-click="inputShow=true"></a>
+              <select ng-if="menu.sub_button==null||menu.sub_button.length==0" style="width: 160px;display: inline-block;position: absolute;right: 250px;" class="form-control" ng-model="menu.type" ng-options="x.code as x.name for x in vm.menuType" class="form-control" ng-selected="x.code==menu.type">
+              </select>
+              <div ng-if="menu.sub_button==null||menu.sub_button.length==0" style="display: inline-block;position: absolute;right:65px">
+              <div style="display: inline-block;font-size: 14px">Key:</div>
+              <input     type="text" class="custom_menu_input js_add_2_menu js_input_limit"    ng-model="menu.key" style="    line-height: 24px;font-size: 14px;margin-bottom: 4px;margin-top: 0px;width:130px;padding-left: 5px">
+              </div>
+              <a class="icon icon_remove float-right js_menu_remove" ng-show="show == true" style="position: absolute;right: 10px;top: 11px;" ng-click="vm.deleteMenu($index,-1)"></a>
+            </div>
+            <ul   data-ng-model="menu.sub_button" style="list-style: none;text-align: left;overflow: auto;padding-left: 15px;color:black">
+              <li  ng-repeat="sub_button in menu.sub_button"   style="list-style: none;text-align: left;overflow: auto;border-bottom: 1px solid #e5e5e5;">
+                <div  class="col-lg-12" ng-class="{'false':'menu-bcackground','true':'menu-bcackground-selected'}[show]" style="padding-bottom: 5px;padding-top: 0px;" ng-init="inputShow=false" ng-mouseenter="show = true" ng-mouseleave="show = false">
+                  <span class="custom_sub_menu_name "  style="padding-bottom: 8px;padding-top: 8px;" ng-show="inputShow == false">{{sub_button.name}}</span>
+                  <input  focus-me="{{inputShow}}"   type="text" class="custom_menu_input js_add_2_menu js_input_limit" ng-show="inputShow == true"  ng-blur="inputShow = false"  ng-model="sub_button.name" style="    line-height: 24px;font-size: 14px;margin-bottom: 0px;margin-top: 4px;width:140px">
+                  <a class="icon icon_edit_gray js_change_name" ng-show="show == true" style="position: absolute;left: 160px;top: 11px;"   ng-click="inputShow=true"></a>
+                  <select  style="width: 160px;display: inline-block;position: absolute;right: 250px;margin-top: 2.5px;" class="form-control" ng-model="sub_button.type" ng-options="x.code as x.name for x in vm.menuType" class="form-control" ng-selected="x.code==sub_button.type">
+                  </select>
+                  <div style="display: inline-block;position: absolute;right:65px;margin-top: 5px;">
+                    <div style="display: inline-block;font-size: 14px">Key:</div>
+                    <input     type="text" class="custom_menu_input js_add_2_menu js_input_limit"    ng-model="sub_button.key" style="    line-height: 24px;font-size: 14px;margin-bottom: 4px;margin-top: 0px;width:130px;padding-left: 5px">
+                  </div>
+                  <a class="icon icon_remove float-right js_menu_remove" ng-show="show == true" style="position: absolute;right: 10px;top: 11px;"  ng-click="vm.deleteMenu($parent.$index,$index)"></a>
+                </div>
+              </li>
+            </ul>
+            <div ng-init="showedit=false"  ng-show="menu.sub_button==null||menu.sub_button.length<5" ng-click="showedit=true"  style="padding-left:40px;border-bottom: 1px solid #e5e5e5;">
+              <span ng-show="showedit==false" class="icon icon_add_small" style="position: absolute;margin-top: 9px"></span>
+              <span ng-show="showedit==false" class="custom_menu_addName gray" style="margin-left: 25px;font-size: 14px;">添加二级菜单</span>
+              <div ng-show="showedit==true" style="display: inline-block">输入菜单名添加子菜单</div>
+              <input focus-me="{{showedit}}" ng-show="showedit==true" type="text" class="custom_menu_input js_add_2_menu js_input_limit"  ng-blur="showedit=false;vm.addSubMenuOperation($index)"  ng-model="vm.addSubMenuName"  style="    line-height: 24px;font-size: 14px;margin-bottom: 8px;margin-top: 10px;width: 200px;margin-left: 10px;">
+            </div>
+          </li>
+          <div ng-show="vm.addMenuInputShowFlag == true" style="padding-left:15px;border-bottom: 1px solid #e5e5e5;">
+            <div style="display: inline-block">输入菜单名添加主菜单</div>
+            <input  focus-me="{{vm.addMenuInputShowFlag}}"   type="text" class="custom_menu_input js_add_2_menu js_input_limit"  ng-blur="vm.addMenuInputShowFlag=false;vm.addMenuOperation()"  ng-model="vm.addMenuName"  style="    line-height: 24px;font-size: 14px;margin-bottom: 8px;margin-top: 10px;width: 200px;margin-left: 10px;">
+          </div>
+        </ul>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="text-left" style="padding-left: 50px;">
+              <a class="menuPageBtn btn_margin_right js_add_menu" ng-class='{false:"btndisabled",true:""}[vm.saveMenuButtonCanClick]' ng-click="vm.saveMenu()"   style="margin-bottom: 8px;"><span>保存</span></a>
+              <a class="menuPageBtn btn_margin_right js_add_menu "  ng-click="vm.releaseMenu()" ng-class='{false:"btndisabled",true:""}[vm.releaseMenuButtonCanClick]'  style="margin-bottom: 8px;margin-left: 5px"><span>发布</span></a>
+              <a class="menuPageBtn btn_margin_right js_add_menu "  ng-click="vm.deleteReleaseMenu()"  ng-class='{false:"btndisabled",true:""}[vm.deletereleaseMenuButtonCanClick]' style="margin-bottom: 8px;margin-left: 5px"><span>清空已发布菜单</span></a>
+              <a class="menuPageBtn btn_margin_right js_add_menu "  ng-click="vm.newMenu()"  style="margin-bottom: 8px;margin-left: 5px"><span>新建</span></a>
+              <input   type="text" class="custom_menu_input js_add_2_menu js_input_limit"    ng-model="vm.menuName"  style="    line-height: 24px;font-size: 14px;margin-bottom: 8px;margin-top: 10px;width: 200px;margin-left: 10px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4" style="padding-left: 0;">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>预览</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div  class="ibox-content" style="background-color: #f8f8f8">
+        <div class="mc_content">
+          <div class="custom_menu_preview_wrap">
+            <div class="custom_menu_preview_menu">
+              <div class="custom_menu_preview_content js_menu_preview">
+              </div>
+              <div id="menu">
+              <div   as-sortable="vm.sortableOptions" data-ng-model="vm.menus.button" class="sortable-row custom_menu_preview_bar js_menu_bar custom_menu_count0">
+
+                <div   ng-repeat="menu in vm.menus.button"  ng-click="vm.clickMenu($index)"   class="custom_menu_preview_item" ng-class="{0:'menu-width-0',1:'menu-width-1',2:'menu-width-2',3:'menu-width-3'}[vm.menus.button.length]"   as-sortable-item>
+                  <div  ng-show="vm.isShowMenu($index,vm.showSubMenu,menu.sub_button)" data-ng-model="menu.sub_button" as-sortable="vm.sortableOptions1"    class="sortable-row custom_menu_preview_float_button_wrap js_sub_menu custom_menu_preview_float_button_1"   ng-class="{1:{1:'submenu-style-1 submenu-style--1',2:'submenu-style-2 submenu-style--1',3:'submenu-style-3 submenu-style--1'}[vm.menus.button.length],2:{1:'submenu-style-1 submenu-style--2',2:'submenu-style-2 submenu-style--2',3:'submenu-style-3 submenu-style--2'}[vm.menus.button.length],3:{1:'submenu-style-1 submenu-style--3',2:'submenu-style-2 submenu-style--3',3:'submenu-style-3 submenu-style--3'}[vm.menus.button.length],4:{1:'submenu-style-1 submenu-style--4',2:'submenu-style-2 submenu-style--4',3:'submenu-style-3 submenu-style--4'}[vm.menus.button.length],5:{1:'submenu-style-1 submenu-style--2',5:'submenu-style-2 submenu-style--5',3:'submenu-style-3 submenu-style--5'}[vm.menus.button.length]}[menu.sub_button.length]" >
+
+                    <a  ng-repeat="sub_button in menu.sub_button" class="custom_menu_preview_float_button js_click_menu" data-id="0-0" href="javascript:;" as-sortable-item>
+                     <div as-sortable-item-handle> {{sub_button.name}}</div>
+                    </a>
+
+                    <span class="custom_menu_arrow">
+                      <span class="custom_menu_down"></span>
+                      <span class="custom_menu_up"></span>
+                    </span>
+                  </div>
+                  <div as-sortable-item-handle>{{menu.name}}</div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>菜单历史记录</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#">Config option 1</a>
+            </li>
+            <li><a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-lg-4">
+                <label class="col-lg-4 control-label">菜单名称</label>
+                <div class="col-lg-8">
+                  <input type="text" ng-model="vm.agent.menuName" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-8">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-4">
+                <div class="col-lg-8 pull-right m-t-n-xs">
+                  <button class="btn btn-white" type="reset" id="searchReset">重置</button>
+                  <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.search()">搜索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th >操作</th>
+              <th >序号</th>
+              <th >菜单名称</th>
+              <th>是否使用中</th>
+              <th>创建时间</th>
+              <th>更新时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  ng-repeat="menu in vm.menuList " >
+              <td>
+                <a ng-show="menu.id!=vm.menuSelectedId" ng-click="vm.editRecord(menu,menu.id)"><i class="fa fa-edit text-warning">编辑</i></a>
+                <a ng-show="menu.id==vm.menuSelectedId"><i class="fa fa-desktop text-warning" style="color:red">编辑中</i></a>
+                <a ng-click="vm.deleteRecord(menu.id)"><i class="fa fa-times text-warning">删除</i></a>
+              </td>
+              <td>{{$index+1}}</td>
+              <td>{{menu.menuName}}</td>
+              <td>{{menu.enableFlag}}</td>
+              <td>{{menu.creationDate}}</td>
+              <td>{{menu.lastUpdateDate}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></item-count>
+          <uib-pagination class="pagination-sm"
+                          total-items="vm.totalItems"
+                          ng-model="vm.page"
+                          ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

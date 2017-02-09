@@ -4,11 +4,10 @@
   angular
     .module('hmapFront')
     .controller('ExecutionLogController', ExecutionLogController);
-  ExecutionLogController.$inject = ['$scope','$state','ExecutionLog','entity','paginationConstants'];
+  ExecutionLogController.$inject = ['$state','ExecutionLog','entity','paginationConstants'];
   /** @ngInject */
-  function ExecutionLogController( $scope,$state, ExecutionLog,entity, paginationConstants) {
+  function ExecutionLogController($state, ExecutionLog,entity, paginationConstants) {
     var vm = this;
-    $scope.num=0;
     vm.page = 1;
     vm.totalItems = null;
     vm.loadAll = loadAll;
@@ -20,25 +19,23 @@
     vm.loadAll();
 
     function loadAll() {
-      ExecutionLog.query({
-        page: vm.page,
-        pagesize: paginationConstants.itemsPerPage
-      }, onSuccess, onError);
+      var page=vm.page;
+      var pagesize=paginationConstants.itemsPerPage;
+      ExecutionLog.loadAll(page,pagesize).query({}, onSuccess, onError);
     }
-    function loadJobs(){
-      vm.job.page=vm.page;
-      vm.job.pagesize=vm.pagesize;
-      ExecutionLog.query(
-        vm.job , onSuccess, onError);
+    function loadJobs() {
+      var page = vm.page;
+      var pagesize = paginationConstants.itemsPerPage;
+      ExecutionLog.loadAll(page, pagesize).query(vm.job, onSuccess, onError);
     }
     function onSuccess(data, headers) {
-      console.log('onSuccess');
-      console.log(data);
+      //console.log('onSuccess');
+      //console.log(data);
       vm.jobs = data.rows;
       vm.totalItems =  data.total;
     }
     function onError(error) {
-      console.log('error');
+      //console.log('error');
 
     }
     function transition () {
@@ -48,8 +45,8 @@
     }
 
     function pageChanged() {
-      console.log('Page changed to: ' +vm.page);
+      //console.log('Page changed to: ' +vm.page);
       loadAll();
-    };
+    }
   }
 })();
